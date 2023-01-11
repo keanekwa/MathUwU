@@ -1,5 +1,7 @@
 import { useState } from "react"
 import random from "random"
+import Timer from "./Timer/Timer"
+import Score from "./Score/Score"
 
 const OPERATORS = {
 	ADD: "+",
@@ -48,7 +50,8 @@ const getQuestion = () => {
 const Game = () => {
 	const [question, setQuestion] = useState(() => getQuestion())
 	const [answer, setAnswer] = useState("")
-	const { operator, numbers } = question
+	const [score, setScore] = useState(0)
+	const [isGameOver, setGameOver] = useState(false)
 
 	const getNewQuestion = () => {
 		setQuestion(getQuestion())
@@ -59,14 +62,21 @@ const Game = () => {
 		setAnswer(val)
 
 		if (parseInt(val) === ans) {
+			setScore(score + 1)
 			setTimeout(() => getNewQuestion(), 100)
 		}
 	}
 
 	return (
 		<div>
-			{numbers?.vars[0]} {operator} {numbers?.vars[1]} ={" "}
-			<input onChange={(e) => checkAnswer(e.target.value, numbers?.ans as number)} value={answer} />
+			<Timer defaultSeconds={120} setGameOver={() => setGameOver(true)} />
+			<Score score={score} />
+			{!isGameOver && (
+				<>
+					{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} ={" "}
+					<input onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)} value={answer} />
+				</>
+			)}
 		</div>
 	)
 }
