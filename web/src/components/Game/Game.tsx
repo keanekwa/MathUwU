@@ -65,10 +65,8 @@ const Game = () => {
 
 	return (
 		<div>
-			<div>
-				{numbers?.vars[0]} {operator} {numbers?.vars[1]} ={" "}
-				<input onChange={(e) => checkAnswer(e.target.value, numbers?.ans as number)} value={answer} />
-			</div>
+			{numbers?.vars[0]} {operator} {numbers?.vars[1]} ={" "}
+			<input onChange={(e) => checkAnswer(e.target.value, numbers?.ans as number)} value={answer} />
 		</div>
 	)
 }
