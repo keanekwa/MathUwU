@@ -3,6 +3,7 @@ const dotenv = require("dotenv")
 const cors = require("cors")
 const db = require("./db")
 const utils = require("./utils")
+const bcrypt = require("bcryptjs")
 
 dotenv.config()
 const app = express()
@@ -46,6 +47,49 @@ app.post("/register", async (req: RegisterReq, res: any) => {
 		)
 
 		utils.sendSuccess(res, "Successfully created user.", newUser.rows[0])
+	} catch (err: any) {
+		console.error(err.message)
+	}
+})
+
+interface LoginReq {
+	body: {
+		username: string
+		password: string
+	}
+}
+
+app.post("/login", async (req: LoginReq, res: any) => {
+	try {
+		// Check if request is valid
+		let { username, password } = req.body
+		if (!username || !password) {
+			utils.sendBadRequestError(res, "Please enter all fields.")
+			return
+		}
+
+		// Check if user exists in DB
+		const userQuery = await db.query("SELECT password FROM users WHERE username = $1", [username])
+		const user = userQuery.rows[0]
+		if (!user) {
+			utils.sendUnauthorizedError(res, "User does not exist.")
+			return
+		}
+
+		// Check if password exists in DB
+		const hashedPassword = user.password
+		if (!hashedPassword) {
+			utils.sendUnauthorizedError(res, "Username / password is wrong.")
+			return
+		}
+
+		// Check if password entered matches DB record
+		const passwordCheck = await bcrypt.compare(password, hashedPassword)
+		if (passwordCheck) {
+			utils.sendSuccess(res, "Login successful.", { username: username })
+		} else {
+			utils.sendUnauthorizedError(res, "Username / password is wrong.")
+		}
 	} catch (err: any) {
 		console.error(err.message)
 	}
