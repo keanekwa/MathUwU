@@ -1,18 +1,10 @@
 import React from "react"
 import api from "./../../utils/api"
-
-interface formDataType {
-	[key: string]: string
-}
+import getFormData from "./../../utils/getFormData"
 
 const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
 	event.preventDefault()
-
-	const formData = new FormData(event.currentTarget as HTMLFormElement)
-	const responseBody: formDataType = {}
-	formData.forEach((value, property: string) => (responseBody[property] = value as string))
-
-	const { username, password } = responseBody
+	const { username, password } = getFormData(event)
 
 	api.post("/login", {
 		username: username,
@@ -29,7 +21,7 @@ const Login = () => {
 			</div>
 			<div>
 				<label>Password </label>
-				<input id="password" name="password" placeholder="Password" />
+				<input id="password" name="password" type="password" placeholder="Password" />
 			</div>
 			<button type="submit">Login</button>
 		</form>
