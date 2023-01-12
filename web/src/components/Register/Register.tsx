@@ -14,7 +14,7 @@ const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
 	formData.forEach((value, property: string) => (responseBody[property] = value as string))
 
 	const { username, email, password, password2 } = responseBody
-	const salt = bcrypt.genSaltSync(10)
+	const salt = bcrypt.genSaltSync(12)
 	const hashedPassword = bcrypt.hashSync(password, salt)
 	const hashedPassword2 = bcrypt.hashSync(password2, salt)
 
