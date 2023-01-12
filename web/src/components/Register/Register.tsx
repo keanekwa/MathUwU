@@ -1,27 +1,37 @@
 import React from "react"
+import { NavigateFunction, useNavigate } from "react-router-dom"
 import api from "./../../utils/api"
 import bcrypt from "bcryptjs-react"
 import getFormData from "./../../utils/getFormData"
 
-const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
+const handleRegister = async (event: React.FormEvent<HTMLFormElement>, navigate: NavigateFunction) => {
 	event.preventDefault()
-	const { username, email, password, password2 } = getFormData(event)
 
+	const { username, email, password, password2 } = getFormData(event)
 	const salt = bcrypt.genSaltSync(12)
 	const hashedPassword = bcrypt.hashSync(password, salt)
 	const hashedPassword2 = bcrypt.hashSync(password2, salt)
 
-	api.post("/register", {
-		username: username,
-		email: email,
-		hashedPassword: hashedPassword,
-		hashedPassword2: hashedPassword2
-	})
+	try {
+		await api.post("/register", {
+			username: username,
+			email: email,
+			hashedPassword: hashedPassword,
+			hashedPassword2: hashedPassword2
+		})
+
+		navigate("/")
+	} catch (err: any) {
+		const errMessage = err?.response?.data?.message
+		alert(errMessage)
+	}
 }
 
 const Register = () => {
+	const navigate = useNavigate()
+
 	return (
-		<form onSubmit={handleRegister}>
+		<form onSubmit={(event) => handleRegister(event, navigate)}>
 			<div>
 				<label htmlFor="username">Username </label>
 				<input id="username" name="username" placeholder="Username" />
