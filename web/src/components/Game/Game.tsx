@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import random from "random"
 import Timer from "./Timer/Timer"
 import Score from "./Score/Score"
