@@ -11,7 +11,7 @@
 		"@types/react": "^18.0.0",
 		"@types/react-dom": "^18.0.0",
 		"axios": "^1.2.2",
-		"bcryptjs": "^2.4.3",
+		"bcryptjs-react": "^2.4.6",
 		"dotenv": "^16.0.3",
 		"path": "^0.12.7",
 		"random": "^4.1.0",
@@ -46,13 +46,5 @@
 			"last 1 safari version"
 		]
 	},
-	"devDependencies": {
-		"@types/bcrypt": "^5.0.0",
-		"@types/bcryptjs": "^2.4.2"
-	},
-	"browser": {
-		"fs": false,
-		"path": false,
-		"os": false
-	}
+	"devDependencies": {}
 }

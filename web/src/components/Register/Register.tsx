@@ -1,5 +1,5 @@
 import api from "./../../utils/api"
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs-react"
 
 interface formDataType {
 	[key: string]: string
