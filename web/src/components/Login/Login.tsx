@@ -27,11 +27,11 @@ const Login = () => {
 		<form onSubmit={(event) => handleLogin(event, navigate)}>
 			<div>
 				<label htmlFor="username">Username </label>
-				<input id="username" name="username" placeholder="Username" />
+				<input id="username" name="username" placeholder="Username" required />
 			</div>
 			<div>
 				<label>Password </label>
-				<input id="password" name="password" type="password" placeholder="Password" />
+				<input id="password" name="password" type="password" placeholder="Password" required />
 			</div>
 			<button type="submit">Login</button>
 		</form>
