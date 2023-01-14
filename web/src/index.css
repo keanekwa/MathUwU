@@ -10,7 +10,13 @@ button[type="submit"] {
 }
 
 input:not(input[type="checkbox"]) {
-	@apply input input-bordered;
+	@apply input input-ghost;
+}
+
+.input-ghost:focus {
+	--tw-bg-opacity: 0.1;
+	color: inherit;
+	box-shadow: none;
 }
 
 input[type="checkbox"] {
