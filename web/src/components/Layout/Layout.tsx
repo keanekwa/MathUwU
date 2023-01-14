@@ -25,7 +25,7 @@ const Layout = (props: LayoutProps) => {
 		<div>
 			<nav>
 				<Link to="/">Home</Link>&nbsp;
-				{context?.user ? (
+				{context?.currentUser ? (
 					<>
 						<a href="" onClick={() => handleLogout(navigate)}>
 							Logout
@@ -35,12 +35,12 @@ const Layout = (props: LayoutProps) => {
 				) : (
 					<>
 						<Link to="/login">Login</Link>&nbsp;
+						<Link to="/register">Register</Link>
 					</>
 				)}
-				<Link to="/register">Register</Link>
 			</nav>
 			<br />
-			{context?.user && <>Logged in as: {context?.user?.username}</>}
+			{context?.currentUser && <>Logged in as: {context?.currentUser}</>}
 			<br />
 			<br />
 			<div>{props.children}</div>

@@ -18,7 +18,7 @@ const handleLogin = async (
 			password: password
 		})
 		const user = res?.data?.response
-		setContext({ user: user })
+		setContext({ currentUser: user?.username })
 
 		navigate("/")
 	} catch (err: any) {

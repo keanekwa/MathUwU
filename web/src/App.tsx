@@ -40,7 +40,7 @@ const App = () => {
 	useEffect(() => {
 		api.get("/user").then((res) => {
 			const user = res?.data
-			if (user) setContext({ user: user })
+			if (user) setContext({ currentUser: user?.username })
 		})
 	}, [])
 
