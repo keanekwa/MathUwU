@@ -69,7 +69,17 @@ const Game = () => {
 		}
 	}
 
+	const startGame = () => {
+		getNewQuestion()
+		setScore(0)
+		setSeconds(120)
+		setStart(true)
+	}
+
 	useInterval(() => setSeconds(seconds - 1), 1000)
+
+	if (seconds == 0) {
+	}
 
 	return (
 		<div>
@@ -89,10 +99,11 @@ const Game = () => {
 					<>
 						Time's up!
 						<Score score={score} />
+						<button onClick={startGame}>Restart</button>
 					</>
 				)
 			) : (
-				<button onClick={() => setStart(true)}>Start</button>
+				<button onClick={startGame}>Start</button>
 			)}
 		</div>
 	)
