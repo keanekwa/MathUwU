@@ -94,7 +94,6 @@ app.post("/login", async (req: any, res: any) => {
 			req.login(user, (err: any) => {
 				if (err) throw err
 				utils.sendSuccess(res, "Login successful.", { username: user.username })
-				console.log(req.user)
 			})
 		}
 	})(req, res)
