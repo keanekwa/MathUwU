@@ -3,14 +3,31 @@ const dotenv = require("dotenv")
 const cors = require("cors")
 const db = require("./db")
 const utils = require("./utils")
-const bcrypt = require("bcryptjs")
+const passport = require("passport")
+const session = require("express-session")
+const cookieParser = require("cookie-parser")
 
 dotenv.config()
 const app = express()
 
 // Middleware
-app.use(cors())
 app.use(express.json())
+app.use(
+	cors({
+		origin: "http://localhost:3001",
+		credentials: true
+	})
+)
+app.use(
+	session({
+		secret: "secretcode",
+		resave: false
+	})
+)
+app.use(cookieParser("secretcode"))
+app.use(passport.initialize())
+app.use(passport.session())
+require("./passportConfig")(passport)
 
 // Routes
 interface RegisterReq {
@@ -59,40 +76,28 @@ interface LoginReq {
 	}
 }
 
-app.post("/login", async (req: LoginReq, res: any) => {
-	try {
-		// Check if request is valid
-		let { username, password } = req.body
-		if (!username || !password) {
-			utils.sendBadRequestError(res, "Please enter all fields.")
-			return
-		}
+app.get("/user", (req: any, res: any) => {
+	res.send(req.user) // The req.user stores the entire user that has been authenticated inside of it.
+})
 
-		// Check if user exists in DB
-		const userQuery = await db.query("SELECT password FROM users WHERE username = $1", [username])
-		const user = userQuery.rows[0]
-		if (!user) {
-			utils.sendUnauthorizedError(res, "User does not exist.")
-			return
-		}
-
-		// Check if password exists in DB
-		const hashedPassword = user.password
-		if (!hashedPassword) {
-			utils.sendUnauthorizedError(res, "Username / password is wrong.")
-			return
-		}
-
-		// Check if password entered matches DB record
-		const passwordCheck = await bcrypt.compare(password, hashedPassword)
-		if (passwordCheck) {
-			utils.sendSuccess(res, "Login successful.", { username: username })
-		} else {
-			utils.sendUnauthorizedError(res, "Username / password is wrong.")
-		}
-	} catch (err: any) {
-		console.error(err.message)
+app.post("/login", async (req: any, res: any) => {
+	let { username, password } = req.body
+	if (!username || !password) {
+		utils.sendBadRequestError(res, "Please enter all fields.")
+		return
 	}
+
+	passport.authenticate("local", (err: any, user: any, info: any) => {
+		if (err) utils.sendUnauthorizedError(res, err)
+		else if (!user) utils.sendUnauthorizedError(res, "Authentication error.")
+		else {
+			req.login(user, (err: any) => {
+				if (err) throw err
+				utils.sendSuccess(res, "Login successful.", { username: user.username })
+				console.log(req.user)
+			})
+		}
+	})(req, res)
 })
 
 app.listen(process.env.API_PORT, () => {
