@@ -18,7 +18,7 @@ const ScoreHistory = (props: ScoreHistoryProps) => {
 			Previous scores &#40;from most recent to least recent&#41;:
 			<ul>
 				{scoreHistory.map((s: Score) => (
-					<li>{s.score}</li>
+					<li key={s.id}>{s.score}</li>
 				))}
 			</ul>
 		</div>
