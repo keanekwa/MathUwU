@@ -69,13 +69,6 @@ app.post("/register", async (req: RegisterReq, res: any) => {
 	}
 })
 
-interface LoginReq {
-	body: {
-		username: string
-		password: string
-	}
-}
-
 app.get("/user", (req: any, res: any) => {
 	res.send(req.user) // The req.user stores the entire user that has been authenticated inside of it.
 })
@@ -97,6 +90,13 @@ app.post("/login", async (req: any, res: any) => {
 			})
 		}
 	})(req, res)
+})
+
+app.post("/logout", async (req: any, res: any) => {
+	req.logout((err: any) => {
+		if (err) console.log(err)
+		utils.sendSuccess(res, "Logout successful.", {})
+	})
 })
 
 app.listen(process.env.API_PORT, () => {
