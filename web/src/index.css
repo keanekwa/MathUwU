@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-button {
-	@apply btn bg-gray-500 !important;
+button,
+button[type="button"],
+button[type="reset"],
+button[type="submit"] {
+	@apply btn bg-gray-500;
 }
 
 input:not(input[type="checkbox"]) {

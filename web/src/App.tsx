@@ -34,13 +34,18 @@ const router = createBrowserRouter([
 	}
 ])
 
+interface Context {
+	currentUser: string | undefined | null //undefined means /user API has NOT been called. null means user is logged out
+}
+
 const App = () => {
-	const [context, setContext] = useState<any>()
+	const [context, setContext] = useState<Context>({ currentUser: undefined })
 
 	useEffect(() => {
 		api.get("/user").then((res) => {
 			const user = res?.data
 			if (user) setContext({ currentUser: user?.username })
+			else setContext({ currentUser: null })
 		})
 	}, [])
 
