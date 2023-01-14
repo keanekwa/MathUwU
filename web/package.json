@@ -3,6 +3,10 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@babel/core": "^7.0.0-0",
+		"@babel/plugin-syntax-flow": "^7.14.5",
+		"@babel/plugin-transform-react-jsx": "^7.14.9",
+		"@testing-library/dom": "^8.19.1",
 		"@testing-library/jest-dom": "^5.14.1",
 		"@testing-library/react": "^13.0.0",
 		"@testing-library/user-event": "^13.2.1",
@@ -14,6 +18,7 @@
 		"bcryptjs-react": "^2.4.6",
 		"dotenv": "^16.0.3",
 		"path": "^0.12.7",
+		"postcss": "^8.4.21",
 		"random": "^4.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
@@ -47,5 +52,9 @@
 			"last 1 safari version"
 		]
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"@types/tailwindcss": "^3.1.0",
+		"autoprefixer": "^10.4.13",
+		"tailwindcss": "^3.2.4"
+	}
 }

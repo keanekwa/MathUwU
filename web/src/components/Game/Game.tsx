@@ -127,7 +127,7 @@ const Game = () => {
 
 	useInterval(() => setSeconds(seconds - 1), 1000)
 
-	if (seconds == 0 && !isScoreSaved) {
+	if (seconds === 0 && !isScoreSaved) {
 		api
 			.post("/scores", {
 				username: context?.currentUser,

@@ -9,7 +9,7 @@ interface LayoutProps {
 
 const handleLogout = async (navigate: NavigateFunction) => {
 	try {
-		const res = await api.post("/logout")
+		await api.post("/logout")
 		navigate("/")
 	} catch (err: any) {
 		const errMessage = err?.response?.data?.message
@@ -24,6 +24,7 @@ const Layout = (props: LayoutProps) => {
 	return (
 		<div>
 			<h1>Math UwU</h1>
+			<h1 className="text-3xl font-bold underline mb-5">Hello world!</h1>
 			<nav>
 				<Link to="/">Home</Link>&nbsp;
 				{context?.currentUser ? (
