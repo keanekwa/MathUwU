@@ -49,6 +49,7 @@ const getQuestion = () => {
 }
 
 const Game = () => {
+	const [start, setStart] = useState(false)
 	const [question, setQuestion] = useState(() => getQuestion())
 	const [answer, setAnswer] = useState("")
 	const [score, setScore] = useState(0)
@@ -72,22 +73,26 @@ const Game = () => {
 
 	return (
 		<div>
-			{seconds > 0 ? (
-				<>
-					<Timer seconds={seconds} />
-					<Score score={score} />
-					{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} ={" "}
-					<input
-						autoFocus
-						onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
-						value={answer}
-					/>
-				</>
+			{start ? (
+				seconds > 0 ? (
+					<>
+						<Timer seconds={seconds} />
+						<Score score={score} />
+						{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} ={" "}
+						<input
+							autoFocus
+							onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
+							value={answer}
+						/>
+					</>
+				) : (
+					<>
+						Time's up!
+						<Score score={score} />
+					</>
+				)
 			) : (
-				<>
-					Time's up!
-					<Score score={score} />
-				</>
+				<button onClick={() => setStart(true)}>Start</button>
 			)}
 		</div>
 	)
