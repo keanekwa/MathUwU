@@ -56,6 +56,7 @@ const Game = () => {
 	const [answer, setAnswer] = useState("")
 	const [score, setScore] = useState(0)
 	const [seconds, setSeconds] = useState(120)
+	const [isScoreSaved, setIsScoreSaved] = useState(false)
 	const [context] = useContext(Context)
 
 	const getNewQuestion = () => {
@@ -75,17 +76,19 @@ const Game = () => {
 	const startGame = () => {
 		getNewQuestion()
 		setScore(0)
+		setIsScoreSaved(false)
 		setSeconds(10)
 		setStart(true)
 	}
 
 	useInterval(() => setSeconds(seconds - 1), 1000)
 
-	if (seconds == 0) {
+	if (seconds == 0 && !isScoreSaved) {
 		api.post("/saveScore", {
 			username: context?.currentUser,
 			score: score
 		})
+		setIsScoreSaved(true)
 	}
 
 	return (
