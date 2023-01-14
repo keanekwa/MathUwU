@@ -77,7 +77,11 @@ const Game = () => {
 					<Timer seconds={seconds} />
 					<Score score={score} />
 					{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} ={" "}
-					<input onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)} value={answer} />
+					<input
+						autoFocus
+						onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
+						value={answer}
+					/>
 				</>
 			) : (
 				<>
