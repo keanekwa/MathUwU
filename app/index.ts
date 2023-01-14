@@ -43,7 +43,7 @@ app.post("/register", async (req: RegisterReq, res: any) => {
 	try {
 		let { username, email, hashedPassword, hashedPassword2 } = req.body
 
-		if (!username || !email || !hashedPassword || !hashedPassword2) {
+		if (utils.checkUndefined(username, email, hashedPassword, hashedPassword2)) {
 			utils.sendBadRequestError(res, "Please enter all fields.")
 			return
 		}
@@ -75,7 +75,7 @@ app.get("/user", (req: any, res: any) => {
 
 app.post("/login", async (req: any, res: any) => {
 	let { username, password } = req.body
-	if (!username || !password) {
+	if (utils.checkUndefined(username, password)) {
 		utils.sendBadRequestError(res, "Please enter all fields.")
 		return
 	}
@@ -103,7 +103,7 @@ app.post("/saveScore", async (req: any, res: any) => {
 	try {
 		let { username, score } = req.body
 
-		if (!username || !score) {
+		if (utils.checkUndefined(username, score)) {
 			utils.sendBadRequestError(res, "Please enter all fields.")
 			return
 		}
