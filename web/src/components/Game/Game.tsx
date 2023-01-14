@@ -6,6 +6,7 @@ import useInterval from "../../utils/useInterval"
 import Timer from "./Timer/Timer"
 import Score from "./Score/Score"
 import ScoreHistory from "./ScoreHistory/ScoreHistory"
+import CustomSettings from "./CustomSettings/CustomSettings"
 
 const OPERATORS = {
 	ADD: "+",
@@ -14,7 +15,9 @@ const OPERATORS = {
 	DIVIDE: "÷"
 }
 
-const getNumbers = (operator: string) => {
+const getNumbers = (operator: string, settings: Settings) => {
+	const { addLow1, addHigh1, addLow2, addHigh2, multiplyLow1, multiplyHigh1, multiplyLow2, multiplyHigh2 } = settings
+
 	const returnNormal = (a: number, b: number, ans: number) => {
 		console.log(ans)
 		return { vars: [a, b], ans: ans }
@@ -26,8 +29,8 @@ const getNumbers = (operator: string) => {
 	}
 
 	if (operator === OPERATORS.ADD || operator === OPERATORS.SUBTRACT) {
-		const a = random.int(2, 100)
-		const b = random.int(2, 100)
+		const a = random.int(addLow1, addHigh1)
+		const b = random.int(addLow2, addHigh2)
 		const ans = a + b
 
 		if (operator === OPERATORS.ADD) return returnNormal(a, b, ans)
@@ -35,8 +38,8 @@ const getNumbers = (operator: string) => {
 	}
 
 	if (operator === OPERATORS.MULTIPLY || operator === OPERATORS.DIVIDE) {
-		const a = random.int(2, 12)
-		const b = random.int(2, 100)
+		const a = random.int(multiplyLow1, multiplyHigh1)
+		const b = random.int(multiplyLow2, multiplyHigh2)
 		const ans = a * b
 
 		if (operator === OPERATORS.MULTIPLY) return returnNormal(a, b, ans)
@@ -44,25 +47,64 @@ const getNumbers = (operator: string) => {
 	}
 }
 
-const getQuestion = () => {
-	const operator = random.choice([OPERATORS.ADD, OPERATORS.SUBTRACT, OPERATORS.MULTIPLY, OPERATORS.DIVIDE]) as string
-	const numbers = getNumbers(operator)
+const getQuestion = (settings: Settings) => {
+	const { isAdd, isSubtract, isMultiply, isDivide } = settings
+	let operators: Array<string> = []
+
+	if (isAdd) operators.push(OPERATORS.ADD)
+	if (isSubtract) operators.push(OPERATORS.SUBTRACT)
+	if (isMultiply) operators.push(OPERATORS.MULTIPLY)
+	if (isDivide) operators.push(OPERATORS.DIVIDE)
+
+	const operator = random.choice(operators) as string
+	const numbers = getNumbers(operator, settings)
 
 	return { operator: operator, numbers: numbers }
 }
 
+const defaultSettings: Settings = {
+	isAdd: true,
+	isSubtract: true,
+	isDivide: true,
+	isMultiply: true,
+	addLow1: 2,
+	addHigh1: 100,
+	addLow2: 2,
+	addHigh2: 100,
+	multiplyLow1: 2,
+	multiplyHigh1: 12,
+	multiplyLow2: 2,
+	multiplyHigh2: 100
+}
+
+export interface Settings {
+	isAdd: boolean
+	isSubtract: boolean
+	isDivide: boolean
+	isMultiply: boolean
+	addLow1: number
+	addHigh1: number
+	addLow2: number
+	addHigh2: number
+	multiplyLow1: number
+	multiplyHigh1: number
+	multiplyLow2: number
+	multiplyHigh2: number
+}
+
 const Game = () => {
+	const [context] = useContext(Context)
 	const [start, setStart] = useState(false)
-	const [question, setQuestion] = useState(() => getQuestion())
 	const [answer, setAnswer] = useState("")
 	const [score, setScore] = useState(0)
 	const [seconds, setSeconds] = useState(120)
 	const [isScoreSaved, setIsScoreSaved] = useState(false)
 	const [scoreHistory, setScoreHistory] = useState([])
-	const [context] = useContext(Context)
+	const [settings, setSettings] = useState(defaultSettings)
+	const [question, setQuestion] = useState(() => getQuestion(settings))
 
 	const getNewQuestion = () => {
-		setQuestion(getQuestion())
+		setQuestion(getQuestion(settings))
 		setAnswer("")
 	}
 
@@ -118,12 +160,18 @@ const Game = () => {
 					<>
 						Time's up!
 						<Score score={score} />
+						<CustomSettings settings={settings} setSettings={setSettings} />
+						<br />
 						<button onClick={startGame}>Restart</button>
 						<ScoreHistory scoreHistory={scoreHistory} />
 					</>
 				)
 			) : (
-				<button onClick={startGame}>Start</button>
+				<>
+					<CustomSettings settings={settings} setSettings={setSettings} />
+					<br />
+					<button onClick={startGame}>Start</button>
+				</>
 			)}
 		</div>
 	)

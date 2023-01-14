@@ -23,6 +23,7 @@ const Layout = (props: LayoutProps) => {
 
 	return (
 		<div>
+			<h1>Math UwU</h1>
 			<nav>
 				<Link to="/">Home</Link>&nbsp;
 				{context?.currentUser ? (
