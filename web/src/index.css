@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+button {
+	@apply btn bg-gray-500 !important;
+}
+
+input:not(input[type="checkbox"]) {
+	@apply input input-bordered;
+}
+
+input[type="checkbox"] {
+	@apply checkbox;
+}
