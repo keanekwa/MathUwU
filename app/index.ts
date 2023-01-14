@@ -99,7 +99,17 @@ app.post("/logout", async (req: any, res: any) => {
 	})
 })
 
-app.post("/saveScore", async (req: any, res: any) => {
+app.get("/scores", async (req: any, res: any) => {
+	try {
+		const scores = await db.query("SELECT * FROM scores")
+
+		utils.sendSuccess(res, "Successfully retrieved scores.", scores.rows)
+	} catch (err: any) {
+		console.error(err.message)
+	}
+})
+
+app.post("/scores", async (req: any, res: any) => {
 	try {
 		let { username, score } = req.body
 

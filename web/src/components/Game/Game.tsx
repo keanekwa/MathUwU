@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react"
+import { Context } from "../../App"
+import api from "./../../utils/api"
 import random from "random"
+import useInterval from "../../utils/useInterval"
 import Timer from "./Timer/Timer"
 import Score from "./Score/Score"
-import useInterval from "../../utils/useInterval"
-import api from "./../../utils/api"
-import { Context } from "../../App"
+import ScoreHistory from "./ScoreHistory/ScoreHistory"
 
 const OPERATORS = {
 	ADD: "+",
@@ -57,6 +58,7 @@ const Game = () => {
 	const [score, setScore] = useState(0)
 	const [seconds, setSeconds] = useState(120)
 	const [isScoreSaved, setIsScoreSaved] = useState(false)
+	const [scoreHistory, setScoreHistory] = useState([])
 	const [context] = useContext(Context)
 
 	const getNewQuestion = () => {
@@ -84,10 +86,17 @@ const Game = () => {
 	useInterval(() => setSeconds(seconds - 1), 1000)
 
 	if (seconds == 0 && !isScoreSaved) {
-		api.post("/saveScore", {
-			username: context?.currentUser,
-			score: score
-		})
+		api
+			.post("/scores", {
+				username: context?.currentUser,
+				score: score
+			})
+			.then(() => {
+				api.get("/scores").then((res) => {
+					setScoreHistory(res?.data?.response)
+				})
+			})
+
 		setIsScoreSaved(true)
 	}
 
@@ -110,6 +119,7 @@ const Game = () => {
 						Time's up!
 						<Score score={score} />
 						<button onClick={startGame}>Restart</button>
+						<ScoreHistory scoreHistory={scoreHistory} />
 					</>
 				)
 			) : (
