@@ -1,8 +1,10 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import random from "random"
 import Timer from "./Timer/Timer"
 import Score from "./Score/Score"
 import useInterval from "../../utils/useInterval"
+import api from "./../../utils/api"
+import { Context } from "../../App"
 
 const OPERATORS = {
 	ADD: "+",
@@ -54,6 +56,7 @@ const Game = () => {
 	const [answer, setAnswer] = useState("")
 	const [score, setScore] = useState(0)
 	const [seconds, setSeconds] = useState(120)
+	const [context] = useContext(Context)
 
 	const getNewQuestion = () => {
 		setQuestion(getQuestion())
@@ -72,13 +75,17 @@ const Game = () => {
 	const startGame = () => {
 		getNewQuestion()
 		setScore(0)
-		setSeconds(120)
+		setSeconds(10)
 		setStart(true)
 	}
 
 	useInterval(() => setSeconds(seconds - 1), 1000)
 
 	if (seconds == 0) {
+		api.post("/saveScore", {
+			username: context?.currentUser,
+			score: score
+		})
 	}
 
 	return (

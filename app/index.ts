@@ -99,6 +99,26 @@ app.post("/logout", async (req: any, res: any) => {
 	})
 })
 
+app.post("/saveScore", async (req: any, res: any) => {
+	try {
+		let { username, score } = req.body
+
+		if (!username || !score) {
+			utils.sendBadRequestError(res, "Please enter all fields.")
+			return
+		}
+
+		const newScore = await db.query("INSERT INTO scores (username, score) VALUES ($1, $2) RETURNING *", [
+			username,
+			score
+		])
+
+		utils.sendSuccess(res, "Successfully saved score.", newScore.rows[0])
+	} catch (err: any) {
+		console.error(err.message)
+	}
+})
+
 app.listen(process.env.API_PORT, () => {
 	console.log(`Example app listening on port ${process.env.API_PORT}`)
 })
