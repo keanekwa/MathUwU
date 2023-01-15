@@ -23,12 +23,12 @@ const Navbar = () => {
 		<div className="navbar bg-gray-500 rounded-lg shadow-lg">
 			<div className="flex-1">
 				{location?.pathname === "/" ? (
-					<span onClick={() => window.location.reload()} className="btn btn-ghost normal-case text-xl">
+					<button onClick={() => window.location.reload()} className="btn-ghost normal-case text-xl">
 						MathUwU
-					</span>
+					</button>
 				) : (
 					<Link to="/">
-						<button className="btn btn-ghost normal-case text-xl">MathUwU</button>
+						<button className="btn-ghost normal-case text-xl">MathUwU</button>
 					</Link>
 				)}
 			</div>
@@ -36,11 +36,11 @@ const Navbar = () => {
 				(context?.currentUser ? (
 					<div className="flex-none">
 						<div className="dropdown dropdown-end">
-							<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+							<button tabIndex={0} className="btn-ghost btn-circle avatar">
 								<div className="w-10 h-10 leading-10 rounded-full bg-gray-400">
 									{context?.currentUser[0].toUpperCase()}
 								</div>
-							</label>
+							</button>
 							<ul
 								tabIndex={0}
 								className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-gray-500 rounded-box w-52">
@@ -56,10 +56,10 @@ const Navbar = () => {
 				) : (
 					<>
 						<Link to="/login">
-							<button className="btn btn-ghost normal-case">Login</button>
+							<button className="btn-ghost normal-case">Login</button>
 						</Link>
 						<Link to="/register">
-							<button className="btn btn-ghost normal-case">Register</button>
+							<button className="btn-ghost normal-case">Register</button>
 						</Link>
 					</>
 				))}
