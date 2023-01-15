@@ -23,9 +23,9 @@ const Navbar = () => {
 		<div className="navbar bg-gray-500 rounded-lg shadow-lg">
 			<div className="flex-1">
 				{location?.pathname === "/" ? (
-					<a onClick={() => window.location.reload()} className="btn btn-ghost normal-case text-xl">
+					<span onClick={() => window.location.reload()} className="btn btn-ghost normal-case text-xl">
 						MathUwU
-					</a>
+					</span>
 				) : (
 					<Link to="/">
 						<button className="btn btn-ghost normal-case text-xl">MathUwU</button>
@@ -45,10 +45,10 @@ const Navbar = () => {
 								tabIndex={0}
 								className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-gray-500 rounded-box w-52">
 								<li>
-									<a>Profile</a>
+									<span>Profile</span>
 								</li>
 								<li>
-									<a onClick={() => handleLogout(navigate, setContext)}>Logout</a>
+									<span onClick={() => handleLogout(navigate, setContext)}>Logout</span>
 								</li>
 							</ul>
 						</div>

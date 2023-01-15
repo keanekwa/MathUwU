@@ -1,12 +1,18 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import { Context } from "../../App"
 import api from "./../../utils/api"
 import random from "random"
 import useInterval from "../../utils/useInterval"
+import Error404 from "./../Error404/Error404"
 import Timer from "./Timer/Timer"
 import Score from "./Score/Score"
 import ScoreHistory from "./ScoreHistory/ScoreHistory"
 import CustomSettings from "./CustomSettings/CustomSettings"
+
+const MODES = {
+	DEFAULT: "default"
+}
 
 const OPERATORS = {
 	ADD: "+",
@@ -93,6 +99,15 @@ export interface Settings {
 }
 
 const Game = () => {
+	const { mode } = useParams()
+	const [is404, setIs404] = useState(false)
+
+	useEffect(() => {
+		if (mode !== undefined && !Object.values(MODES).includes(mode)) {
+			setIs404(true)
+		}
+	}, [mode])
+
 	const [context] = useContext(Context)
 	const [start, setStart] = useState(false)
 	const [answer, setAnswer] = useState("")
@@ -143,37 +158,43 @@ const Game = () => {
 	}
 
 	return (
-		<div>
-			{start ? (
-				seconds > 0 ? (
-					<>
-						<Timer seconds={seconds} />
-						<Score score={score} />
-						{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} ={" "}
-						<input
-							autoFocus
-							onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
-							value={answer}
-						/>
-					</>
-				) : (
-					<>
-						Time's up!
-						<Score score={score} />
-						<CustomSettings settings={settings} setSettings={setSettings} />
-						<br />
-						<button onClick={startGame}>Restart</button>
-						<ScoreHistory scoreHistory={scoreHistory} />
-					</>
-				)
+		<>
+			{is404 ? (
+				<Error404 message="Game not found." />
 			) : (
-				<>
-					<CustomSettings settings={settings} setSettings={setSettings} />
-					<br />
-					<button onClick={startGame}>Start</button>
-				</>
+				<div>
+					{start ? (
+						seconds > 0 ? (
+							<>
+								<Timer seconds={seconds} />
+								<Score score={score} />
+								{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} ={" "}
+								<input
+									autoFocus
+									onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
+									value={answer}
+								/>
+							</>
+						) : (
+							<>
+								Time's up!
+								<Score score={score} />
+								<CustomSettings settings={settings} setSettings={setSettings} />
+								<br />
+								<button onClick={startGame}>Restart</button>
+								<ScoreHistory scoreHistory={scoreHistory} />
+							</>
+						)
+					) : (
+						<>
+							<CustomSettings settings={settings} setSettings={setSettings} />
+							<br />
+							<button onClick={startGame}>Start</button>
+						</>
+					)}
+				</div>
 			)}
-		</div>
+		</>
 	)
 }
 
