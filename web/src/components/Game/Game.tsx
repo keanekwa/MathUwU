@@ -9,17 +9,7 @@ import Timer from "./Timer/Timer"
 import Score from "./Score/Score"
 import ScoreHistory from "./ScoreHistory/ScoreHistory"
 import CustomSettings from "./CustomSettings/CustomSettings"
-
-const MODES = {
-	DEFAULT: "default"
-}
-
-const OPERATORS = {
-	ADD: "+",
-	SUBTRACT: "-",
-	MULTIPLY: "x",
-	DIVIDE: "÷"
-}
+import { GAME_MODES, OPERATORS } from "./../../constants"
 
 const getNumbers = (operator: string, settings: Settings) => {
 	const { addLow1, addHigh1, addLow2, addHigh2, multiplyLow1, multiplyHigh1, multiplyLow2, multiplyHigh2 } = settings
@@ -103,7 +93,8 @@ const Game = () => {
 	const [is404, setIs404] = useState(false)
 
 	useEffect(() => {
-		if (mode !== undefined && !Object.values(MODES).includes(mode)) {
+		const modePaths = Object.values(GAME_MODES).map((m) => m.path)
+		if (mode !== undefined && !modePaths.includes("/" + mode)) {
 			setIs404(true)
 		}
 	}, [mode])
