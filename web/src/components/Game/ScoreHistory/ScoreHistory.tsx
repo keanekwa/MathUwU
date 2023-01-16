@@ -15,7 +15,7 @@ const ScoreHistory = (props: ScoreHistoryProps) => {
 	const scoreHistoryArr = scoreHistory.map((s: Score) => s.score)
 
 	return (
-		<div className="mt-8">
+		<div>
 			<strong>Score history &#40;from most recent to least recent&#41;:</strong>
 			<div>{scoreHistoryArr.join(", ")}</div>
 		</div>

@@ -182,11 +182,12 @@ const Game = () => {
 									<h6>Time's up!</h6>
 									<Score score={score} />
 								</div>
+								<ScoreHistory scoreHistory={scoreHistory} />
+								<div className="divider"></div>
 								<CustomSettings settings={settings} setSettings={setSettings} />
 								<button className="btn mt-8" onClick={startGame}>
 									Restart
 								</button>
-								<ScoreHistory scoreHistory={scoreHistory} />
 							</>
 						)
 					) : (
