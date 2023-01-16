@@ -5,7 +5,7 @@ interface ScoreProps {
 }
 
 const Score = ({ score }: ScoreProps) => {
-	return <div>Score: {score}</div>
+	return <h6>Score: {score}</h6>
 }
 
 export default Score

@@ -70,7 +70,8 @@ const defaultSettings: Settings = {
 	multiplyLow1: 2,
 	multiplyHigh1: 12,
 	multiplyLow2: 2,
-	multiplyHigh2: 100
+	multiplyHigh2: 100,
+	seconds: 120
 }
 
 export interface Settings {
@@ -86,6 +87,7 @@ export interface Settings {
 	multiplyHigh1: number
 	multiplyLow2: number
 	multiplyHigh2: number
+	seconds: number
 }
 
 const Game = () => {
@@ -124,10 +126,11 @@ const Game = () => {
 	}
 
 	const startGame = () => {
+		console.log(settings)
 		getNewQuestion()
 		setScore(0)
 		setIsScoreSaved(false)
-		setSeconds(10)
+		setSeconds(settings.seconds)
 		setStart(true)
 	}
 
@@ -153,34 +156,45 @@ const Game = () => {
 			{is404 ? (
 				<Error404 message="Game not found." />
 			) : (
-				<div>
+				<div className="text-center flex flex-col justify-center items-center">
 					{start ? (
 						seconds > 0 ? (
 							<>
 								<Timer seconds={seconds} />
 								<Score score={score} />
-								{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} ={" "}
-								<input
-									autoFocus
-									onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
-									value={answer}
-								/>
+								<div className="flex justify-center items-center my-10">
+									<span className="text-xl mr-5">
+										{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} =
+									</span>
+									<input
+										autoFocus
+										onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
+										value={answer}
+									/>
+								</div>
+								<button className="mt-8" onClick={startGame}>
+									Restart
+								</button>
 							</>
 						) : (
 							<>
-								Time's up!
-								<Score score={score} />
+								<div className="mb-5">
+									<h6>Time's up!</h6>
+									<Score score={score} />
+								</div>
 								<CustomSettings settings={settings} setSettings={setSettings} />
-								<br />
-								<button onClick={startGame}>Restart</button>
+								<button className="mt-8" onClick={startGame}>
+									Restart
+								</button>
 								<ScoreHistory scoreHistory={scoreHistory} />
 							</>
 						)
 					) : (
 						<>
 							<CustomSettings settings={settings} setSettings={setSettings} />
-							<br />
-							<button onClick={startGame}>Start</button>
+							<button className="mt-8 btn-lg btn-wide" onClick={startGame}>
+								Start
+							</button>
 						</>
 					)}
 				</div>
