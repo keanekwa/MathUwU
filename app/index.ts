@@ -101,7 +101,7 @@ app.post("/logout", async (req: any, res: any) => {
 
 app.get("/scores", async (req: any, res: any) => {
 	try {
-		const scores = await db.query("SELECT * FROM scores")
+		const scores = await db.query("SELECT * FROM scores ORDER BY id DESC")
 
 		utils.sendSuccess(res, "Successfully retrieved scores.", scores.rows)
 	} catch (err: any) {
