@@ -48,7 +48,9 @@ const Register = () => {
 				<label>Repeat Password </label>
 				<input id="password2" name="password2" type="password" placeholder="Repeat Password" required />
 			</div>
-			<button type="submit">Register</button>
+			<button className="btn" type="submit">
+				Register
+			</button>
 		</form>
 	)
 }

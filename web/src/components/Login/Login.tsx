@@ -41,7 +41,9 @@ const Login = () => {
 				<label>Password </label>
 				<input id="password" name="password" type="password" placeholder="Password" required />
 			</div>
-			<button type="submit">Login</button>
+			<button className="btn" type="submit">
+				Login
+			</button>
 		</form>
 	)
 }

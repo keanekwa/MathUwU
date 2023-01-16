@@ -172,7 +172,7 @@ const Game = () => {
 										value={answer}
 									/>
 								</div>
-								<button className="mt-8" onClick={startGame}>
+								<button className="btn mt-8" onClick={startGame}>
 									Restart
 								</button>
 							</>
@@ -183,7 +183,7 @@ const Game = () => {
 									<Score score={score} />
 								</div>
 								<CustomSettings settings={settings} setSettings={setSettings} />
-								<button className="mt-8" onClick={startGame}>
+								<button className="btn mt-8" onClick={startGame}>
 									Restart
 								</button>
 								<ScoreHistory scoreHistory={scoreHistory} />
@@ -192,7 +192,7 @@ const Game = () => {
 					) : (
 						<>
 							<CustomSettings settings={settings} setSettings={setSettings} />
-							<button className="mt-8 btn-lg btn-wide" onClick={startGame}>
+							<button className="btn mt-8 btn-lg btn-wide" onClick={startGame}>
 								Start
 							</button>
 						</>

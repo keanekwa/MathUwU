@@ -23,12 +23,12 @@ const Navbar = () => {
 		<div className="navbar bg-gray-500 rounded-lg shadow-lg">
 			<div className="flex-1">
 				{location?.pathname === "/" ? (
-					<button onClick={() => window.location.reload()} className="btn-ghost normal-case text-xl">
+					<button className="btn btn-ghost normal-case text-xl" onClick={() => window.location.reload()}>
 						MathUwU
 					</button>
 				) : (
 					<Link to="/">
-						<button className="btn-ghost normal-case text-xl">MathUwU</button>
+						<button className="btn btn-ghost normal-case text-xl">MathUwU</button>
 					</Link>
 				)}
 			</div>
@@ -36,7 +36,7 @@ const Navbar = () => {
 				(context?.currentUser ? (
 					<div className="flex-none">
 						<div className="dropdown dropdown-end">
-							<button tabIndex={0} className="btn-ghost btn-circle avatar">
+							<button className="btn btn-ghost btn-circle avatar" tabIndex={0}>
 								<div className="w-10 h-10 leading-10 rounded-full bg-gray-400">
 									{context?.currentUser[0].toUpperCase()}
 								</div>
@@ -56,10 +56,10 @@ const Navbar = () => {
 				) : (
 					<>
 						<Link to="/login">
-							<button className="btn-ghost normal-case">Login</button>
+							<button className="btn btn-ghost normal-case">Login</button>
 						</Link>
 						<Link to="/register">
-							<button className="btn-ghost normal-case">Register</button>
+							<button className="btn btn-ghost normal-case">Register</button>
 						</Link>
 					</>
 				))}

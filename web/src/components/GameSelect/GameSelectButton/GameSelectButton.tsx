@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { GameModeType } from "./../../../constants"
 
 export interface GameSelectButtonProps {
+	key: string
 	mode: GameModeType
 }
 
@@ -21,7 +22,6 @@ const GameSelectButton = ({ mode }: GameSelectButtonProps) => {
 		<Link
 			to={"/game" + mode.path}
 			onClick={mode.disabled ? (event) => event.preventDefault() : (event) => 0}
-			key={mode.path}
 			className={classes}>
 			<h5>{mode.name}</h5>
 			<p>{mode.description}</p>

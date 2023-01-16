@@ -27,9 +27,9 @@ const CustomSettings = (props: CustomSettingsProps) => {
 	return (
 		<form className="card max-w-4xl p-10 bg-gray-600 shadow-xl">
 			<h6 className="mb-7">Game Settings</h6>
-			<div className="mb-5 flex items-center justify-center">
+			<div className="mb-5 flex items-center justify-left">
 				<input
-					className="mr-1"
+					className="checkbox mr-2"
 					type="checkbox"
 					id="isAdd"
 					name="isAdd"
@@ -39,7 +39,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				Addition --&gt; Range: &#40;
 				<input
 					required
-					className="w-20 mx-3 text-center"
+					className="input input-sm w-16 mx-2 text-center"
 					id="addLow1"
 					name="addLow1"
 					defaultValue={addLow1}
@@ -48,7 +48,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				to{" "}
 				<input
 					required
-					className="w-20 mx-3 text-center"
+					className="input input-sm w-16 mx-2 text-center"
 					id="addHigh1"
 					name="addHigh1"
 					defaultValue={addHigh1}
@@ -57,7 +57,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				&#41; + &#40;
 				<input
 					required
-					className="w-20 mx-3 text-center"
+					className="input input-sm w-16 mx-2 text-center"
 					id="addLow2"
 					name="addLow2"
 					defaultValue={addLow2}
@@ -66,7 +66,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				to{" "}
 				<input
 					required
-					className="w-20 mx-3 text-center"
+					className="input input-sm w-16 mx-2 text-center"
 					id="addHigh2"
 					name="addHigh2"
 					defaultValue={addHigh2}
@@ -74,9 +74,9 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>
 				&#41;
 			</div>
-			<div className="mb-5 flex items-center justify-center">
+			<div className="mb-5 flex items-center justify-left">
 				<input
-					className="mr-1"
+					className="checkbox mr-2"
 					type="checkbox"
 					id="isSubtract"
 					name="isSubtract"
@@ -85,9 +85,9 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>
 				Subtraction --&gt; Addition problems in reverse.
 			</div>
-			<div className="mb-5 flex items-center justify-center">
+			<div className="mb-5 flex items-center justify-left">
 				<input
-					className="mr-1"
+					className="checkbox mr-2"
 					type="checkbox"
 					id="isMultiply"
 					name="isMultiply"
@@ -97,7 +97,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				Multiplication --&gt; Range: &#40;
 				<input
 					required
-					className="w-20 mx-3 text-center"
+					className="input input-sm w-16 mx-2 text-center"
 					id="multiplyLow1"
 					name="multiplyLow1"
 					defaultValue={multiplyLow1}
@@ -106,7 +106,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				to{" "}
 				<input
 					required
-					className="w-20 mx-3 text-center"
+					className="input input-sm w-16 mx-2 text-center"
 					id="multiplyHigh1"
 					name="multiplyHigh1"
 					defaultValue={multiplyHigh1}
@@ -115,7 +115,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				&#41; + &#40;
 				<input
 					required
-					className="w-20 mx-3 text-center"
+					className="input input-sm w-16 mx-2 text-center"
 					id="multiplyLow2"
 					name="multiplyLow2"
 					defaultValue={multiplyLow2}
@@ -124,7 +124,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				to{" "}
 				<input
 					required
-					className="w-20 mx-3 text-center"
+					className="input input-sm w-16 mx-2 text-center"
 					id="multiplyHigh2"
 					name="multiplyHigh2"
 					defaultValue={multiplyHigh2}
@@ -132,9 +132,9 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>
 				&#41;
 			</div>
-			<div className="flex items-center justify-center">
+			<div className="flex items-center justify-left">
 				<input
-					className="mr-1"
+					className="checkbox mr-2"
 					type="checkbox"
 					id="isDivide"
 					name="isDivide"
@@ -148,7 +148,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				Game Duration:{" "}
 				<input
 					required
-					className="w-20 mx-3 text-center"
+					className="input input-sm w-16 mx-2 text-center"
 					id="seconds"
 					name="seconds"
 					defaultValue={seconds}

@@ -8,7 +8,7 @@ const GameSelect = () => {
 			<p className="text-xl text-center font-light mt-12 mb-7">Select a game mode:</p>
 			<div className="grid grid-cols-4 gap-x-4">
 				{Object.values(GAME_MODES).map((mode) => (
-					<GameSelectButton mode={mode} />
+					<GameSelectButton key={mode.name} mode={mode} />
 				))}
 			</div>
 		</div>

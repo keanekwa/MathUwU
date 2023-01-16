@@ -12,15 +12,12 @@ interface Score {
 
 const ScoreHistory = (props: ScoreHistoryProps) => {
 	const { scoreHistory } = props
+	const scoreHistoryArr = scoreHistory.map((s: Score) => s.score)
 
 	return (
-		<div>
-			Previous scores &#40;from most recent to least recent&#41;:
-			<ul>
-				{scoreHistory.map((s: Score) => (
-					<li key={s.id}>{s.score}</li>
-				))}
-			</ul>
+		<div className="mt-8">
+			<strong>Score history &#40;from most recent to least recent&#41;:</strong>
+			<div>{scoreHistoryArr.join(", ")}</div>
 		</div>
 	)
 }
