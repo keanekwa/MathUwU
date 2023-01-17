@@ -197,7 +197,7 @@ const Game = () => {
 								</div>
 								<ScoreHistory scoreHistory={scoreHistory} />
 								<div className="divider"></div>
-								<CustomSettings settings={settings} defaultSettings={defaultSettings} setSettings={setSettings} />
+								<CustomSettings settings={settings} setSettings={setSettings} />
 								<button className="btn mt-8" onClick={startGame}>
 									Restart
 								</button>
@@ -205,7 +205,7 @@ const Game = () => {
 						)
 					) : (
 						<>
-							<CustomSettings settings={settings} defaultSettings={defaultSettings} setSettings={setSettings} />
+							<CustomSettings settings={settings} setSettings={setSettings} />
 							<button className="btn mt-8 btn-lg btn-wide" onClick={startGame}>
 								Start
 							</button>

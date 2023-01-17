@@ -1,14 +1,14 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Settings } from "./../Game"
 
 interface CustomSettingsProps {
 	settings: Settings
-	defaultSettings: Settings
 	setSettings: Function
 }
 
 const CustomSettings = (props: CustomSettingsProps) => {
-	const { settings, defaultSettings, setSettings } = props
+	const { settings, setSettings } = props
+	const [defaultSettings] = useState<Settings>({ ...settings })
 	const { isAdd, isSubtract, isMultiply, isDivide, add1, add2, multiply1, multiply2, seconds } = defaultSettings
 
 	return (
