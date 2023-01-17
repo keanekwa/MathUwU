@@ -167,6 +167,7 @@ const Game = () => {
 										{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} =
 									</span>
 									<input
+										className="input"
 										autoFocus
 										onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
 										value={answer}

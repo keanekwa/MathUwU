@@ -33,13 +33,15 @@ const Login = () => {
 
 	return (
 		<form onSubmit={(event) => handleLogin(event, navigate, setContext)}>
-			<div>
-				<label htmlFor="username">Username </label>
-				<input id="username" name="username" placeholder="Username" required />
+			<div className="mb-2">
+				<label className="inline-block w-20 mr-5" htmlFor="username">
+					Username
+				</label>
+				<input className="input" id="username" name="username" placeholder="Username" required />
 			</div>
-			<div>
-				<label>Password </label>
-				<input id="password" name="password" type="password" placeholder="Password" required />
+			<div className="mb-5">
+				<label className="inline-block w-20 mr-5">Password</label>
+				<input className="input" id="password" name="password" type="password" placeholder="Password" required />
 			</div>
 			<button className="btn" type="submit">
 				Login

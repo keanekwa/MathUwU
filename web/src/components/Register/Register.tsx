@@ -34,19 +34,26 @@ const Register = () => {
 		<form onSubmit={(event) => handleRegister(event, navigate)}>
 			<div>
 				<label htmlFor="username">Username </label>
-				<input id="username" name="username" placeholder="Username" required />
+				<input className="input" id="username" name="username" placeholder="Username" required />
 			</div>
 			<div>
 				<label>Email </label>
-				<input id="email" name="email" type="email" placeholder="Email" required />
+				<input className="input" id="email" name="email" type="email" placeholder="Email" required />
 			</div>
 			<div>
 				<label>Password </label>
-				<input id="password" name="password" type="password" placeholder="Password" required />
+				<input className="input" id="password" name="password" type="password" placeholder="Password" required />
 			</div>
 			<div>
 				<label>Repeat Password </label>
-				<input id="password2" name="password2" type="password" placeholder="Repeat Password" required />
+				<input
+					className="input"
+					id="password2"
+					name="password2"
+					type="password"
+					placeholder="Repeat Password"
+					required
+				/>
 			</div>
 			<button className="btn" type="submit">
 				Register
