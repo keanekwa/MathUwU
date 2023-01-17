@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Context } from "../../App"
 import api from "./../../utils/api"
 import random from "random"
@@ -147,7 +147,7 @@ const Game = () => {
 
 	useInterval(() => setSeconds(seconds - 1), 1000)
 
-	if (seconds === 0 && !isScoreSaved) {
+	if (seconds === 0 && !isScoreSaved && context?.currentUser) {
 		api
 			.post("/scores", {
 				username: context?.currentUser,
@@ -195,7 +195,13 @@ const Game = () => {
 									<h6>Time's up!</h6>
 									<Score score={score} />
 								</div>
-								<ScoreHistory scoreHistory={scoreHistory} />
+								{context?.currentUser ? (
+									<ScoreHistory scoreHistory={scoreHistory} />
+								) : (
+									<Link to="/login">
+										<button className="link">Login to save scores.</button>
+									</Link>
+								)}
 								<div className="divider"></div>
 								<CustomSettings settings={settings} setSettings={setSettings} />
 								<button className="btn mt-8" onClick={startGame}>
