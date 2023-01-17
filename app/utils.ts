@@ -21,8 +21,8 @@ const sendValidationError = (res: any, message: string) => {
 	res.status(HTTP_STATUS.ERROR_VALIDATION).send({ message: message })
 }
 
-const checkUndefined = (arr: Array<any>) => {
-	return arr.includes(undefined)
+const checkUndefinedOrNull = (arr: Array<any>) => {
+	return arr.includes(null) || arr.includes(undefined)
 }
 
-module.exports = { sendSuccess, sendBadRequestError, sendUnauthorizedError, sendValidationError, checkUndefined }
+module.exports = { sendSuccess, sendBadRequestError, sendUnauthorizedError, sendValidationError, checkUndefinedOrNull }

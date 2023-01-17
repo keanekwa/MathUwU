@@ -43,7 +43,7 @@ app.post("/register", async (req: RegisterReq, res: any) => {
 	try {
 		let { username, email, hashedPassword, hashedPassword2 } = req.body
 
-		if (utils.checkUndefined(username, email, hashedPassword, hashedPassword2)) {
+		if (utils.checkUndefinedOrNull([username, email, hashedPassword, hashedPassword2])) {
 			utils.sendBadRequestError(res, "Please enter all fields.")
 			return
 		}
@@ -75,7 +75,7 @@ app.get("/user", (req: any, res: any) => {
 
 app.post("/login", async (req: any, res: any) => {
 	let { username, password } = req.body
-	if (utils.checkUndefined(username, password)) {
+	if (utils.checkUndefinedOrNull([username, password])) {
 		utils.sendBadRequestError(res, "Please enter all fields.")
 		return
 	}
@@ -101,7 +101,12 @@ app.post("/logout", async (req: any, res: any) => {
 
 app.get("/scores", async (req: any, res: any) => {
 	try {
-		const scores = await db.query("SELECT * FROM scores ORDER BY id DESC")
+		if (!req.user.username) {
+			utils.sendUnauthorizedError(res, "Unable to get scores for user who is not logged in.")
+			return
+		}
+
+		const scores = await db.query("SELECT * FROM scores WHERE username = $1 ORDER BY id DESC", [req.user.username])
 
 		utils.sendSuccess(res, "Successfully retrieved scores.", scores.rows)
 	} catch (err: any) {
@@ -113,7 +118,7 @@ app.post("/scores", async (req: any, res: any) => {
 	try {
 		let { username, score } = req.body
 
-		if (utils.checkUndefined(username, score)) {
+		if (utils.checkUndefinedOrNull([username, score])) {
 			utils.sendBadRequestError(res, "Please enter all fields.")
 			return
 		}
