@@ -10,23 +10,22 @@ import Score from "./Score/Score"
 import ScoreHistory from "./ScoreHistory/ScoreHistory"
 import CustomSettings from "./CustomSettings/CustomSettings"
 import { GAME_MODES, OPERATORS } from "./../../constants"
+import Alert from "../Alert/Alert"
 
 const getNumbers = (operator: string, settings: Settings) => {
-	const { addLow1, addHigh1, addLow2, addHigh2, multiplyLow1, multiplyHigh1, multiplyLow2, multiplyHigh2 } = settings
+	const { add1, add2, multiply1, multiply2 } = settings
 
 	const returnNormal = (a: number, b: number, ans: number) => {
-		console.log(ans)
 		return { vars: [a, b], ans: ans }
 	}
 
 	const returnReverse = (a: number, b: number, ans: number) => {
-		console.log(b)
 		return { vars: [ans, a], ans: b }
 	}
 
 	if (operator === OPERATORS.ADD || operator === OPERATORS.SUBTRACT) {
-		const a = random.int(addLow1, addHigh1)
-		const b = random.int(addLow2, addHigh2)
+		const a = random.int(Math.min(...add1), Math.max(...add1))
+		const b = random.int(Math.min(...add2), Math.max(...add2))
 		const ans = a + b
 
 		if (operator === OPERATORS.ADD) return returnNormal(a, b, ans)
@@ -34,8 +33,8 @@ const getNumbers = (operator: string, settings: Settings) => {
 	}
 
 	if (operator === OPERATORS.MULTIPLY || operator === OPERATORS.DIVIDE) {
-		const a = random.int(multiplyLow1, multiplyHigh1)
-		const b = random.int(multiplyLow2, multiplyHigh2)
+		const a = random.int(Math.min(...multiply1), Math.max(...multiply1))
+		const b = random.int(Math.min(...multiply2), Math.max(...multiply2))
 		const ans = a * b
 
 		if (operator === OPERATORS.MULTIPLY) return returnNormal(a, b, ans)
@@ -63,14 +62,10 @@ const defaultSettings: Settings = {
 	isSubtract: true,
 	isDivide: true,
 	isMultiply: true,
-	addLow1: 2,
-	addHigh1: 100,
-	addLow2: 2,
-	addHigh2: 100,
-	multiplyLow1: 2,
-	multiplyHigh1: 12,
-	multiplyLow2: 2,
-	multiplyHigh2: 100,
+	add1: [2, 100],
+	add2: [2, 100],
+	multiply1: [2, 12],
+	multiply2: [2, 12],
 	seconds: 120
 }
 
@@ -79,14 +74,10 @@ export interface Settings {
 	isSubtract: boolean
 	isDivide: boolean
 	isMultiply: boolean
-	addLow1: number
-	addHigh1: number
-	addLow2: number
-	addHigh2: number
-	multiplyLow1: number
-	multiplyHigh1: number
-	multiplyLow2: number
-	multiplyHigh2: number
+	add1: [number, number]
+	add2: [number, number]
+	multiply1: [number, number]
+	multiply2: [number, number]
 	seconds: number
 }
 
@@ -110,6 +101,8 @@ const Game = () => {
 	const [scoreHistory, setScoreHistory] = useState([])
 	const [settings, setSettings] = useState(defaultSettings)
 	const [question, setQuestion] = useState(() => getQuestion(settings))
+	const [showAlert, setShowAlert] = useState(false)
+	const [alertMessage, setAlertMessage] = useState("")
 
 	const getNewQuestion = () => {
 		setQuestion(getQuestion(settings))
@@ -126,7 +119,25 @@ const Game = () => {
 	}
 
 	const startGame = () => {
-		console.log(settings)
+		const { isAdd, isSubtract, isMultiply, isDivide, add1, add2, multiply1, multiply2, seconds } = settings
+		if ((isAdd || isSubtract) && (add1.includes(NaN) || add2.includes(NaN))) {
+			setShowAlert(true)
+			setAlertMessage("Enter a numeric range for addition.")
+			return
+		}
+		if ((isMultiply || isDivide) && (multiply1.includes(NaN) || multiply2.includes(NaN))) {
+			setShowAlert(true)
+			setAlertMessage("Enter a numeric range for multiplication.")
+			return
+		}
+		if (Number.isNaN(seconds)) {
+			setShowAlert(true)
+			setAlertMessage("Enter a game duration.")
+			setTimeout(() => setShowAlert(false), 5000)
+			setTimeout(() => setAlertMessage(""), 5300)
+			return
+		}
+
 		getNewQuestion()
 		setScore(0)
 		setIsScoreSaved(false)
@@ -153,6 +164,7 @@ const Game = () => {
 
 	return (
 		<>
+			<Alert show={showAlert} message={alertMessage} />
 			{is404 ? (
 				<Error404 message="Game not found." />
 			) : (
@@ -185,7 +197,7 @@ const Game = () => {
 								</div>
 								<ScoreHistory scoreHistory={scoreHistory} />
 								<div className="divider"></div>
-								<CustomSettings settings={settings} setSettings={setSettings} />
+								<CustomSettings settings={settings} defaultSettings={defaultSettings} setSettings={setSettings} />
 								<button className="btn mt-8" onClick={startGame}>
 									Restart
 								</button>
@@ -193,7 +205,7 @@ const Game = () => {
 						)
 					) : (
 						<>
-							<CustomSettings settings={settings} setSettings={setSettings} />
+							<CustomSettings settings={settings} defaultSettings={defaultSettings} setSettings={setSettings} />
 							<button className="btn mt-8 btn-lg btn-wide" onClick={startGame}>
 								Start
 							</button>

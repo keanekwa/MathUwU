@@ -3,26 +3,13 @@ import { Settings } from "./../Game"
 
 interface CustomSettingsProps {
 	settings: Settings
+	defaultSettings: Settings
 	setSettings: Function
 }
 
 const CustomSettings = (props: CustomSettingsProps) => {
-	const { settings, setSettings } = props
-	const {
-		isAdd,
-		isSubtract,
-		isMultiply,
-		isDivide,
-		addLow1,
-		addHigh1,
-		addLow2,
-		addHigh2,
-		multiplyLow1,
-		multiplyHigh1,
-		multiplyLow2,
-		multiplyHigh2,
-		seconds
-	} = settings
+	const { settings, defaultSettings, setSettings } = props
+	const { isAdd, isSubtract, isMultiply, isDivide, add1, add2, multiply1, multiply2, seconds } = defaultSettings
 
 	return (
 		<form className="card max-w-4xl p-10 bg-gray-600 shadow-xl">
@@ -31,8 +18,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				<input
 					className="checkbox mr-2"
 					type="checkbox"
-					id="isAdd"
-					name="isAdd"
 					defaultChecked={isAdd}
 					onChange={(event) => setSettings({ ...settings, isAdd: event.target.checked })}
 				/>
@@ -40,37 +25,33 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				<input
 					required
 					className="input input-sm w-16 mx-2 text-center"
-					id="addLow1"
-					name="addLow1"
-					defaultValue={addLow1}
-					onChange={(event) => setSettings({ ...settings, addLow1: parseInt(event.target.value) })}
+					type="number"
+					defaultValue={add1[0]}
+					onChange={(event) => setSettings({ ...settings, add1: [parseInt(event.target.value), add1[1]] })}
 				/>{" "}
 				to{" "}
 				<input
 					required
 					className="input input-sm w-16 mx-2 text-center"
-					id="addHigh1"
-					name="addHigh1"
-					defaultValue={addHigh1}
-					onChange={(event) => setSettings({ ...settings, addHigh1: parseInt(event.target.value) })}
+					type="number"
+					defaultValue={add1[1]}
+					onChange={(event) => setSettings({ ...settings, add1: [add1[0], parseInt(event.target.value)] })}
 				/>
 				&#41; + &#40;
 				<input
 					required
 					className="input input-sm w-16 mx-2 text-center"
-					id="addLow2"
-					name="addLow2"
-					defaultValue={addLow2}
-					onChange={(event) => setSettings({ ...settings, addLow2: parseInt(event.target.value) })}
+					type="number"
+					defaultValue={add2[0]}
+					onChange={(event) => setSettings({ ...settings, add2: [parseInt(event.target.value), add2[1]] })}
 				/>{" "}
 				to{" "}
 				<input
 					required
 					className="input input-sm w-16 mx-2 text-center"
-					id="addHigh2"
-					name="addHigh2"
-					defaultValue={addHigh2}
-					onChange={(event) => setSettings({ ...settings, addHigh2: parseInt(event.target.value) })}
+					type="number"
+					defaultValue={add2[1]}
+					onChange={(event) => setSettings({ ...settings, add2: [add2[0], parseInt(event.target.value)] })}
 				/>
 				&#41;
 			</div>
@@ -78,8 +59,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				<input
 					className="checkbox mr-2"
 					type="checkbox"
-					id="isSubtract"
-					name="isSubtract"
 					defaultChecked={isSubtract}
 					onChange={(event) => setSettings({ ...settings, isSubtract: event.target.checked })}
 				/>
@@ -89,8 +68,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				<input
 					className="checkbox mr-2"
 					type="checkbox"
-					id="isMultiply"
-					name="isMultiply"
 					defaultChecked={isMultiply}
 					onChange={(event) => setSettings({ ...settings, isMultiply: event.target.checked })}
 				/>
@@ -98,28 +75,25 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				<input
 					required
 					className="input input-sm w-16 mx-2 text-center"
-					id="multiplyLow1"
-					name="multiplyLow1"
-					defaultValue={multiplyLow1}
-					onChange={(event) => setSettings({ ...settings, multiplyLow1: parseInt(event.target.value) })}
+					type="number"
+					defaultValue={multiply1[0]}
+					onChange={(event) => setSettings({ ...settings, multiply1: [parseInt(event.target.value), multiply1[1]] })}
 				/>{" "}
 				to{" "}
 				<input
 					required
 					className="input input-sm w-16 mx-2 text-center"
-					id="multiplyHigh1"
-					name="multiplyHigh1"
-					defaultValue={multiplyHigh1}
-					onChange={(event) => setSettings({ ...settings, multiplyHigh1: parseInt(event.target.value) })}
+					type="number"
+					defaultValue={multiply1[1]}
+					onChange={(event) => setSettings({ ...settings, multiply1: [multiply1[0], parseInt(event.target.value)] })}
 				/>
-				&#41; + &#40;
+				&#41; &#215; &#40;
 				<input
 					required
 					className="input input-sm w-16 mx-2 text-center"
-					id="multiplyLow2"
-					name="multiplyLow2"
-					defaultValue={multiplyLow2}
-					onChange={(event) => setSettings({ ...settings, multiplyLow2: parseInt(event.target.value) })}
+					type="number"
+					defaultValue={multiply2[0]}
+					onChange={(event) => setSettings({ ...settings, multiply2: [parseInt(event.target.value), multiply2[1]] })}
 				/>{" "}
 				to{" "}
 				<input
@@ -127,8 +101,8 @@ const CustomSettings = (props: CustomSettingsProps) => {
 					className="input input-sm w-16 mx-2 text-center"
 					id="multiplyHigh2"
 					name="multiplyHigh2"
-					defaultValue={multiplyHigh2}
-					onChange={(event) => setSettings({ ...settings, multiplyHigh2: parseInt(event.target.value) })}
+					defaultValue={multiply2[1]}
+					onChange={(event) => setSettings({ ...settings, multiply2: [multiply2[0], parseInt(event.target.value)] })}
 				/>
 				&#41;
 			</div>
@@ -136,8 +110,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				<input
 					className="checkbox mr-2"
 					type="checkbox"
-					id="isDivide"
-					name="isDivide"
 					defaultChecked={isDivide}
 					onChange={(event) => setSettings({ ...settings, isDivide: event.target.checked })}
 				/>
@@ -149,8 +121,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				<input
 					required
 					className="input input-sm w-16 mx-2 text-center"
-					id="seconds"
-					name="seconds"
 					defaultValue={seconds}
 					onChange={(event) => setSettings({ ...settings, seconds: parseInt(event.target.value) })}
 				/>{" "}
