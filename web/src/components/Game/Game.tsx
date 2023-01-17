@@ -150,7 +150,6 @@ const Game = () => {
 	if (seconds === 0 && !isScoreSaved && context?.currentUser) {
 		api
 			.post("/scores", {
-				username: context?.currentUser,
 				score: score
 			})
 			.then(() => {

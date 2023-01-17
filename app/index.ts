@@ -21,6 +21,7 @@ app.use(
 app.use(
 	session({
 		secret: "secretcode",
+		saveUninitialized: false,
 		resave: false
 	})
 )
@@ -101,8 +102,8 @@ app.post("/logout", async (req: any, res: any) => {
 
 app.get("/scores", async (req: any, res: any) => {
 	try {
-		if (!req.user.username) {
-			utils.sendUnauthorizedError(res, "Unable to get scores for user who is not logged in.")
+		if (!req?.user?.username) {
+			utils.sendUnauthorizedError(res, "User not logged in.")
 			return
 		}
 
@@ -116,15 +117,20 @@ app.get("/scores", async (req: any, res: any) => {
 
 app.post("/scores", async (req: any, res: any) => {
 	try {
-		let { username, score } = req.body
+		let { score } = req.body
 
-		if (utils.checkUndefinedOrNull([username, score])) {
+		if (!req?.user?.username) {
+			utils.sendUnauthorizedError(res, "User not logged in.")
+			return
+		}
+
+		if (utils.checkUndefinedOrNull([score])) {
 			utils.sendBadRequestError(res, "Please enter all fields.")
 			return
 		}
 
 		const newScore = await db.query("INSERT INTO scores (username, score) VALUES ($1, $2) RETURNING *", [
-			username,
+			req.user.username,
 			score
 		])
 
