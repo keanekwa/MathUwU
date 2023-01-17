@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { Settings } from "./../Game"
 
 interface CustomSettingsProps {
@@ -23,7 +23,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>
 				Addition --&gt; Range: &#40;
 				<input
-					required
 					className="input input-sm w-16 mx-2 text-center"
 					type="number"
 					defaultValue={add1[0]}
@@ -31,7 +30,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>{" "}
 				to{" "}
 				<input
-					required
 					className="input input-sm w-16 mx-2 text-center"
 					type="number"
 					defaultValue={add1[1]}
@@ -39,7 +37,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>
 				&#41; + &#40;
 				<input
-					required
 					className="input input-sm w-16 mx-2 text-center"
 					type="number"
 					defaultValue={add2[0]}
@@ -47,7 +44,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>{" "}
 				to{" "}
 				<input
-					required
 					className="input input-sm w-16 mx-2 text-center"
 					type="number"
 					defaultValue={add2[1]}
@@ -73,7 +69,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>
 				Multiplication --&gt; Range: &#40;
 				<input
-					required
 					className="input input-sm w-16 mx-2 text-center"
 					type="number"
 					defaultValue={multiply1[0]}
@@ -81,7 +76,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>{" "}
 				to{" "}
 				<input
-					required
 					className="input input-sm w-16 mx-2 text-center"
 					type="number"
 					defaultValue={multiply1[1]}
@@ -89,7 +83,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>
 				&#41; &#215; &#40;
 				<input
-					required
 					className="input input-sm w-16 mx-2 text-center"
 					type="number"
 					defaultValue={multiply2[0]}
@@ -97,7 +90,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				/>{" "}
 				to{" "}
 				<input
-					required
 					className="input input-sm w-16 mx-2 text-center"
 					id="multiplyHigh2"
 					name="multiplyHigh2"
@@ -119,7 +111,6 @@ const CustomSettings = (props: CustomSettingsProps) => {
 			<div className="flex items-center justify-center">
 				Game Duration:{" "}
 				<input
-					required
 					className="input input-sm w-16 mx-2 text-center"
 					defaultValue={seconds}
 					onChange={(event) => setSettings({ ...settings, seconds: parseInt(event.target.value) })}

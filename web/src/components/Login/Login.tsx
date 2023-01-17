@@ -2,12 +2,13 @@ import React, { useContext } from "react"
 import { NavigateFunction, useNavigate } from "react-router-dom"
 import api from "./../../utils/api"
 import getFormData from "./../../utils/getFormData"
-import { Context } from "../../App"
+import { AlertContext, UserContext } from "../../App"
 
 const handleLogin = async (
 	event: React.FormEvent<HTMLFormElement>,
 	navigate: NavigateFunction,
-	setContext: Function
+	setUser: Function,
+	setAlert: Function
 ) => {
 	event.preventDefault()
 	const { username, password } = getFormData(event)
@@ -18,30 +19,31 @@ const handleLogin = async (
 			password: password
 		})
 		const user = res?.data?.response
-		setContext({ currentUser: user?.username })
+		setUser(user?.username)
 
 		navigate("/")
 	} catch (err: any) {
 		const errMessage = err?.response?.data?.message
-		alert(errMessage)
+		setAlert({ show: true, message: errMessage })
 	}
 }
 
 const Login = () => {
-	const [, setContext] = useContext(Context)
+	const [, setUser] = useContext(UserContext)
+	const [, setAlert] = useContext(AlertContext)
 	const navigate = useNavigate()
 
 	return (
-		<form onSubmit={(event) => handleLogin(event, navigate, setContext)}>
+		<form onSubmit={(event) => handleLogin(event, navigate, setUser, setAlert)}>
 			<div className="mb-2">
-				<label className="inline-block w-20 mr-5" htmlFor="username">
+				<label className="inline-block w-32 mr-5" htmlFor="username">
 					Username
 				</label>
-				<input className="input" id="username" name="username" placeholder="Username" required />
+				<input className="input" id="username" name="username" placeholder="Username" />
 			</div>
 			<div className="mb-5">
-				<label className="inline-block w-20 mr-5">Password</label>
-				<input className="input" id="password" name="password" type="password" placeholder="Password" required />
+				<label className="inline-block w-32 mr-5">Password</label>
+				<input className="input" id="password" name="password" type="password" placeholder="Password" />
 			</div>
 			<button className="btn" type="submit">
 				Login

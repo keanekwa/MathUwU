@@ -1,10 +1,15 @@
-import React from "react"
+import React, { useContext } from "react"
 import { NavigateFunction, useNavigate } from "react-router-dom"
 import api from "./../../utils/api"
 import bcrypt from "bcryptjs-react"
 import getFormData from "./../../utils/getFormData"
+import { AlertContext } from "../../App"
 
-const handleRegister = async (event: React.FormEvent<HTMLFormElement>, navigate: NavigateFunction) => {
+const handleRegister = async (
+	event: React.FormEvent<HTMLFormElement>,
+	navigate: NavigateFunction,
+	setAlert: Function
+) => {
 	event.preventDefault()
 
 	const { username, email, password, password2 } = getFormData(event)
@@ -23,37 +28,39 @@ const handleRegister = async (event: React.FormEvent<HTMLFormElement>, navigate:
 		navigate("/")
 	} catch (err: any) {
 		const errMessage = err?.response?.data?.message
-		alert(errMessage)
+		setAlert({ show: true, message: errMessage })
 	}
 }
 
 const Register = () => {
+	const [, setAlert] = useContext(AlertContext)
 	const navigate = useNavigate()
 
 	return (
-		<form onSubmit={(event) => handleRegister(event, navigate)}>
-			<div>
-				<label htmlFor="username">Username </label>
-				<input className="input" id="username" name="username" placeholder="Username" required />
+		<form onSubmit={(event) => handleRegister(event, navigate, setAlert)}>
+			<div className="mb-2">
+				<label className="inline-block w-32 mr-5" htmlFor="username">
+					Username{" "}
+				</label>
+				<input className="input" id="username" name="username" placeholder="Username" />
 			</div>
-			<div>
-				<label>Email </label>
-				<input className="input" id="email" name="email" type="email" placeholder="Email" required />
+			<div className="mb-2">
+				<label className="inline-block w-32 mr-5" htmlFor="email">
+					Email{" "}
+				</label>
+				<input className="input" id="email" name="email" type="email" placeholder="Email" />
 			</div>
-			<div>
-				<label>Password </label>
-				<input className="input" id="password" name="password" type="password" placeholder="Password" required />
+			<div className="mb-2">
+				<label className="inline-block w-32 mr-5" htmlFor="password">
+					Password{" "}
+				</label>
+				<input className="input" id="password" name="password" type="password" placeholder="Password" />
 			</div>
-			<div>
-				<label>Repeat Password </label>
-				<input
-					className="input"
-					id="password2"
-					name="password2"
-					type="password"
-					placeholder="Repeat Password"
-					required
-				/>
+			<div className="mb-5">
+				<label className="inline-block w-32 mr-5" htmlFor="password2">
+					Repeat Password{" "}
+				</label>
+				<input className="input" id="password2" name="password2" type="password" placeholder="Repeat Password" />
 			</div>
 			<button className="btn" type="submit">
 				Register

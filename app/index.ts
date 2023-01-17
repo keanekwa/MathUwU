@@ -44,7 +44,7 @@ app.post("/register", async (req: RegisterReq, res: any) => {
 	try {
 		let { username, email, hashedPassword, hashedPassword2 } = req.body
 
-		if (utils.checkUndefinedOrNull([username, email, hashedPassword, hashedPassword2])) {
+		if (utils.checkEmpty([username, email, hashedPassword, hashedPassword2])) {
 			utils.sendBadRequestError(res, "Please enter all fields.")
 			return
 		}
@@ -76,7 +76,7 @@ app.get("/user", (req: any, res: any) => {
 
 app.post("/login", async (req: any, res: any) => {
 	let { username, password } = req.body
-	if (utils.checkUndefinedOrNull([username, password])) {
+	if (utils.checkEmpty([username, password])) {
 		utils.sendBadRequestError(res, "Please enter all fields.")
 		return
 	}
@@ -124,7 +124,7 @@ app.post("/scores", async (req: any, res: any) => {
 			return
 		}
 
-		if (utils.checkUndefinedOrNull([score])) {
+		if (utils.checkEmpty([score])) {
 			utils.sendBadRequestError(res, "Please enter all fields.")
 			return
 		}

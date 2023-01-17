@@ -1,21 +1,22 @@
 import React, { useContext } from "react"
 import { Link, NavigateFunction, useNavigate, useLocation } from "react-router-dom"
-import { Context } from "../../../App"
+import { AlertContext, UserContext } from "../../../App"
 import api from "../../../utils/api"
 
-const handleLogout = async (navigate: NavigateFunction, setContext: Function) => {
+const handleLogout = async (navigate: NavigateFunction, setUser: Function, setAlert: Function) => {
 	try {
 		await api.post("/logout")
-		setContext({ currentUser: null })
+		setUser(null)
 		navigate("/")
 	} catch (err: any) {
 		const errMessage = err?.response?.data?.message
-		alert(errMessage)
+		setAlert({ show: true, message: errMessage })
 	}
 }
 
 const Navbar = () => {
-	const [context, setContext] = useContext(Context)
+	const [user, setUser] = useContext(UserContext)
+	const [, setAlert] = useContext(AlertContext)
 	const navigate = useNavigate()
 	const location = useLocation()
 
@@ -32,14 +33,12 @@ const Navbar = () => {
 					</Link>
 				)}
 			</div>
-			{context?.currentUser !== undefined &&
-				(context?.currentUser ? (
+			{user !== undefined &&
+				(user ? (
 					<div className="flex-none">
 						<div className="dropdown dropdown-end">
 							<button className="btn btn-ghost btn-circle avatar" tabIndex={0}>
-								<div className="w-10 h-10 leading-10 rounded-full bg-gray-400">
-									{context?.currentUser[0].toUpperCase()}
-								</div>
+								<div className="w-10 h-10 leading-10 rounded-full bg-gray-400">{user[0].toUpperCase()}</div>
 							</button>
 							<ul
 								tabIndex={0}
@@ -48,7 +47,7 @@ const Navbar = () => {
 									<span>Profile</span>
 								</li>
 								<li>
-									<span onClick={() => handleLogout(navigate, setContext)}>Logout</span>
+									<span onClick={() => handleLogout(navigate, setUser, setAlert)}>Logout</span>
 								</li>
 							</ul>
 						</div>

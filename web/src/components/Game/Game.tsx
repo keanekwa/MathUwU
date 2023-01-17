@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { Context } from "../../App"
+import { AlertContext, UserContext } from "../../App"
 import api from "./../../utils/api"
 import random from "random"
 import useInterval from "../../utils/useInterval"
@@ -10,7 +10,6 @@ import Score from "./Score/Score"
 import ScoreHistory from "./ScoreHistory/ScoreHistory"
 import CustomSettings from "./CustomSettings/CustomSettings"
 import { GAME_MODES, OPERATORS } from "./../../constants"
-import Alert from "../Alert/Alert"
 
 const getNumbers = (operator: string, settings: Settings) => {
 	const { add1, add2, multiply1, multiply2 } = settings
@@ -92,7 +91,8 @@ const Game = () => {
 		}
 	}, [mode])
 
-	const [context] = useContext(Context)
+	const [user] = useContext(UserContext)
+	const [, setAlert] = useContext(AlertContext)
 	const [start, setStart] = useState(false)
 	const [answer, setAnswer] = useState("")
 	const [score, setScore] = useState(0)
@@ -101,8 +101,6 @@ const Game = () => {
 	const [scoreHistory, setScoreHistory] = useState([])
 	const [settings, setSettings] = useState(defaultSettings)
 	const [question, setQuestion] = useState(() => getQuestion(settings))
-	const [showAlert, setShowAlert] = useState(false)
-	const [alertMessage, setAlertMessage] = useState("")
 
 	const getNewQuestion = () => {
 		setQuestion(getQuestion(settings))
@@ -121,20 +119,15 @@ const Game = () => {
 	const startGame = () => {
 		const { isAdd, isSubtract, isMultiply, isDivide, add1, add2, multiply1, multiply2, seconds } = settings
 		if ((isAdd || isSubtract) && (add1.includes(NaN) || add2.includes(NaN))) {
-			setShowAlert(true)
-			setAlertMessage("Enter a numeric range for addition.")
+			setAlert({ show: true, message: "Enter a numeric range for addition." })
 			return
 		}
 		if ((isMultiply || isDivide) && (multiply1.includes(NaN) || multiply2.includes(NaN))) {
-			setShowAlert(true)
-			setAlertMessage("Enter a numeric range for multiplication.")
+			setAlert({ show: true, message: "Enter a numeric range for multiplication." })
 			return
 		}
 		if (Number.isNaN(seconds)) {
-			setShowAlert(true)
-			setAlertMessage("Enter a game duration.")
-			setTimeout(() => setShowAlert(false), 5000)
-			setTimeout(() => setAlertMessage(""), 5300)
+			setAlert({ show: true, message: "Enter a game duration." })
 			return
 		}
 
@@ -147,7 +140,7 @@ const Game = () => {
 
 	useInterval(() => setSeconds(seconds - 1), 1000)
 
-	if (seconds === 0 && !isScoreSaved && context?.currentUser) {
+	if (seconds === 0 && !isScoreSaved && user) {
 		api
 			.post("/scores", {
 				score: score
@@ -163,7 +156,6 @@ const Game = () => {
 
 	return (
 		<>
-			<Alert show={showAlert} message={alertMessage} />
 			{is404 ? (
 				<Error404 message="Game not found." />
 			) : (
@@ -194,7 +186,7 @@ const Game = () => {
 									<h6>Time's up!</h6>
 									<Score score={score} />
 								</div>
-								{context?.currentUser ? (
+								{user ? (
 									<ScoreHistory scoreHistory={scoreHistory} />
 								) : (
 									<Link to="/login">

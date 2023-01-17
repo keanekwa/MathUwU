@@ -52,28 +52,33 @@ const router = createBrowserRouter([
 	}
 ])
 
-interface ContextType {
-	currentUser: string | undefined | null //undefined means /user API has NOT been called. null means user is logged out
+interface AlertType {
+	show: boolean
+	message: string
 }
 
 const App = () => {
-	const [context, setContext] = useState<ContextType>({ currentUser: undefined })
+	const [user, setUser] = useState<string | null>(null)
+	const [alert, setAlert] = useState<AlertType>({ show: false, message: "" })
 
 	useEffect(() => {
 		api.get("/user").then((res) => {
 			const user = res?.data
-			if (user) setContext({ currentUser: user?.username })
-			else setContext({ currentUser: null })
+			if (user) setUser(user?.username)
+			else setUser(null)
 		})
 	}, [])
 
 	return (
-		<Context.Provider value={[context, setContext]}>
-			<RouterProvider router={router}></RouterProvider>
-		</Context.Provider>
+		<UserContext.Provider value={[user, setUser]}>
+			<AlertContext.Provider value={[alert, setAlert]}>
+				<RouterProvider router={router}></RouterProvider>
+			</AlertContext.Provider>
+		</UserContext.Provider>
 	)
 }
 
 export default App
 
-export const Context = React.createContext<any>(undefined)
+export const UserContext = React.createContext<any>(undefined)
+export const AlertContext = React.createContext<any>(undefined)
