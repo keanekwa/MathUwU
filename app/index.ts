@@ -140,7 +140,20 @@ app.post("/scores", async (req: any, res: any) => {
 			score
 		])
 
-		utils.sendSuccess(res, "Successfully saved score.", newScore.rows[0])
+		utils.sendSuccess(res, "Successfully aved score.", newScore.rows[0])
+	} catch (err: any) {
+		console.error(err.message)
+	}
+})
+
+app.get("/percentile/:score", async (req: any, res: any) => {
+	try {
+		const percentile = await db.query(
+			"SELECT percentiles.percent_rank FROM (SELECT score, PERCENT_RANK() OVER (ORDER BY score) FROM scores GROUP BY score) AS percentiles WHERE percentiles.score = $1",
+			[req?.params?.score]
+		)
+
+		utils.sendSuccess(res, "Successfully retrieved percentile.", percentile.rows[0])
 	} catch (err: any) {
 		console.error(err.message)
 	}

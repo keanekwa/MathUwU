@@ -70,7 +70,7 @@ const Stats = ({ score, seconds, percentile }: StatsProps) => {
 					</svg>
 				</div>
 				<div className="stat-title">Better than</div>
-				<div className="stat-value">{percentile}%</div>
+				<div className="stat-value">{(percentile * 100).toFixed(1)}%</div>
 				<div className="stat-desc">of users</div>
 			</div>
 		</div>

@@ -103,6 +103,7 @@ const Game = () => {
 	const [scoreHistory, setScoreHistory] = useState([])
 	const [settings, setSettings] = useState(defaultSettings)
 	const [question, setQuestion] = useState(() => getQuestion(settings))
+	const [percentile, setPercentile] = useState(0)
 
 	const getNewQuestion = () => {
 		setQuestion(getQuestion(settings))
@@ -152,6 +153,10 @@ const Game = () => {
 				api.get("/scores").then((res) => {
 					setScoreHistory(res?.data?.response)
 				})
+
+				api.get(`/percentile/${score}`).then((res) => {
+					setPercentile(res?.data?.response?.percent_rank)
+				})
 			})
 
 		setIsScoreSaved(true)
@@ -187,7 +192,7 @@ const Game = () => {
 							<>
 								<div className="mb-5">
 									<h6>Time's up!</h6>
-									<Stats score={score} seconds={startSeconds} percentile={1} />
+									<Stats score={score} seconds={startSeconds} percentile={percentile} />
 								</div>
 								{user ? (
 									<ScoreHistory scoreHistory={scoreHistory} />
