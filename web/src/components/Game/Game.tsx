@@ -10,6 +10,7 @@ import Score from "./Score/Score"
 import ScoreHistory from "./ScoreHistory/ScoreHistory"
 import CustomSettings from "./CustomSettings/CustomSettings"
 import { GAME_MODES, OPERATORS } from "./../../constants"
+import Stats from "./Stats/Stats"
 
 const getNumbers = (operator: string, settings: Settings) => {
 	const { add1, add2, multiply1, multiply2 } = settings
@@ -97,6 +98,7 @@ const Game = () => {
 	const [answer, setAnswer] = useState("")
 	const [score, setScore] = useState(0)
 	const [seconds, setSeconds] = useState(120)
+	const [startSeconds, setStartSeconds] = useState(120)
 	const [isScoreSaved, setIsScoreSaved] = useState(false)
 	const [scoreHistory, setScoreHistory] = useState([])
 	const [settings, setSettings] = useState(defaultSettings)
@@ -134,6 +136,7 @@ const Game = () => {
 		getNewQuestion()
 		setScore(0)
 		setIsScoreSaved(false)
+		setStartSeconds(settings.seconds)
 		setSeconds(settings.seconds)
 		setStart(true)
 	}
@@ -184,7 +187,7 @@ const Game = () => {
 							<>
 								<div className="mb-5">
 									<h6>Time's up!</h6>
-									<Score score={score} />
+									<Stats score={score} seconds={startSeconds} percentile={1} />
 								</div>
 								{user ? (
 									<ScoreHistory scoreHistory={scoreHistory} />
