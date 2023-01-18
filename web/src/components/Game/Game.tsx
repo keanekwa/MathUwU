@@ -81,6 +81,15 @@ export interface Settings {
 	seconds: number
 }
 
+export interface QuestionAnsweredType {
+	operator: string
+	numbers: {
+		vars: number[]
+		ans: number
+	}
+	duration: number
+}
+
 const Game = () => {
 	const { mode } = useParams()
 	const [is404, setIs404] = useState(false)
@@ -104,9 +113,12 @@ const Game = () => {
 	const [settings, setSettings] = useState(defaultSettings)
 	const [question, setQuestion] = useState(() => getQuestion(settings))
 	const [percentile, setPercentile] = useState(0)
+	const [questionStartTime, setQuestionStartTime] = useState(0)
+	const [questionsAnswered, setQuestionsAnswered] = useState<QuestionAnsweredType[]>([])
 
 	const getNewQuestion = () => {
 		setQuestion(getQuestion(settings))
+		setQuestionStartTime(performance.now())
 		setAnswer("")
 	}
 
@@ -114,6 +126,13 @@ const Game = () => {
 		setAnswer(val)
 
 		if (parseInt(val) === ans) {
+			const questionEndTime = performance.now()
+			const lastQuestion = {
+				...question,
+				duration: questionEndTime - questionStartTime
+			}
+
+			setQuestionsAnswered([...questionsAnswered, lastQuestion as QuestionAnsweredType])
 			setScore(score + 1)
 			setTimeout(() => getNewQuestion(), 100)
 		}
@@ -134,6 +153,7 @@ const Game = () => {
 			return
 		}
 
+		setQuestionsAnswered([])
 		getNewQuestion()
 		setScore(0)
 		setIsScoreSaved(false)
@@ -192,7 +212,12 @@ const Game = () => {
 							<>
 								<div className="mb-5">
 									<h6>Time's up!</h6>
-									<Stats score={score} seconds={startSeconds} percentile={percentile} />
+									<Stats
+										score={score}
+										seconds={startSeconds}
+										percentile={percentile}
+										questionsAnswered={questionsAnswered}
+									/>
 								</div>
 								{user ? (
 									<ScoreHistory scoreHistory={scoreHistory} />
