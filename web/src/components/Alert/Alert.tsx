@@ -7,7 +7,7 @@ interface AlertProps {
 
 const Alert = ({ show, message }: AlertProps) => {
 	let classes =
-		"alert alert-warning my-alert shadow-lg fixed w-auto pr-10 max-w-sm top-5 right-5 transition duration-300"
+		"alert alert-warning my-alert shadow-2xl fixed w-auto pr-10 max-w-sm bottom-5 right-8 transition duration-300 z-10"
 	if (show) classes = classes + " show"
 
 	return (
