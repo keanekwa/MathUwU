@@ -59,6 +59,12 @@ app.post("/register", async (req: RegisterReq, res: any) => {
 			return
 		}
 
+		const existingUser = await db.query("SELECT * FROM users WHERE username = $1", [username])
+		if (existingUser?.rows[0]) {
+			utils.sendBadRequestError(res, "Username already exists.")
+			return
+		}
+
 		const newUser = await db.query(
 			"INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING username, email",
 			[username, email, hashedPassword]
