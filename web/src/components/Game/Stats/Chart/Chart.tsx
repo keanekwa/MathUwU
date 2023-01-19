@@ -1,10 +1,10 @@
 import React from "react"
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip } from "chart.js"
 import { Bar } from "react-chartjs-2"
-import { QuestionAnsweredType } from "../../Game"
+import { IQuestionAnswered } from "../../../../interfaces/Game"
 
 interface ChartProps {
-	questionsAnswered: QuestionAnsweredType[]
+	questionsAnswered: IQuestionAnswered[]
 }
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip)

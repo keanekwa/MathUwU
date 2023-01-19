@@ -11,8 +11,9 @@ import ScoreHistory from "./ScoreHistory/ScoreHistory"
 import CustomSettings from "./CustomSettings/CustomSettings"
 import { GAME_MODES, OPERATORS } from "./../../constants"
 import Stats from "./Stats/Stats"
+import { IQuestionAnswered, ISettings } from "../../interfaces/Game"
 
-const getNumbers = (operator: string, settings: Settings) => {
+const getNumbers = (operator: string, settings: ISettings) => {
 	const { add1, add2, multiply1, multiply2 } = settings
 
 	const returnNormal = (a: number, b: number, ans: number) => {
@@ -42,7 +43,7 @@ const getNumbers = (operator: string, settings: Settings) => {
 	}
 }
 
-const getQuestion = (settings: Settings) => {
+const getQuestion = (settings: ISettings) => {
 	const { isAdd, isSubtract, isMultiply, isDivide } = settings
 	let operators: Array<string> = []
 
@@ -57,7 +58,7 @@ const getQuestion = (settings: Settings) => {
 	return { operator: operator, numbers: numbers }
 }
 
-const defaultSettings: Settings = {
+const defaultSettings: ISettings = {
 	isAdd: true,
 	isSubtract: true,
 	isDivide: true,
@@ -67,27 +68,6 @@ const defaultSettings: Settings = {
 	multiply1: [2, 12],
 	multiply2: [2, 12],
 	seconds: 120
-}
-
-export interface Settings {
-	isAdd: boolean
-	isSubtract: boolean
-	isDivide: boolean
-	isMultiply: boolean
-	add1: [number, number]
-	add2: [number, number]
-	multiply1: [number, number]
-	multiply2: [number, number]
-	seconds: number
-}
-
-export interface QuestionAnsweredType {
-	operator: string
-	numbers: {
-		vars: number[]
-		ans: number
-	}
-	duration: number
 }
 
 const Game = () => {
@@ -114,7 +94,7 @@ const Game = () => {
 	const [question, setQuestion] = useState(() => getQuestion(settings))
 	const [percentile, setPercentile] = useState(0)
 	const [questionStartTime, setQuestionStartTime] = useState(0)
-	const [questionsAnswered, setQuestionsAnswered] = useState<QuestionAnsweredType[]>([])
+	const [questionsAnswered, setQuestionsAnswered] = useState<IQuestionAnswered[]>([])
 
 	const getNewQuestion = () => {
 		setQuestion(getQuestion(settings))
@@ -132,7 +112,7 @@ const Game = () => {
 				duration: questionEndTime - questionStartTime
 			}
 
-			setQuestionsAnswered([...questionsAnswered, lastQuestion as QuestionAnsweredType])
+			setQuestionsAnswered([...questionsAnswered, lastQuestion as IQuestionAnswered])
 			setScore(score + 1)
 			setTimeout(() => getNewQuestion(), 100)
 		}

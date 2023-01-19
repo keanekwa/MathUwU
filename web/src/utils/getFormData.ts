@@ -1,12 +1,9 @@
 import React from "react"
-
-interface ResponseBody {
-	[key: string]: string
-}
+import { IResponseBody } from "../interfaces/utils"
 
 const getFormData = (event: React.FormEvent<HTMLFormElement>) => {
 	const formData = new FormData(event.currentTarget as HTMLFormElement)
-	const responseBody: ResponseBody = {}
+	const responseBody: IResponseBody = {}
 	formData.forEach((value, property: string) => (responseBody[property] = value as string))
 
 	return responseBody

@@ -1,12 +1,12 @@
 import React from "react"
-import { QuestionAnsweredType } from "../Game"
+import { IQuestionAnswered } from "../../../interfaces/Game"
 import Chart from "./Chart/Chart"
 
 interface StatsProps {
 	score: number
 	seconds: number
 	percentile: number
-	questionsAnswered: QuestionAnsweredType[]
+	questionsAnswered: IQuestionAnswered[]
 }
 
 const Stats = ({ score, seconds, percentile, questionsAnswered }: StatsProps) => {

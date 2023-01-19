@@ -1,11 +1,6 @@
-export interface GameModeType {
-	path: string
-	name: string
-	description: string
-	disabled: boolean
-}
+import { IGameMode } from "./interfaces/Game"
 
-export const GAME_MODES: { [key: string]: GameModeType } = {
+export const GAME_MODES: { [key: string]: IGameMode } = {
 	DEFAULT: {
 		path: "/default",
 		name: "Default",

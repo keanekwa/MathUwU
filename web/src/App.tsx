@@ -8,6 +8,7 @@ import Register from "./components/Register/Register"
 import Login from "./components/Login/Login"
 import api from "./utils/api"
 import Error404 from "./components/Error404/Error404"
+import { IAlert } from "./interfaces/Alert"
 
 const router = createBrowserRouter([
 	{
@@ -52,14 +53,9 @@ const router = createBrowserRouter([
 	}
 ])
 
-interface AlertType {
-	show: boolean
-	message: string
-}
-
 const App = () => {
 	const [user, setUser] = useState<string | null>(null)
-	const [alert, setAlert] = useState<AlertType>({ show: false, message: "" })
+	const [alert, setAlert] = useState<IAlert>({ show: false, message: "" })
 
 	useEffect(() => {
 		api.get("/user").then((res) => {

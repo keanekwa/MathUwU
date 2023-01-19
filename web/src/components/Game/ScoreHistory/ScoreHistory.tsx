@@ -1,18 +1,13 @@
 import React from "react"
+import { IScore } from "../../../interfaces/Game"
 
 interface ScoreHistoryProps {
-	scoreHistory: Array<Score>
-}
-
-interface Score {
-	id: number
-	username: string
-	score: number
+	scoreHistory: Array<IScore>
 }
 
 const ScoreHistory = (props: ScoreHistoryProps) => {
 	const { scoreHistory } = props
-	const scoreHistoryArr = scoreHistory.map((s: Score) => s.score)
+	const scoreHistoryArr = scoreHistory.map((s: IScore) => s.score)
 
 	return (
 		<div>

@@ -1,14 +1,14 @@
 import React, { useState } from "react"
-import { Settings } from "./../Game"
+import { ISettings } from "../../../interfaces/Game"
 
 interface CustomSettingsProps {
-	settings: Settings
+	settings: ISettings
 	setSettings: Function
 }
 
 const CustomSettings = (props: CustomSettingsProps) => {
 	const { settings, setSettings } = props
-	const [defaultSettings] = useState<Settings>({ ...settings })
+	const [defaultSettings] = useState<ISettings>({ ...settings })
 
 	return (
 		<form className="card max-w-4xl p-10 bg-gray-600 shadow-xl">

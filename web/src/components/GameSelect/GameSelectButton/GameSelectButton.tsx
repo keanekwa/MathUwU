@@ -1,10 +1,10 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { GameModeType } from "./../../../constants"
+import { IGameMode } from "../../../interfaces/Game"
 
 export interface GameSelectButtonProps {
 	key: string
-	mode: GameModeType
+	mode: IGameMode
 }
 
 const GameSelectButton = ({ mode }: GameSelectButtonProps) => {
