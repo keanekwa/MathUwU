@@ -19,9 +19,7 @@ const Layout = (props: LayoutProps) => {
 		<div className="h-full overflow-auto">
 			<Navbar />
 			<Alert show={alert?.show} message={alert?.message} />
-			<div className="container">
-				<div className="py-14 px-5">{props.children}</div>
-			</div>
+			<div className="container pt-14 pb-24">{props.children}</div>
 		</div>
 	)
 }

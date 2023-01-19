@@ -199,7 +199,7 @@ const Game = () => {
 								/>
 								<div className="my-8 divider"></div>
 								<CustomSettings settings={settings} setSettings={setSettings} />
-								<button className="btn mt-8" onClick={startGame}>
+								<button className="btn mt-8 btn-wide" onClick={startGame}>
 									Restart
 								</button>
 							</>
