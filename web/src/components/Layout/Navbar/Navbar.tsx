@@ -34,9 +34,7 @@ const Navbar = () => {
 					</Link>
 				)}
 			</div>
-			<div className="pr-2">
-				<DarkModeSwitcher />
-			</div>
+			<DarkModeSwitcher />
 			{user !== undefined &&
 				(user ? (
 					<div className="flex-none">
