@@ -1,6 +1,6 @@
 import React from "react"
 import { IQuestionAnswered } from "../../../interfaces/Game"
-import Chart from "./Chart/Chart"
+import StatsChart from "./StatsChart/StatsChart"
 
 interface StatsProps {
 	score: number
@@ -19,7 +19,7 @@ const Stats = ({ score, seconds, percentile, questionsAnswered }: StatsProps) =>
 
 	return (
 		<>
-			<div className="stats shadow bg-base-200 border-2">
+			<div className="stats shadow bg-base-200 border-2 mb-5">
 				<div className="stat">
 					<div className="stat-figure text-primary">
 						<svg
@@ -84,7 +84,7 @@ const Stats = ({ score, seconds, percentile, questionsAnswered }: StatsProps) =>
 			</div>
 			{questionsAnswered.length > 0 && (
 				<>
-					<Chart questionsAnswered={questionsAnswered} />
+					<StatsChart questionsAnswered={questionsAnswered} />
 					<div className="mt-5">
 						<h3>You might need some work on these:</h3>
 						{slowestQuestions.map((q, id) => (
