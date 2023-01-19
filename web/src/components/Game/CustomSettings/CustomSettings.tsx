@@ -20,7 +20,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 					defaultChecked={defaultSettings.isAdd}
 					onChange={(event) => setSettings({ ...settings, isAdd: event.target.checked })}
 				/>
-				Addition --&gt; Range: &#40;
+				Addition &rarr; Range: &#40;
 				<input
 					className="input input-sm w-16 mx-2 text-center"
 					type="number"
@@ -57,7 +57,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 					defaultChecked={defaultSettings.isSubtract}
 					onChange={(event) => setSettings({ ...settings, isSubtract: event.target.checked })}
 				/>
-				Subtraction --&gt; Addition problems in reverse.
+				Subtraction &rarr; Addition problems in reverse.
 			</div>
 			<div className="mb-5 flex items-center justify-left">
 				<input
@@ -66,7 +66,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 					defaultChecked={defaultSettings.isMultiply}
 					onChange={(event) => setSettings({ ...settings, isMultiply: event.target.checked })}
 				/>
-				Multiplication --&gt; Range: &#40;
+				Multiplication &rarr; Range: &#40;
 				<input
 					className="input input-sm w-16 mx-2 text-center"
 					type="number"
@@ -112,7 +112,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 					defaultChecked={defaultSettings.isDivide}
 					onChange={(event) => setSettings({ ...settings, isDivide: event.target.checked })}
 				/>
-				Division --&gt; Multiplication problems in reverse.
+				Division &rarr; Multiplication problems in reverse.
 			</div>
 			<div className="divider"></div>
 			<div className="flex items-center justify-center">
