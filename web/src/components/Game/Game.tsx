@@ -66,7 +66,7 @@ const defaultSettings: ISettings = {
 	add1: [2, 100],
 	add2: [2, 100],
 	multiply1: [2, 12],
-	multiply2: [2, 12],
+	multiply2: [2, 100],
 	seconds: 120
 }
 
