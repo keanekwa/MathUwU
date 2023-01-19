@@ -5,7 +5,7 @@ import GameSelectButton from "./GameSelectButton/GameSelectButton"
 const GameSelect = () => {
 	return (
 		<div>
-			<p className="text-xl text-center font-light mt-12 mb-14">Select a game mode:</p>
+			<h2 className="text-xl text-center font-light mt-12 mb-14">Select a game mode:</h2>
 			<div className="grid grid-cols-4">
 				{Object.values(GAME_MODES).map((mode) => (
 					<GameSelectButton key={mode.name} mode={mode} />

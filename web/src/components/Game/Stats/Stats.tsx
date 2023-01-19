@@ -86,7 +86,7 @@ const Stats = ({ score, seconds, percentile, questionsAnswered }: StatsProps) =>
 				<>
 					<Chart questionsAnswered={questionsAnswered} />
 					<div className="mt-5">
-						<strong>You might need some work on these:</strong>
+						<h3>You might need some work on these:</h3>
 						{slowestQuestions.map((q, id) => (
 							<p key={id}>{`${q.numbers.vars[0]} ${q.operator} ${q.numbers.vars[1]} = ${q.numbers.ans} (${(
 								q.duration / 1000

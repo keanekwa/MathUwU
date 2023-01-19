@@ -191,7 +191,7 @@ const Game = () => {
 						) : (
 							<>
 								<div className="mb-5">
-									<h3>Time's up!</h3>
+									<h2>Time's up!</h2>
 									<Stats
 										score={score}
 										seconds={startSeconds}
@@ -216,7 +216,7 @@ const Game = () => {
 					) : (
 						<>
 							<CustomSettings settings={settings} setSettings={setSettings} />
-							<button className="btn mt-8 btn-lg btn-wide" onClick={startGame}>
+							<button className="btn mt-8 btn-wide" onClick={startGame}>
 								Start
 							</button>
 						</>

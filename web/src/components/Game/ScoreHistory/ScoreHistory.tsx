@@ -11,7 +11,7 @@ const ScoreHistory = (props: ScoreHistoryProps) => {
 
 	return (
 		<div>
-			<strong>Score history &#40;from most recent to least recent&#41;:</strong>
+			<h3>Score history &#40;from most recent to least recent&#41;:</h3>
 			<div>{scoreHistoryArr.join(", ")}</div>
 		</div>
 	)
