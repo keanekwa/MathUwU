@@ -2,8 +2,8 @@ const colors = require("tailwindcss/colors")
 
 module.exports = {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
+	darkMode: "class",
 	theme: {
-		// darkMode: true,
 		extend: {
 			colors: {
 				slate: colors.slate,
@@ -34,8 +34,5 @@ module.exports = {
 			center: true
 		}
 	},
-	plugins: [require("daisyui")],
-	daisyui: {
-		darkTheme: "light"
-	}
+	plugins: [require("daisyui")]
 }

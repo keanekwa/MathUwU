@@ -16,10 +16,10 @@ const Layout = (props: LayoutProps) => {
 	}
 
 	return (
-		<div className="h-full overflow-auto bg-gray-700 text-white py-10">
+		<div className="h-full overflow-auto bg-slate-50 dark:bg-slate-800">
+			<Navbar />
 			<Alert show={alert?.show} message={alert?.message} />
 			<div className="container">
-				<Navbar />
 				<div className="py-14 px-5">{props.children}</div>
 			</div>
 		</div>

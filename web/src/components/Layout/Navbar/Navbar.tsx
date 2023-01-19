@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { Link, NavigateFunction, useNavigate, useLocation } from "react-router-dom"
 import { AlertContext, UserContext } from "../../../App"
 import api from "../../../utils/api"
+import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher"
 
 const handleLogout = async (navigate: NavigateFunction, setUser: Function, setAlert: Function) => {
 	try {
@@ -21,7 +22,7 @@ const Navbar = () => {
 	const location = useLocation()
 
 	return (
-		<div className="navbar bg-gray-500 rounded-lg shadow-lg">
+		<div className="navbar">
 			<div className="flex-1">
 				{location?.pathname === "/" ? (
 					<button className="btn btn-ghost normal-case text-xl" onClick={() => window.location.reload()}>
@@ -33,16 +34,21 @@ const Navbar = () => {
 					</Link>
 				)}
 			</div>
+			<div className="pr-2">
+				<DarkModeSwitcher />
+			</div>
 			{user !== undefined &&
 				(user ? (
 					<div className="flex-none">
 						<div className="dropdown dropdown-end">
 							<button className="btn btn-ghost btn-circle avatar" tabIndex={0}>
-								<div className="w-10 h-10 leading-10 rounded-full bg-gray-400">{user[0].toUpperCase()}</div>
+								<div className="w-10 h-10 leading-10 rounded-full bg-slate-300 dark:bg-slate-700">
+									{user[0].toUpperCase()}
+								</div>
 							</button>
 							<ul
 								tabIndex={0}
-								className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-gray-500 rounded-box w-52">
+								className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-slate-300 dark:bg-slate-700 rounded-box w-52">
 								<li>
 									<span>Profile</span>
 								</li>
