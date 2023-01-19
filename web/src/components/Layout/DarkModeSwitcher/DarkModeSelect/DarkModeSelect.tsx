@@ -6,9 +6,7 @@ interface DarkModeSelectProps {
 
 const DarkModeSelect = ({ themeSwitch }: DarkModeSelectProps) => {
 	return (
-		<ul
-			tabIndex={0}
-			className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-slate-300 dark:bg-slate-700 rounded-box w-52">
+		<ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52">
 			<li>
 				<span onClick={() => themeSwitch("default")}>System Default</span>
 			</li>

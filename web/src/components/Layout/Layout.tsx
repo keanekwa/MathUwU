@@ -16,7 +16,7 @@ const Layout = (props: LayoutProps) => {
 	}
 
 	return (
-		<div className="h-full overflow-auto bg-slate-50 dark:bg-slate-800">
+		<div className="h-full overflow-auto">
 			<Navbar />
 			<Alert show={alert?.show} message={alert?.message} />
 			<div className="container">

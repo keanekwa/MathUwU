@@ -5,7 +5,7 @@ interface TimerProps {
 }
 
 const Timer = ({ seconds }: TimerProps) => {
-	return <h6>Time Remaining: {seconds}</h6>
+	return <h3>Time Remaining: {seconds}</h3>
 }
 
 export default Timer

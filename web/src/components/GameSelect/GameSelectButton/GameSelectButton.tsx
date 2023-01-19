@@ -8,9 +8,9 @@ export interface GameSelectButtonProps {
 }
 
 const GameSelectButton = ({ mode }: GameSelectButtonProps) => {
-	let classes = "justify-center text-center m-10 p-12 rounded-lg shadow-lg"
-	const enabledClasses = "bg-sky-300/[.1] hover:bg-sky-300/[.08] focus:shadow-md active:bg-sky-400/[.06]"
-	const disabledClasses = "bg-neutral-400/[.05] cursor-not-allowed"
+	let classes = "justify-center text-center mx-5 p-12 rounded-lg border-2"
+	const enabledClasses = "bg-base-300 shadow-lg hover:bg-base-300/[.75] focus:bg-base-300/[.9]"
+	const disabledClasses = "bg-base-200/[.3] opacity-60 cursor-not-allowed"
 
 	if (mode.disabled) {
 		classes = classes + " " + disabledClasses
@@ -23,7 +23,7 @@ const GameSelectButton = ({ mode }: GameSelectButtonProps) => {
 			to={"/game" + mode.path}
 			onClick={mode.disabled ? (event) => event.preventDefault() : (event) => 0}
 			className={classes}>
-			<h5>{mode.name}</h5>
+			<h2>{mode.name}</h2>
 			<p>{mode.description}</p>
 		</Link>
 	)

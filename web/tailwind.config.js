@@ -2,7 +2,6 @@ const colors = require("tailwindcss/colors")
 
 module.exports = {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
-	darkMode: "class",
 	theme: {
 		extend: {
 			colors: {
@@ -34,5 +33,8 @@ module.exports = {
 			center: true
 		}
 	},
-	plugins: [require("daisyui")]
+	plugins: [require("@tailwindcss/typography"), require("daisyui")],
+	daisyui: {
+		themes: ["cupcake", "dracula"]
+	}
 }

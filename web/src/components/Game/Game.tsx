@@ -191,7 +191,7 @@ const Game = () => {
 						) : (
 							<>
 								<div className="mb-5">
-									<h6>Time's up!</h6>
+									<h3>Time's up!</h3>
 									<Stats
 										score={score}
 										seconds={startSeconds}

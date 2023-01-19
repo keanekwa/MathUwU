@@ -40,13 +40,9 @@ const Navbar = () => {
 					<div className="flex-none">
 						<div className="dropdown dropdown-end">
 							<button className="btn btn-ghost btn-circle avatar" tabIndex={0}>
-								<div className="w-10 h-10 leading-10 rounded-full bg-slate-300 dark:bg-slate-700">
-									{user[0].toUpperCase()}
-								</div>
+								<div className="w-10 h-10 leading-10 rounded-full bg-base-300">{user[0].toUpperCase()}</div>
 							</button>
-							<ul
-								tabIndex={0}
-								className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-slate-300 dark:bg-slate-700 rounded-box w-52">
+							<ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52">
 								<li>
 									<span>Profile</span>
 								</li>

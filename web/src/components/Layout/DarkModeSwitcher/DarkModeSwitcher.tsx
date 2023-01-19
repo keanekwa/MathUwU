@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { THEMES } from "../../../constants"
 import DarkModeSelect from "./DarkModeSelect/DarkModeSelect"
 
 const DarkModeSwitcher = () => {
@@ -22,14 +23,12 @@ const DarkModeSwitcher = () => {
 	}, [isSystemDark])
 
 	const applyDark = () => {
-		if (!document.documentElement.classList.contains("dark")) {
-			document.documentElement.classList.add("dark")
-			setShowMoon(false)
-		}
+		document.body.setAttribute("data-theme", THEMES.DARK)
+		setShowMoon(false)
 	}
 
 	const applyLight = () => {
-		document.documentElement.classList.remove("dark")
+		document.body.setAttribute("data-theme", THEMES.LIGHT)
 		setShowMoon(true)
 	}
 

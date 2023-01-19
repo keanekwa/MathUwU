@@ -11,8 +11,8 @@ const CustomSettings = (props: CustomSettingsProps) => {
 	const [defaultSettings] = useState<ISettings>({ ...settings })
 
 	return (
-		<form className="card max-w-4xl p-10 bg-gray-600 shadow-xl">
-			<h6 className="mb-7">Game Settings</h6>
+		<form className="card max-w-4xl p-10 bg-base-200 border-2 shadow-xl">
+			<h3 className="mb-7">Game Settings</h3>
 			<div className="mb-5 flex items-center justify-left">
 				<input
 					className="checkbox mr-2"

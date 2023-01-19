@@ -19,7 +19,7 @@ const Stats = ({ score, seconds, percentile, questionsAnswered }: StatsProps) =>
 
 	return (
 		<>
-			<div className="stats shadow">
+			<div className="stats shadow bg-base-200 border-2">
 				<div className="stat">
 					<div className="stat-figure text-primary">
 						<svg
