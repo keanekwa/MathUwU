@@ -30,7 +30,14 @@ module.exports = {
 			}
 		},
 		container: {
-			center: true
+			center: true,
+			padding: {
+				DEFAULT: "1rem",
+				sm: "1rem",
+				lg: "8rem",
+				xl: "14rem",
+				"2xl": "20rem"
+			}
 		}
 	},
 	plugins: [require("@tailwindcss/typography"), require("daisyui")],

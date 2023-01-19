@@ -1,11 +1,11 @@
 import React from "react"
-import { IScore } from "../../../interfaces/Game"
+import { IScore } from "../../../../interfaces/Game"
 
-interface ScoreHistoryProps {
+interface StatsScoreHistoryProps {
 	scoreHistory: Array<IScore>
 }
 
-const ScoreHistory = (props: ScoreHistoryProps) => {
+const StatsScoreHistory = (props: StatsScoreHistoryProps) => {
 	const { scoreHistory } = props
 	const scoreHistoryArr = scoreHistory.map((s: IScore) => s.score)
 
@@ -17,4 +17,4 @@ const ScoreHistory = (props: ScoreHistoryProps) => {
 	)
 }
 
-export default ScoreHistory
+export default StatsScoreHistory

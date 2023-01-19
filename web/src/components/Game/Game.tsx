@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { AlertContext, UserContext } from "../../App"
 import api from "./../../utils/api"
 import random from "random"
@@ -7,7 +7,6 @@ import useInterval from "../../utils/useInterval"
 import Error404 from "./../Error404/Error404"
 import Timer from "./Timer/Timer"
 import Score from "./Score/Score"
-import ScoreHistory from "./ScoreHistory/ScoreHistory"
 import CustomSettings from "./CustomSettings/CustomSettings"
 import { GAME_MODES, OPERATORS } from "./../../constants"
 import Stats from "./Stats/Stats"
@@ -190,23 +189,15 @@ const Game = () => {
 							</>
 						) : (
 							<>
-								<div className="mb-5">
-									<h2>Time's up!</h2>
-									<Stats
-										score={score}
-										seconds={startSeconds}
-										percentile={percentile}
-										questionsAnswered={questionsAnswered}
-									/>
-								</div>
-								{user ? (
-									<ScoreHistory scoreHistory={scoreHistory} />
-								) : (
-									<Link to="/login">
-										<button className="link">Login to save scores.</button>
-									</Link>
-								)}
-								<div className="divider"></div>
+								<h2 className="mb-5">Time's up!</h2>
+								<Stats
+									score={score}
+									seconds={startSeconds}
+									percentile={percentile}
+									questionsAnswered={questionsAnswered}
+									scoreHistory={scoreHistory}
+								/>
+								<div className="my-8 divider"></div>
 								<CustomSettings settings={settings} setSettings={setSettings} />
 								<button className="btn mt-8" onClick={startGame}>
 									Restart
