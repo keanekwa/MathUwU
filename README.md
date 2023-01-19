@@ -10,7 +10,7 @@ One of the most popular practice tools in the market is the [Arithmetic Zetamac]
 3. Inability to save scores
 4. Lack of more advanced game modes such as decimal and fraction arithmetic, or [Optiver's](https://optiver.com/) 80 in 8 game.
 
-MathUwU introduces a fun, new way to practice for 
+MathUwU introduces a fun, new way to practice for these mental arithmetic tests, which is an integral part of the quantitative finance world.
 
 ## Future Product Roadmap
 
