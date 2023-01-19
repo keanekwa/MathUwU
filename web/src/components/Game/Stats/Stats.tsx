@@ -1,5 +1,6 @@
 import React from "react"
 import { QuestionAnsweredType } from "../Game"
+import Chart from "./Chart/Chart"
 
 interface StatsProps {
 	score: number
@@ -10,9 +11,10 @@ interface StatsProps {
 
 const Stats = ({ score, seconds, percentile, questionsAnswered }: StatsProps) => {
 	const avgTime = (seconds / score).toFixed(2)
-	questionsAnswered.sort((a, b) => (a.duration < b.duration ? 1 : -1))
-	if (questionsAnswered.length > 5) {
-		questionsAnswered = questionsAnswered.slice(0, 5)
+	let slowestQuestions = [...questionsAnswered]
+	slowestQuestions.sort((a, b) => (a.duration < b.duration ? 1 : -1))
+	if (slowestQuestions.length > 5) {
+		slowestQuestions = slowestQuestions.slice(0, 5)
 	}
 
 	return (
@@ -80,14 +82,19 @@ const Stats = ({ score, seconds, percentile, questionsAnswered }: StatsProps) =>
 					<div className="stat-desc">of users</div>
 				</div>
 			</div>
-			<div className="mt-5">
-				<strong>You might need some work on these:</strong>
-				{questionsAnswered.map((q, id) => (
-					<p key={id}>{`${q.numbers.vars[0]} ${q.operator} ${q.numbers.vars[1]} = ${q.numbers.ans} (${(
-						q.duration / 1000
-					).toFixed(2)}s)`}</p>
-				))}
-			</div>
+			{questionsAnswered.length > 0 && (
+				<>
+					<Chart questionsAnswered={questionsAnswered} />
+					<div className="mt-5">
+						<strong>You might need some work on these:</strong>
+						{slowestQuestions.map((q, id) => (
+							<p key={id}>{`${q.numbers.vars[0]} ${q.operator} ${q.numbers.vars[1]} = ${q.numbers.ans} (${(
+								q.duration / 1000
+							).toFixed(2)}s)`}</p>
+						))}
+					</div>
+				</>
+			)}
 		</>
 	)
 }
