@@ -25,12 +25,12 @@ const Navbar = () => {
 		<div className="navbar">
 			<div className="flex-1">
 				{location?.pathname === "/" ? (
-					<button className="btn btn-ghost normal-case text-xl" onClick={() => window.location.reload()}>
+					<button className="btn btn-ghost normal-case text-2xl logo" onClick={() => window.location.reload()}>
 						MathUwU
 					</button>
 				) : (
 					<Link to="/">
-						<button className="btn btn-ghost normal-case text-xl">MathUwU</button>
+						<button className="btn btn-ghost normal-case text-2xl logo">MathUwU</button>
 					</Link>
 				)}
 			</div>
