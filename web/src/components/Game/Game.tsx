@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import { AlertContext, UserContext } from "../../App"
 import api from "./../../utils/api"
@@ -94,6 +94,7 @@ const Game = () => {
 	const [percentile, setPercentile] = useState(0)
 	const [questionStartTime, setQuestionStartTime] = useState(0)
 	const [questionsAnswered, setQuestionsAnswered] = useState<IQuestionAnswered[]>([])
+	const inputRef = useRef<HTMLInputElement>(null)
 
 	const getNewQuestion = () => {
 		setQuestion(getQuestion(settings))
@@ -139,6 +140,7 @@ const Game = () => {
 		setStartSeconds(settings.seconds)
 		setSeconds(settings.seconds)
 		setStart(true)
+		inputRef.current?.focus()
 	}
 
 	useInterval(() => setSeconds(seconds - 1), 1000)
@@ -179,6 +181,7 @@ const Game = () => {
 									<input
 										className="input"
 										autoFocus
+										ref={inputRef}
 										onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
 										value={answer}
 									/>

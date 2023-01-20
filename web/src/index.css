@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
+
+.logo {
+	font-family: "Major Mono Display", monospace;
+}
 
 h1 {
 	@apply text-2xl font-bold mb-5;
