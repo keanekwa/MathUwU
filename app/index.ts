@@ -159,8 +159,8 @@ app.get("/percentile/:score", async (req: any, res: any) => {
 	}
 })
 
-app.listen(process.env.API_PORT, () => {
-	console.log(`Example app listening on port ${process.env.API_PORT}`)
+app.listen(process.env.PORT, () => {
+	console.log(`Example app listening on port ${process.env.PORT}`)
 })
 
 export {}
