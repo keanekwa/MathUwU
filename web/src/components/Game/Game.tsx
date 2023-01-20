@@ -180,6 +180,7 @@ const Game = () => {
 									</span>
 									<input
 										className="input"
+										type="number"
 										autoFocus
 										ref={inputRef}
 										onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
