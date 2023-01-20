@@ -37,35 +37,37 @@ const Register = () => {
 	const navigate = useNavigate()
 
 	return (
-		<form onSubmit={(event) => handleRegister(event, navigate, setAlert)}>
-			<div className="mb-2">
-				<label className="inline-block w-32 mr-5" htmlFor="username">
-					Username{" "}
-				</label>
-				<input className="input" id="username" name="username" placeholder="Username" />
-			</div>
-			<div className="mb-2">
-				<label className="inline-block w-32 mr-5" htmlFor="email">
-					Email{" "}
-				</label>
-				<input className="input" id="email" name="email" type="email" placeholder="Email" />
-			</div>
-			<div className="mb-2">
-				<label className="inline-block w-32 mr-5" htmlFor="password">
-					Password{" "}
-				</label>
-				<input className="input" id="password" name="password" type="password" placeholder="Password" />
-			</div>
-			<div className="mb-5">
-				<label className="inline-block w-32 mr-5" htmlFor="password2">
-					Repeat Password{" "}
-				</label>
-				<input className="input" id="password2" name="password2" type="password" placeholder="Repeat Password" />
-			</div>
-			<button className="btn" type="submit">
-				Register
-			</button>
-		</form>
+		<div className="flex flex-column justify-center">
+			<form onSubmit={(event) => handleRegister(event, navigate, setAlert)}>
+				<div className="mb-2">
+					<label className="inline-block w-32 mr-5" htmlFor="username">
+						Username{" "}
+					</label>
+					<input className="input" id="username" name="username" placeholder="Username" />
+				</div>
+				<div className="mb-2">
+					<label className="inline-block w-32 mr-5" htmlFor="email">
+						Email{" "}
+					</label>
+					<input className="input" id="email" name="email" type="email" placeholder="Email" />
+				</div>
+				<div className="mb-2">
+					<label className="inline-block w-32 mr-5" htmlFor="password">
+						Password{" "}
+					</label>
+					<input className="input" id="password" name="password" type="password" placeholder="Password" />
+				</div>
+				<div className="mb-5">
+					<label className="inline-block w-32 mr-5" htmlFor="password2">
+						Repeat Password{" "}
+					</label>
+					<input className="input" id="password2" name="password2" type="password" placeholder="Repeat Password" />
+				</div>
+				<button className="btn" type="submit">
+					Register
+				</button>
+			</form>
+		</div>
 	)
 }
 

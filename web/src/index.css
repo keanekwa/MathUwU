@@ -40,16 +40,6 @@ input:not(input[type="checkbox"]) {
 	box-shadow: none;
 }
 
-.my-alert {
-	opacity: 0;
-	transform: translateX(10px);
-}
-
-.my-alert.show {
-	opacity: 1;
-	transform: translateY(0);
-}
-
 .menu {
 	@apply bg-base-300;
 }

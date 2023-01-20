@@ -34,21 +34,23 @@ const Login = () => {
 	const navigate = useNavigate()
 
 	return (
-		<form onSubmit={(event) => handleLogin(event, navigate, setUser, setAlert)}>
-			<div className="mb-2">
-				<label className="inline-block w-32 mr-5" htmlFor="username">
-					Username
-				</label>
-				<input className="input" id="username" name="username" placeholder="Username" />
-			</div>
-			<div className="mb-5">
-				<label className="inline-block w-32 mr-5">Password</label>
-				<input className="input" id="password" name="password" type="password" placeholder="Password" />
-			</div>
-			<button className="btn" type="submit">
-				Login
-			</button>
-		</form>
+		<div className="flex flex-column justify-center">
+			<form onSubmit={(event) => handleLogin(event, navigate, setUser, setAlert)}>
+				<div className="mb-2">
+					<label className="inline-block w-24 mr-5" htmlFor="username">
+						Username
+					</label>
+					<input className="input" id="username" name="username" placeholder="Username" />
+				</div>
+				<div className="mb-5">
+					<label className="inline-block w-24 mr-5">Password</label>
+					<input className="input" id="password" name="password" type="password" placeholder="Password" />
+				</div>
+				<button className="btn" type="submit">
+					Login
+				</button>
+			</form>
+		</div>
 	)
 }
 

@@ -1,6 +1,7 @@
 import React, { ReactNode, useContext } from "react"
 import { AlertContext } from "../../App"
 import Alert from "../Alert/Alert"
+import Footer from "./Footer/Footer"
 import Navbar from "./Navbar/Navbar"
 
 interface LayoutProps {
@@ -16,10 +17,11 @@ const Layout = (props: LayoutProps) => {
 	}
 
 	return (
-		<div className="h-full overflow-auto">
+		<div className="overflow-auto flex flex-col h-screen justify-between">
 			<Navbar />
 			<Alert show={alert?.show} message={alert?.message} />
 			<div className="container pt-14 pb-24">{props.children}</div>
+			<Footer />
 		</div>
 	)
 }

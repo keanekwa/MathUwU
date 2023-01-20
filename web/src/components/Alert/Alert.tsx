@@ -6,9 +6,13 @@ interface AlertProps {
 }
 
 const Alert = ({ show, message }: AlertProps) => {
-	let classes =
-		"alert alert-warning my-alert shadow-2xl fixed w-auto pr-10 max-w-sm bottom-5 right-8 transition duration-300 z-10"
-	if (show) classes = classes + " show"
+	const defaultClasses =
+		"alert alert-warning fixed top-2 left-1/2 -translate-x-1/2 w-auto max-w-sm pr-10 shadow-2xl transition duration-300 z-10 pointer-events-none"
+	const showClasses = "opacity-100 translate-y-0"
+	const hideClasses = "opacity-0 -translate-y-5"
+	let classes = ""
+	if (show) classes = defaultClasses + " " + showClasses
+	else classes = defaultClasses + " " + hideClasses
 
 	return (
 		<div className={classes}>
