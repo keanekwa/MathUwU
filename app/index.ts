@@ -14,7 +14,7 @@ const app = express()
 app.use(express.json())
 app.use(
 	cors({
-		origin: process.env.WEB_HOST + ":" + process.env.WEB_PORT,
+		origin: process.env.ENV === "PROD" ? process.env.WEB_HOST : process.env.WEB_HOST + ":" + process.env.WEB_PORT,
 		credentials: true
 	})
 )
