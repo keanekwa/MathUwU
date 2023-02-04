@@ -35,7 +35,7 @@ const Navbar = () => {
 				)}
 			</div>
 			<DarkModeSwitcher />
-			{user !== undefined &&
+			{/* {user !== undefined &&
 				(user ? (
 					<div className="flex-none">
 						<div className="dropdown dropdown-end">
@@ -61,7 +61,7 @@ const Navbar = () => {
 							<button className="btn btn-ghost normal-case">Register</button>
 						</Link>
 					</>
-				))}
+				))} */}
 		</div>
 	)
 }

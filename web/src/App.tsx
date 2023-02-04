@@ -4,8 +4,8 @@ import "./index.css"
 import Layout from "./components/Layout/Layout"
 import GameSelect from "./components/GameSelect/GameSelect"
 import Game from "./components/Game/Game"
-import Register from "./components/Register/Register"
-import Login from "./components/Login/Login"
+// import Register from "./components/Register/Register"
+// import Login from "./components/Login/Login"
 import api from "./utils/api"
 import Error404 from "./components/Error404/Error404"
 import { IAlert } from "./interfaces/Alert"
@@ -27,22 +27,22 @@ const router = createBrowserRouter([
 			</Layout>
 		)
 	},
-	{
-		path: "/register",
-		element: (
-			<Layout>
-				<Register />
-			</Layout>
-		)
-	},
-	{
-		path: "/login",
-		element: (
-			<Layout>
-				<Login />
-			</Layout>
-		)
-	},
+	// {
+	// 	path: "/register",
+	// 	element: (
+	// 		<Layout>
+	// 			<Register />
+	// 		</Layout>
+	// 	)
+	// },
+	// {
+	// 	path: "/login",
+	// 	element: (
+	// 		<Layout>
+	// 			<Login />
+	// 		</Layout>
+	// 	)
+	// },
 	{
 		path: "*",
 		element: (
@@ -57,13 +57,13 @@ const App = () => {
 	const [user, setUser] = useState<string | null>(null)
 	const [alert, setAlert] = useState<IAlert>({ show: false, message: "" })
 
-	useEffect(() => {
-		api.get("/user").then((res) => {
-			const user = res?.data
-			if (user) setUser(user?.username)
-			else setUser(null)
-		})
-	}, [])
+	// useEffect(() => {
+	// 	api.get("/user").then((res) => {
+	// 		const user = res?.data
+	// 		if (user) setUser(user?.username)
+	// 		else setUser(null)
+	// 	})
+	// }, [])
 
 	return (
 		<UserContext.Provider value={[user, setUser]}>
