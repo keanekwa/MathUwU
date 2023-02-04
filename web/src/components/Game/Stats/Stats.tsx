@@ -28,13 +28,13 @@ const Stats = ({ score, seconds, percentile, questionsAnswered, scoreHistory }: 
 						<StatsSlowQuestions questionsAnswered={questionsAnswered} />
 					</>
 				)}
-				{user ? (
+				{/* {user ? (
 					<StatsScoreHistory scoreHistory={scoreHistory} />
 				) : (
 					<Link to="/login">
 						<button className="link">Login to save scores.</button>
 					</Link>
-				)}
+				)} */}
 			</div>
 		</div>
 	)
