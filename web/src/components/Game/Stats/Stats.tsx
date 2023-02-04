@@ -1,10 +1,10 @@
-import React, { useContext } from "react"
-import { Link } from "react-router-dom"
-import { UserContext } from "../../../App"
+import React /*, { useContext }*/ from "react"
+// import { Link } from "react-router-dom"
+// import { UserContext } from "../../../App"
 import { IQuestionAnswered, IScore } from "../../../interfaces/Game"
 import StatsChart from "./StatsChart/StatsChart"
 import StatsOverview from "./StatsOverview/StatsOverview"
-import StatsScoreHistory from "./StatsScoreHistory/StatsScoreHistory"
+// import StatsScoreHistory from "./StatsScoreHistory/StatsScoreHistory"
 import StatsSlowQuestions from "./StatsSlowQuestions/StatsSlowQuestions"
 
 interface StatsProps {
@@ -16,7 +16,7 @@ interface StatsProps {
 }
 
 const Stats = ({ score, seconds, percentile, questionsAnswered, scoreHistory }: StatsProps) => {
-	const [user] = useContext(UserContext)
+	// const [user] = useContext(UserContext)
 
 	return (
 		<div className="w-full grid gap-y-5">

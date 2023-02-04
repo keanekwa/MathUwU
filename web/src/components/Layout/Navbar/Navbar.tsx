@@ -1,24 +1,24 @@
-import React, { useContext } from "react"
-import { Link, NavigateFunction, useNavigate, useLocation } from "react-router-dom"
-import { AlertContext, UserContext } from "../../../App"
-import api from "../../../utils/api"
+import React /*, { useContext }*/ from "react"
+import { Link /*, NavigateFunction, useNavigate*/, useLocation } from "react-router-dom"
+// import { AlertContext, UserContext } from "../../../App"
+// import api from "../../../utils/api"
 import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher"
 
-const handleLogout = async (navigate: NavigateFunction, setUser: Function, setAlert: Function) => {
-	try {
-		await api.post("/logout")
-		setUser(null)
-		navigate("/")
-	} catch (err: any) {
-		const errMessage = err?.response?.data?.message
-		setAlert({ show: true, message: errMessage })
-	}
-}
+// const handleLogout = async (navigate: NavigateFunction, setUser: Function, setAlert: Function) => {
+// 	try {
+// 		await api.post("/logout")
+// 		setUser(null)
+// 		navigate("/")
+// 	} catch (err: any) {
+// 		const errMessage = err?.response?.data?.message
+// 		setAlert({ show: true, message: errMessage })
+// 	}
+// }
 
 const Navbar = () => {
-	const [user, setUser] = useContext(UserContext)
-	const [, setAlert] = useContext(AlertContext)
-	const navigate = useNavigate()
+	// const [user, setUser] = useContext(UserContext)
+	// const [, setAlert] = useContext(AlertContext)
+	// const navigate = useNavigate()
 	const location = useLocation()
 
 	return (
