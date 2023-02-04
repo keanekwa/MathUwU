@@ -145,15 +145,17 @@ const Game = () => {
 
 	useInterval(() => setSeconds(seconds - 1), 1000)
 
-	if (seconds === 0 && !isScoreSaved && user) {
+	if (seconds === 0 && !isScoreSaved) {
 		api
 			.post("/scores", {
 				score: score
 			})
 			.then(() => {
-				api.get("/scores").then((res) => {
-					setScoreHistory(res?.data?.response)
-				})
+				if (user) {
+					api.get("/scores").then((res) => {
+						setScoreHistory(res?.data?.response)
+					})
+				}
 
 				api.get(`/percentile/${score}`).then((res) => {
 					setPercentile(res?.data?.response?.percent_rank)

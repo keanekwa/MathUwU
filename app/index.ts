@@ -125,30 +125,24 @@ require("./passportConfig")(passport)
 // 	}
 // })
 
-// app.post("/scores", async (req: any, res: any) => {
-// 	try {
-// 		let { score } = req.body
+app.post("/scores", async (req: any, res: any) => {
+	try {
+		let { score } = req.body
 
-// 		if (!req?.user?.username) {
-// 			utils.sendUnauthorizedError(res, "User not logged in.")
-// 			return
-// 		}
+		if (utils.checkEmpty([score])) {
+			utils.sendBadRequestError(res, "Unable to save score.")
+			return
+		}
 
-// 		if (utils.checkEmpty([score])) {
-// 			utils.sendBadRequestError(res, "Please enter all fields.")
-// 			return
-// 		}
+		const newScore = req.user
+			? await db.query("INSERT INTO scores (username, score) VALUES ($1, $2) RETURNING *", [req.user.username, score])
+			: await db.query("INSERT INTO scores (score) VALUES ($1) RETURNING *", [score])
 
-// 		const newScore = await db.query("INSERT INTO scores (username, score) VALUES ($1, $2) RETURNING *", [
-// 			req.user.username,
-// 			score
-// 		])
-
-// 		utils.sendSuccess(res, "Successfully aved score.", newScore.rows[0])
-// 	} catch (err: any) {
-// 		console.error(err.message)
-// 	}
-// })
+		utils.sendSuccess(res, "Successfully aved score.", newScore.rows[0])
+	} catch (err: any) {
+		console.error(err.message)
+	}
+})
 
 app.get("/percentile/:score", async (req: any, res: any) => {
 	try {

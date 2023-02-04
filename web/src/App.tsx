@@ -57,13 +57,13 @@ const App = () => {
 	const [user, setUser] = useState<string | null>(null)
 	const [alert, setAlert] = useState<IAlert>({ show: false, message: "" })
 
-	useEffect(() => {
-		api.get("/user").then((res) => {
-			const user = res?.data
-			if (user) setUser(user?.username)
-			else setUser(null)
-		})
-	}, [])
+	// useEffect(() => {
+	// 	api.get("/user").then((res) => {
+	// 		const user = res?.data
+	// 		if (user) setUser(user?.username)
+	// 		else setUser(null)
+	// 	})
+	// }, [])
 
 	return (
 		<UserContext.Provider value={[user, setUser]}>
