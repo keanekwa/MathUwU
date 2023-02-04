@@ -9,6 +9,15 @@ const Footer = () => {
 					<a className="link" href="https://github.com/keanekwa/MathUwU" target="_blank" rel="noopener noreferrer">
 						GitHub
 					</a>
+					.{" "}
+					<a
+						className="link"
+						href="https://github.com/keanekwa/MathUwU/issues"
+						target="_blank"
+						rel="noopener noreferrer">
+						Leave Feedback
+					</a>
+					.
 				</p>
 			</div>
 			<div>
