@@ -8,7 +8,7 @@ interface StatsOverviewProps {
 
 const StatsOverview = ({ score, seconds, percentile }: StatsOverviewProps) => {
 	return (
-		<div className="stats shadow bg-base-200 border-2">
+		<div className="stats stats-vertical md:stats-horizontal shadow bg-base-200 border-2">
 			<div className="stat">
 				<div className="stat-figure text-primary">
 					<svg
