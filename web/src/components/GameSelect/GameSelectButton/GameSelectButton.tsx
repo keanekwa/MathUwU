@@ -8,7 +8,7 @@ export interface GameSelectButtonProps {
 }
 
 const GameSelectButton = ({ mode }: GameSelectButtonProps) => {
-	let classes = "justify-center text-center p-12 rounded-lg border-2"
+	let classes = "justify-center text-center py-10 px-5 md:p-12 rounded-lg border-2"
 	const enabledClasses = "bg-base-300 shadow-lg hover:bg-base-300/[.75] focus:bg-base-300/[.9]"
 	const disabledClasses = "bg-base-200/[.3] opacity-60 cursor-not-allowed"
 
