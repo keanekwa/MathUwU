@@ -6,7 +6,7 @@ const GameSelect = () => {
 	return (
 		<div>
 			<h2 className="text-xl text-center font-light mt-5 mb-14">Select a game mode:</h2>
-			<div className="grid grid-cols-2 gap-12">
+			<div className="grid grid-cols-2 gap-5 gap-y-7 md:gap-12">
 				{Object.values(GAME_MODES).map((mode) => (
 					<GameSelectButton key={mode.name} mode={mode} />
 				))}
