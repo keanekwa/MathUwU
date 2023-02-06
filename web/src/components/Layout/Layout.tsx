@@ -17,7 +17,7 @@ const Layout = (props: LayoutProps) => {
 	}
 
 	return (
-		<div className="overflow-auto flex flex-col h-screen justify-between">
+		<div className="flex flex-col min-h-screen justify-between">
 			<Navbar />
 			<Alert show={alert?.show} message={alert?.message} />
 			<div className="container pt-14 pb-24">{props.children}</div>
