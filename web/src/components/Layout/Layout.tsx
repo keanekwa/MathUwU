@@ -1,3 +1,4 @@
+import Head from "next/head"
 import React, { ReactNode, useContext } from "react"
 import { AlertContext } from "../../pages/_app"
 import Alert from "../Alert/Alert"
@@ -17,12 +18,18 @@ const Layout = (props: LayoutProps) => {
 	}
 
 	return (
-		<div className="flex flex-col min-h-screen justify-between">
-			<Navbar />
-			<Alert show={alert?.show} message={alert?.message} />
-			<div className="container pt-14 pb-24">{props.children}</div>
-			<Footer />
-		</div>
+		<>
+			<Head>
+				<title>MathUwU</title>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+			</Head>
+			<div className="flex flex-col min-h-screen justify-between">
+				<Navbar />
+				<Alert show={alert?.show} message={alert?.message} />
+				<div className="container pt-14 pb-24">{props.children}</div>
+				<Footer />
+			</div>
+		</>
 	)
 }
 
