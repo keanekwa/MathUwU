@@ -21,7 +21,7 @@ const GameSelectButton = ({ mode }: GameSelectButtonProps) => {
 
 	return (
 		<Link
-			href={"/game" + mode.path}
+			href={"/game/" + mode.path}
 			onClick={mode.disabled ? (event) => event.preventDefault() : (event) => 0}
 			className={classes}>
 			<h2>{mode.name}</h2>

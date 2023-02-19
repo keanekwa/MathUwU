@@ -74,6 +74,12 @@ const Game = () => {
 
 	useEffect(() => {
 		const modePaths = Object.values(GAME_MODES).map((m) => m.path)
+		console.log(mode)
+		console.log(typeof mode)
+		console.log(modePaths)
+		if (mode && typeof mode == "string" && !modePaths.includes(mode)) {
+			router.push("/404")
+		}
 	}, [mode])
 
 	const [user] = useContext(UserContext)
