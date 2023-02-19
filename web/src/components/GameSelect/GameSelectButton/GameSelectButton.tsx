@@ -1,5 +1,6 @@
+import Link from "next/link"
 import React from "react"
-import { Link } from "react-router-dom"
+
 import { IGameMode } from "../../../interfaces/Game"
 
 export interface GameSelectButtonProps {
@@ -20,7 +21,7 @@ const GameSelectButton = ({ mode }: GameSelectButtonProps) => {
 
 	return (
 		<Link
-			to={"/game" + mode.path}
+			href={"/game" + mode.path}
 			onClick={mode.disabled ? (event) => event.preventDefault() : (event) => 0}
 			className={classes}>
 			<h2>{mode.name}</h2>

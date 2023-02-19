@@ -4,11 +4,14 @@ import DarkModeSelect from "./DarkModeSelect/DarkModeSelect"
 
 const DarkModeSwitcher = () => {
 	const [showMoon, setShowMoon] = useState(true)
-	const [isSystemDark, setIsSystemDark] = useState(window.matchMedia("(prefers-color-scheme: dark)").matches)
+	const [isSystemDark, setIsSystemDark] = useState(
+		typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
+	)
 
-	window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
-		setIsSystemDark(window.matchMedia("(prefers-color-scheme: dark)").matches)
-	})
+	typeof window !== "undefined" &&
+		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
+			setIsSystemDark(window.matchMedia("(prefers-color-scheme: dark)").matches)
+		})
 
 	useEffect(() => {
 		const userTheme = localStorage.getItem("theme")

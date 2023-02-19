@@ -1,15 +1,11 @@
 import React, { useContext } from "react"
-import { NavigateFunction, useNavigate } from "react-router-dom"
 import api from "./../../utils/api"
 import bcrypt from "bcryptjs-react"
 import getFormData from "./../../utils/getFormData"
-import { AlertContext } from "../../App"
+import { AlertContext } from "../../pages/_app"
+import { NextRouter, useRouter } from "next/router"
 
-const handleRegister = async (
-	event: React.FormEvent<HTMLFormElement>,
-	navigate: NavigateFunction,
-	setAlert: Function
-) => {
+const handleRegister = async (event: React.FormEvent<HTMLFormElement>, router: NextRouter, setAlert: Function) => {
 	event.preventDefault()
 
 	const { username, email, password, password2 } = getFormData(event)
@@ -25,7 +21,7 @@ const handleRegister = async (
 			hashedPassword2: hashedPassword2
 		})
 
-		navigate("/")
+		router.push("/")
 	} catch (err: any) {
 		const errMessage = err?.response?.data?.message
 		setAlert({ show: true, message: errMessage })
@@ -34,11 +30,11 @@ const handleRegister = async (
 
 const Register = () => {
 	const [, setAlert] = useContext(AlertContext)
-	const navigate = useNavigate()
+	const router = useRouter()
 
 	return (
 		<div className="flex flex-column justify-center">
-			<form onSubmit={(event) => handleRegister(event, navigate, setAlert)}>
+			<form onSubmit={(event) => handleRegister(event, router, setAlert)}>
 				<div className="mb-2">
 					<label className="inline-block w-32 mr-5" htmlFor="username">
 						Username{" "}

@@ -1,5 +1,4 @@
 import React /*, { useContext }*/ from "react"
-// import { Link } from "react-router-dom"
 // import { UserContext } from "../../../App"
 import { IQuestionAnswered, IScore } from "../../../interfaces/Game"
 import StatsChart from "./StatsChart/StatsChart"
