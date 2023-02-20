@@ -34,14 +34,14 @@ const Game = () => {
 	const [isScoreSaved, setIsScoreSaved] = useState(false)
 	const [scoreHistory, setScoreHistory] = useState([])
 	const [settings, setSettings] = useState(GAME_MODES[0].defaultSettings)
-	const [question, setQuestion] = useState(() => getQuestion(settings))
+	const [question, setQuestion] = useState(() => getQuestion(mode, settings))
 	const [percentile, setPercentile] = useState(0)
 	const [questionStartTime, setQuestionStartTime] = useState(0)
 	const [questionsAnswered, setQuestionsAnswered] = useState<IQuestionAnswered[]>([])
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	const getNewQuestion = () => {
-		setQuestion(getQuestion(settings))
+		setQuestion(getQuestion(mode, settings))
 		setQuestionStartTime(performance.now())
 		setAnswer("")
 	}
