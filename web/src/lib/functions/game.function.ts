@@ -19,7 +19,7 @@ const getInt = (range: [number, number]) => {
 	return random.int(Math.min(...range), Math.max(...range))
 }
 
-const getDecimal = (range: [number, number], decimalPlaces: number) => {
+const getDecimal = (range: [number, number], decimalPlaces: number = 2) => {
 	return (
 		random.int(Math.min(...range) * Math.pow(10, decimalPlaces), Math.max(...range) * Math.pow(10, decimalPlaces)) /
 		(10 * decimalPlaces)
@@ -80,6 +80,17 @@ const getQuestionDecimals = (operator: string, settings: ISettings) => {
 	}
 }
 
+const isCorrectDefault = (val: string, ans: number, settings: ISettings) => {
+	if (parseInt(val) === ans) return true
+	else return false
+}
+
+const isCorrectDecimals = (val: string, ans: number, settings: ISettings) => {
+	const { decimalPlaces } = settings
+	if (parseFloat(val) === +ans.toFixed(decimalPlaces)) return true
+	else return false
+}
+
 const modeToGetQuestionMap: { [key: string]: Function } = {
 	default: getQuestionDefault,
 	decimals: getQuestionDecimals
@@ -87,7 +98,18 @@ const modeToGetQuestionMap: { [key: string]: Function } = {
 	// eightyInEight: getQuestion80in8
 }
 
+const modeToIsCorrectMap: { [key: string]: Function } = {
+	default: isCorrectDefault,
+	decimals: isCorrectDecimals
+	// fractions: isCorrectFractions,
+	// eightyInEight: isCorrect80in8
+}
+
 export const getQuestion = (mode: string = "default", settings: ISettings) => {
 	const operator = getOperator(settings)
 	if (mode in modeToGetQuestionMap) return modeToGetQuestionMap[mode](operator, settings)
+}
+
+export const isCorrect = (mode: string = "default", val: string, ans: number, settings: ISettings) => {
+	if (mode in modeToGetQuestionMap) return modeToIsCorrectMap[mode](val, ans, settings)
 }

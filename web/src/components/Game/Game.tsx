@@ -11,7 +11,7 @@ import { IQuestionAnswered } from "@/lib/interfaces/game.interfaces"
 import { useRouter } from "next/router"
 import { UserContext } from "@/lib/contexts/user.context"
 import { AlertContext } from "@/lib/contexts/alert.context"
-import { getQuestion } from "@/lib/functions/game.function"
+import { getQuestion, isCorrect } from "@/lib/functions/game.function"
 
 const Game = () => {
 	const router = useRouter()
@@ -49,7 +49,7 @@ const Game = () => {
 	const checkAnswer = (val: string, ans: number) => {
 		setAnswer(val)
 
-		if (parseInt(val) === ans) {
+		if (isCorrect(mode, val, ans, settings)) {
 			const questionEndTime = performance.now()
 			const lastQuestion = {
 				...question,
