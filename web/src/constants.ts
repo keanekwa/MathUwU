@@ -1,30 +1,35 @@
-import { IGameMode } from "./interfaces/Game"
+import { I80in8Settings, IDecimalSettings, IFractionSettings, IGameMode, ISettings } from "./interfaces/Game"
 
-export const GAME_MODES: { [key: string]: IGameMode } = {
-	DEFAULT: {
-		path: "default",
-		name: "Default",
-		description: "The default Zetamac-style arithmetic game with whole numbers.",
-		disabled: false
-	},
-	DECIMALS: {
-		path: "decimals",
-		name: "Decimals",
-		description: "[Coming soon] Arithmetic game with decimals.",
-		disabled: true
-	},
-	FRACTIONS: {
-		path: "fractions",
-		name: "Fractions",
-		description: "[Coming soon] Arithmetic game with fractions.",
-		disabled: true
-	},
-	EIGHTY_IN_EIGHT: {
-		path: "80in8",
-		name: "80 in 8",
-		description: "[Coming soon] Optiver's 80 in 8 assessment. Solve 80 questions in 8 minutes.",
-		disabled: true
-	}
+export const THEMES = {
+	LIGHT: "cupcake",
+	DARK: "dracula"
+}
+
+export const DEFAULT_SETTINGS: ISettings = {
+	isAdd: true,
+	isSubtract: true,
+	isDivide: true,
+	isMultiply: true,
+	add1: [2, 100],
+	add2: [2, 100],
+	multiply1: [2, 12],
+	multiply2: [2, 100],
+	seconds: 120
+}
+
+export const DEFAULT_DECIMAL_SETTINGS: IDecimalSettings = {
+	...DEFAULT_SETTINGS,
+	decimalPlaces: 2
+}
+
+export const DEFAULT_FRACTION_SETTINGS: IFractionSettings = {
+	...DEFAULT_SETTINGS,
+	decimalPlaces: 2
+}
+
+export const DEFAULT_80IN8_SETTINGS: I80in8Settings = {
+	...DEFAULT_SETTINGS,
+	decimalPlaces: 2
 }
 
 export const OPERATORS = {
@@ -34,7 +39,33 @@ export const OPERATORS = {
 	DIVIDE: "÷"
 }
 
-export const THEMES = {
-	LIGHT: "cupcake",
-	DARK: "dracula"
-}
+export const GAME_MODES: IGameMode[] = [
+	{
+		path: "default",
+		name: "Default",
+		description: "The default Zetamac-style arithmetic game with whole numbers.",
+		disabled: false,
+		defaultSettings: DEFAULT_SETTINGS
+	},
+	{
+		path: "decimals",
+		name: "Decimals",
+		description: "Arithmetic game with decimals.",
+		disabled: false,
+		defaultSettings: DEFAULT_DECIMAL_SETTINGS
+	},
+	{
+		path: "fractions",
+		name: "Fractions",
+		description: "[Coming soon] Arithmetic game with fractions.",
+		disabled: true,
+		defaultSettings: DEFAULT_FRACTION_SETTINGS
+	},
+	{
+		path: "80in8",
+		name: "80 in 8",
+		description: "[Coming soon] Optiver's 80 in 8 assessment. Solve 80 questions in 8 minutes.",
+		disabled: true,
+		defaultSettings: DEFAULT_80IN8_SETTINGS
+	}
+]

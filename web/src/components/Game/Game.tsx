@@ -56,27 +56,15 @@ const getQuestion = (settings: ISettings) => {
 	return { operator: operator, numbers: numbers }
 }
 
-const defaultSettings: ISettings = {
-	isAdd: true,
-	isSubtract: true,
-	isDivide: true,
-	isMultiply: true,
-	add1: [2, 100],
-	add2: [2, 100],
-	multiply1: [2, 12],
-	multiply2: [2, 100],
-	seconds: 120
-}
-
 const Game = () => {
 	const router = useRouter()
-	const { mode } = router.query
+	const { isReady, query } = router
+	const mode = typeof query?.mode === "string" ? query?.mode : "default"
 
 	useEffect(() => {
-		const modePaths = Object.values(GAME_MODES).map((m) => m.path)
-		if (mode && typeof mode == "string" && !modePaths.includes(mode)) {
-			router.push("/404")
-		}
+		const gameMode = GAME_MODES.find((m) => m.path === mode)
+		if (isReady && gameMode === undefined) router.push("/404")
+		if (gameMode !== undefined) setSettings(gameMode!.defaultSettings)
 	}, [mode])
 
 	const [user] = useContext(UserContext)
@@ -88,7 +76,7 @@ const Game = () => {
 	const [startSeconds, setStartSeconds] = useState(120)
 	const [isScoreSaved, setIsScoreSaved] = useState(false)
 	const [scoreHistory, setScoreHistory] = useState([])
-	const [settings, setSettings] = useState(defaultSettings)
+	const [settings, setSettings] = useState(GAME_MODES[0].defaultSettings)
 	const [question, setQuestion] = useState(() => getQuestion(settings))
 	const [percentile, setPercentile] = useState(0)
 	const [questionStartTime, setQuestionStartTime] = useState(0)
@@ -200,7 +188,7 @@ const Game = () => {
 								scoreHistory={scoreHistory}
 							/>
 							<div className="my-8 divider"></div>
-							<CustomSettings settings={settings} setSettings={setSettings} />
+							<CustomSettings mode={mode} settings={settings} setSettings={setSettings} />
 							<button className="btn mt-8 btn-wide" onClick={startGame}>
 								Restart
 							</button>
@@ -208,7 +196,7 @@ const Game = () => {
 					)
 				) : (
 					<>
-						<CustomSettings settings={settings} setSettings={setSettings} />
+						<CustomSettings mode={mode} settings={settings} setSettings={setSettings} />
 						<button className="btn mt-8 btn-wide" onClick={startGame}>
 							Start
 						</button>
