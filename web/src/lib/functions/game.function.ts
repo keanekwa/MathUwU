@@ -32,7 +32,7 @@ const getNumbers = (operator: string, settings: ISettings) => {
 	}
 }
 
-export const getQuestion = (settings: ISettings, mode: string) => {
+export const getQuestion = (settings: ISettings, mode?: string) => {
 	const { isAdd, isSubtract, isMultiply, isDivide } = settings
 	let operators: Array<string> = []
 
