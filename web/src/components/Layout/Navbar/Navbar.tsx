@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import React /*, { useContext }*/ from "react"
 // import { AlertContext, UserContext } from "@App"
 // import api from "@utils/api"
-import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher"
+import DarkModeSwitcher from "@/components/Layout/DarkModeSwitcher/DarkModeSwitcher"
 
 // const handleLogout = async (router: NextRouter, setUser: Function, setAlert: Function) => {
 // 	try {
