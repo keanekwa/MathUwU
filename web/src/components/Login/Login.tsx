@@ -1,12 +1,12 @@
 import React, { useContext } from "react"
-import { NavigateFunction, useNavigate } from "react-router-dom"
 import api from "./../../utils/api"
 import getFormData from "./../../utils/getFormData"
-import { AlertContext, UserContext } from "../../App"
+import { AlertContext, UserContext } from "../../pages/_app"
+import { NextRouter, useRouter } from "next/router"
 
 const handleLogin = async (
 	event: React.FormEvent<HTMLFormElement>,
-	navigate: NavigateFunction,
+	router: NextRouter,
 	setUser: Function,
 	setAlert: Function
 ) => {
@@ -21,7 +21,7 @@ const handleLogin = async (
 		const user = res?.data?.response
 		setUser(user?.username)
 
-		navigate("/")
+		router.push("/")
 	} catch (err: any) {
 		const errMessage = err?.response?.data?.message
 		setAlert({ show: true, message: errMessage })
@@ -31,11 +31,11 @@ const handleLogin = async (
 const Login = () => {
 	const [, setUser] = useContext(UserContext)
 	const [, setAlert] = useContext(AlertContext)
-	const navigate = useNavigate()
+	const router = useRouter()
 
 	return (
 		<div className="flex flex-column justify-center">
-			<form onSubmit={(event) => handleLogin(event, navigate, setUser, setAlert)}>
+			<form onSubmit={(event) => handleLogin(event, router, setUser, setAlert)}>
 				<div className="mb-2">
 					<label className="inline-block w-24 mr-5" htmlFor="username">
 						Username

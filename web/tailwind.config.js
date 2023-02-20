@@ -4,6 +4,9 @@ module.exports = {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
 	theme: {
 		extend: {
+			fontFamily: {
+				majorMonoDisplay: ["Major Mono Display"]
+			},
 			colors: {
 				slate: colors.slate,
 				gray: colors.gray,

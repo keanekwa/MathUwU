@@ -1,14 +1,15 @@
+import Link from "next/link"
+import { useRouter } from "next/router"
 import React /*, { useContext }*/ from "react"
-import { Link /*, NavigateFunction, useNavigate*/, useLocation } from "react-router-dom"
 // import { AlertContext, UserContext } from "../../../App"
 // import api from "../../../utils/api"
 import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher"
 
-// const handleLogout = async (navigate: NavigateFunction, setUser: Function, setAlert: Function) => {
+// const handleLogout = async (router: NextRouter, setUser: Function, setAlert: Function) => {
 // 	try {
 // 		await api.post("/logout")
 // 		setUser(null)
-// 		navigate("/")
+// 		router.push("/")
 // 	} catch (err: any) {
 // 		const errMessage = err?.response?.data?.message
 // 		setAlert({ show: true, message: errMessage })
@@ -18,18 +19,18 @@ import DarkModeSwitcher from "../DarkModeSwitcher/DarkModeSwitcher"
 const Navbar = () => {
 	// const [user, setUser] = useContext(UserContext)
 	// const [, setAlert] = useContext(AlertContext)
-	// const navigate = useNavigate()
-	const location = useLocation()
+	// const router = useRouter()
+	const router = useRouter()
 
 	return (
 		<div className="navbar">
 			<div className="flex-1">
-				{location?.pathname === "/" ? (
+				{router?.pathname === "/" ? (
 					<button className="btn btn-ghost normal-case text-2xl logo" onClick={() => window.location.reload()}>
 						MathUwU
 					</button>
 				) : (
-					<Link to="/">
+					<Link href="/">
 						<button className="btn btn-ghost normal-case text-2xl logo">MathUwU</button>
 					</Link>
 				)}
@@ -47,7 +48,7 @@ const Navbar = () => {
 									<span>Profile</span>
 								</li>
 								<li>
-									<span onClick={() => handleLogout(navigate, setUser, setAlert)}>Logout</span>
+									<span onClick={() => handleLogout(router, setUser, setAlert)}>Logout</span>
 								</li>
 							</ul>
 						</div>

@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { useParams } from "react-router-dom"
-import { AlertContext, UserContext } from "../../App"
+import { AlertContext, UserContext } from "../../pages/_app"
 import api from "./../../utils/api"
 import random from "random"
 import useInterval from "../../utils/useInterval"
-import Error404 from "./../Error404/Error404"
 import Timer from "./Timer/Timer"
 import Score from "./Score/Score"
 import CustomSettings from "./CustomSettings/CustomSettings"
 import { GAME_MODES, OPERATORS } from "./../../constants"
 import Stats from "./Stats/Stats"
 import { IQuestionAnswered, ISettings } from "../../interfaces/Game"
+import { useRouter } from "next/router"
 
 const getNumbers = (operator: string, settings: ISettings) => {
 	const { add1, add2, multiply1, multiply2 } = settings
@@ -70,13 +69,13 @@ const defaultSettings: ISettings = {
 }
 
 const Game = () => {
-	const { mode } = useParams()
-	const [is404, setIs404] = useState(false)
+	const router = useRouter()
+	const { mode } = router.query
 
 	useEffect(() => {
 		const modePaths = Object.values(GAME_MODES).map((m) => m.path)
-		if (mode !== undefined && !modePaths.includes("/" + mode)) {
-			setIs404(true)
+		if (mode && typeof mode == "string" && !modePaths.includes(mode)) {
+			router.push("/404")
 		}
 	}, [mode])
 
@@ -167,59 +166,55 @@ const Game = () => {
 
 	return (
 		<>
-			{is404 ? (
-				<Error404 message="Game not found." />
-			) : (
-				<div className="text-center flex flex-col justify-center items-center">
-					{start ? (
-						seconds > 0 ? (
-							<>
-								<Timer seconds={seconds} />
-								<Score score={score} />
-								<div className="flex justify-center items-center my-10">
-									<span className="text-xl mr-5">
-										{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} =
-									</span>
-									<input
-										className="input"
-										type="number"
-										autoFocus
-										ref={inputRef}
-										onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
-										value={answer}
-									/>
-								</div>
-								<button className="btn mt-8" onClick={startGame}>
-									Restart
-								</button>
-							</>
-						) : (
-							<>
-								<h2 className="mb-5">Time's up!</h2>
-								<Stats
-									score={score}
-									seconds={startSeconds}
-									percentile={percentile}
-									questionsAnswered={questionsAnswered}
-									scoreHistory={scoreHistory}
-								/>
-								<div className="my-8 divider"></div>
-								<CustomSettings settings={settings} setSettings={setSettings} />
-								<button className="btn mt-8 btn-wide" onClick={startGame}>
-									Restart
-								</button>
-							</>
-						)
-					) : (
+			<div className="text-center flex flex-col justify-center items-center">
+				{start ? (
+					seconds > 0 ? (
 						<>
-							<CustomSettings settings={settings} setSettings={setSettings} />
-							<button className="btn mt-8 btn-wide" onClick={startGame}>
-								Start
+							<Timer seconds={seconds} />
+							<Score score={score} />
+							<div className="flex justify-center items-center my-10">
+								<span className="text-xl mr-5">
+									{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} =
+								</span>
+								<input
+									className="input"
+									type="number"
+									autoFocus
+									ref={inputRef}
+									onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
+									value={answer}
+								/>
+							</div>
+							<button className="btn mt-8" onClick={startGame}>
+								Restart
 							</button>
 						</>
-					)}
-				</div>
-			)}
+					) : (
+						<>
+							<h2 className="mb-5">Time's up!</h2>
+							<Stats
+								score={score}
+								seconds={startSeconds}
+								percentile={percentile}
+								questionsAnswered={questionsAnswered}
+								scoreHistory={scoreHistory}
+							/>
+							<div className="my-8 divider"></div>
+							<CustomSettings settings={settings} setSettings={setSettings} />
+							<button className="btn mt-8 btn-wide" onClick={startGame}>
+								Restart
+							</button>
+						</>
+					)
+				) : (
+					<>
+						<CustomSettings settings={settings} setSettings={setSettings} />
+						<button className="btn mt-8 btn-wide" onClick={startGame}>
+							Start
+						</button>
+					</>
+				)}
+			</div>
 		</>
 	)
 }
