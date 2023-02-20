@@ -12,7 +12,7 @@ import {
 } from "chart.js"
 import { Chart } from "react-chartjs-2"
 import { IQuestionAnswered } from "../../../../interfaces/Game"
-import { THEMES } from "../../../../constants"
+import { THEMES } from "../../../../constants/theme"
 
 interface ChartProps {
 	questionsAnswered: IQuestionAnswered[]

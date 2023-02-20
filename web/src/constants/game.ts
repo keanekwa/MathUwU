@@ -1,9 +1,4 @@
-import { I80in8Settings, IDecimalSettings, IFractionSettings, IGameMode, ISettings } from "./interfaces/Game"
-
-export const THEMES = {
-	LIGHT: "cupcake",
-	DARK: "dracula"
-}
+import { I80in8Settings, IDecimalSettings, IFractionSettings, IGameMode, ISettings } from "../interfaces/Game"
 
 export const DEFAULT_SETTINGS: ISettings = {
 	isAdd: true,
