@@ -1,4 +1,10 @@
-import { I80in8Settings, IDecimalSettings, IFractionSettings, IGameMode, ISettings } from "../interfaces/Game"
+import {
+	I80in8Settings,
+	IDecimalSettings,
+	IFractionSettings,
+	IGameMode,
+	ISettings
+} from "../interfaces/game.interfaces"
 
 export const DEFAULT_SETTINGS: ISettings = {
 	isAdd: true,

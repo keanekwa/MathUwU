@@ -1,5 +1,5 @@
 import React from "react"
-import { IResponseBody } from "../interfaces/utils"
+import { IResponseBody } from "../interfaces/utils.interfaces"
 
 const getFormData = (event: React.FormEvent<HTMLFormElement>) => {
 	const formData = new FormData(event.currentTarget as HTMLFormElement)

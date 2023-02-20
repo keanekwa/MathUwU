@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { AlertContext, UserContext } from "../../pages/_app"
-import api from "./../../utils/api"
+
+import api from "../../lib/utils/api"
 import random from "random"
-import useInterval from "../../utils/useInterval"
+import useInterval from "../../lib/utils/useInterval"
 import Timer from "./Timer/Timer"
 import Score from "./Score/Score"
 import CustomSettings from "./CustomSettings/CustomSettings"
-import { GAME_MODES, OPERATORS } from "./../../constants/game"
+import { GAME_MODES, OPERATORS } from "../../lib/constants/game.constants"
 import Stats from "./Stats/Stats"
-import { IQuestionAnswered, ISettings } from "../../interfaces/Game"
+import { IQuestionAnswered, ISettings } from "../../lib/interfaces/game.interfaces"
 import { useRouter } from "next/router"
+import { UserContext } from "../../lib/contexts/user.context"
+import { AlertContext } from "../../lib/contexts/alert.context"
 
 const getNumbers = (operator: string, settings: ISettings) => {
 	const { add1, add2, multiply1, multiply2 } = settings

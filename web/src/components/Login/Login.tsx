@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
-import api from "./../../utils/api"
-import getFormData from "./../../utils/getFormData"
+import api from "../../lib/utils/api"
+import getFormData from "../../lib/utils/getFormData"
 import { AlertContext, UserContext } from "../../pages/_app"
 import { NextRouter, useRouter } from "next/router"
 

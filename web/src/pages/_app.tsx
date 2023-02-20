@@ -1,7 +1,9 @@
 import "./../styles/globals.css"
 import type { AppProps } from "next/app"
-import { createContext, useState } from "react"
-import { IAlert } from "../interfaces/Alert"
+import { useState } from "react"
+import { IAlert } from "../lib/interfaces/alert.interfaces"
+import { UserContext } from "../lib/contexts/user.context"
+import { AlertContext } from "../lib/contexts/alert.context"
 
 export default function App({ Component, pageProps }: AppProps) {
 	const [user, setUser] = useState<string | null>(null)
@@ -15,6 +17,3 @@ export default function App({ Component, pageProps }: AppProps) {
 		</UserContext.Provider>
 	)
 }
-
-export const UserContext = createContext<any>(undefined)
-export const AlertContext = createContext<any>(undefined)

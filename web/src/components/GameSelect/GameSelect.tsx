@@ -1,5 +1,5 @@
 import React from "react"
-import { GAME_MODES } from "./../../constants/game"
+import { GAME_MODES } from "../../lib/constants/game.constants"
 import GameSelectButton from "./GameSelectButton/GameSelectButton"
 
 const GameSelect = () => {

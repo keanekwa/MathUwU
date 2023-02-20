@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { ISettings } from "../../../interfaces/Game"
+import { ISettings } from "../../../lib/interfaces/game.interfaces"
 
 interface CustomSettingsProps {
 	mode: string

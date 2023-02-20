@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
-import api from "./../../utils/api"
+import api from "../../lib/utils/api"
 import bcrypt from "bcryptjs-react"
-import getFormData from "./../../utils/getFormData"
+import getFormData from "../../lib/utils/getFormData"
 import { AlertContext } from "../../pages/_app"
 import { NextRouter, useRouter } from "next/router"
 

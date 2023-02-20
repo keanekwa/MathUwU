@@ -1,5 +1,5 @@
 import React from "react"
-import { IQuestionAnswered } from "../../../../interfaces/Game"
+import { IQuestionAnswered } from "../../../../lib/interfaces/game.interfaces"
 
 interface StatsSlowQuestionsProps {
 	questionsAnswered: IQuestionAnswered[]

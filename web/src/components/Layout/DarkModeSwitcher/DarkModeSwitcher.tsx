@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { THEMES } from "../../../constants/theme"
+import { THEMES } from "../../../lib/constants/theme.constants"
 import DarkModeSelect from "./DarkModeSelect/DarkModeSelect"
 
 const DarkModeSwitcher = () => {

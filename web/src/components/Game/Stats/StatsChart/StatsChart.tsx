@@ -11,8 +11,8 @@ import {
 	BarController
 } from "chart.js"
 import { Chart } from "react-chartjs-2"
-import { IQuestionAnswered } from "../../../../interfaces/Game"
-import { THEMES } from "../../../../constants/theme"
+import { IQuestionAnswered } from "../../../../lib/interfaces/game.interfaces"
+import { THEMES } from "../../../../lib/constants/theme.constants"
 
 interface ChartProps {
 	questionsAnswered: IQuestionAnswered[]
