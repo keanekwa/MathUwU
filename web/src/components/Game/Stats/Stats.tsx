@@ -1,6 +1,5 @@
 import React /*, { useContext }*/ from "react"
-// import { UserContext } from "../../../App"
-import { IQuestionAnswered, IScore } from "../../../lib/interfaces/game.interfaces"
+import { IQuestionAnswered, IScore } from "@/lib/interfaces/game.interfaces"
 import StatsChart from "./StatsChart/StatsChart"
 import StatsOverview from "./StatsOverview/StatsOverview"
 // import StatsScoreHistory from "./StatsScoreHistory/StatsScoreHistory"

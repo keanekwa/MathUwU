@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 
-import api from "../../lib/utils/api"
-import useInterval from "../../lib/utils/useInterval"
+import api from "@/lib/utils/api"
+import useInterval from "@/lib/utils/useInterval"
 import Timer from "./Timer/Timer"
 import Score from "./Score/Score"
 import CustomSettings from "./CustomSettings/CustomSettings"
-import { GAME_MODES } from "../../lib/constants/game.constants"
+import { GAME_MODES } from "@/lib/constants/game.constants"
 import Stats from "./Stats/Stats"
-import { IQuestionAnswered } from "../../lib/interfaces/game.interfaces"
+import { IQuestionAnswered } from "@/lib/interfaces/game.interfaces"
 import { useRouter } from "next/router"
-import { UserContext } from "../../lib/contexts/user.context"
-import { AlertContext } from "../../lib/contexts/alert.context"
-import { getQuestion } from "../../lib/functions/game.function"
+import { UserContext } from "@/lib/contexts/user.context"
+import { AlertContext } from "@/lib/contexts/alert.context"
+import { getQuestion } from "@/lib/functions/game.function"
 
 const Game = () => {
 	const router = useRouter()

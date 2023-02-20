@@ -1,7 +1,7 @@
 import Link from "next/link"
 import React from "react"
 
-import { IGameMode } from "../../../lib/interfaces/game.interfaces"
+import { IGameMode } from "@/lib/interfaces/game.interfaces"
 
 export interface GameSelectButtonProps {
 	key: string

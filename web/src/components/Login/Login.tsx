@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
-import api from "../../lib/utils/api"
-import getFormData from "../../lib/utils/getFormData"
-import { AlertContext, UserContext } from "../../pages/_app"
+import api from "@/lib/utils/api"
+import getFormData from "@/lib/utils/getFormData"
+import { AlertContext, UserContext } from "@/pages/_app"
 import { NextRouter, useRouter } from "next/router"
 
 const handleLogin = async (

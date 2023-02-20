@@ -1,5 +1,5 @@
 import React from "react"
-import { IScore } from "../../../../lib/interfaces/game.interfaces"
+import { IScore } from "@/lib/interfaces/game.interfaces"
 
 interface StatsScoreHistoryProps {
 	scoreHistory: Array<IScore>
