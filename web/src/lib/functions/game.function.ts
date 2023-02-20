@@ -21,8 +21,9 @@ const getInt = (range: [number, number]) => {
 
 const getDecimal = (range: [number, number], decimalPlaces: number = 2) => {
 	return (
-		random.int(Math.min(...range) * Math.pow(10, decimalPlaces), Math.max(...range) * Math.pow(10, decimalPlaces)) /
-		(10 * decimalPlaces)
+		Math.round(
+			random.int(Math.min(...range) * Math.pow(10, decimalPlaces), Math.max(...range) * Math.pow(10, decimalPlaces))
+		) / Math.pow(10, decimalPlaces)
 	)
 }
 
