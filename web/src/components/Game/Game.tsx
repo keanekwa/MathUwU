@@ -9,23 +9,27 @@ import { GAME_MODES } from "@/lib/constants/game.constants"
 import Stats from "./Stats/Stats"
 import { IQuestionAnswered } from "@/lib/interfaces/game.interfaces"
 import { useRouter } from "next/router"
-import { UserContext } from "@/lib/contexts/user.context"
-import { AlertContext } from "@/lib/contexts/alert.context"
+import UserContext from "@/lib/contexts/user.context"
+import AlertContext from "@/lib/contexts/alert.context"
 import { getQuestion, isCorrect } from "@/lib/functions/game.function"
 
 const Game = () => {
 	const router = useRouter()
 	const { isReady, query } = router
-	const mode = typeof query?.mode === "string" ? query?.mode : "default"
 
 	useEffect(() => {
-		const gameMode = GAME_MODES.find((m) => m.path === mode)
-		if (isReady && gameMode === undefined) router.push("/404")
-		if (gameMode !== undefined) setSettings(gameMode!.defaultSettings)
-	}, [mode])
+		const mode = typeof query?.mode === "string" ? query?.mode : "default"
+		const findGameMode = GAME_MODES.find((m) => m.path === mode)
+		if (isReady && findGameMode === undefined) router.push("/404")
+		if (findGameMode !== undefined) {
+			setGameMode(findGameMode)
+			setSettings(findGameMode.defaultSettings)
+		}
+	}, [isReady, query])
 
 	const [user] = useContext(UserContext)
 	const [, setAlert] = useContext(AlertContext)
+	const [gameMode, setGameMode] = useState(GAME_MODES[0])
 	const [start, setStart] = useState(false)
 	const [answer, setAnswer] = useState("")
 	const [score, setScore] = useState(0)
@@ -35,14 +39,14 @@ const Game = () => {
 	const [scoreHistory, setScoreHistory] = useState([])
 	const [settings, setSettings] = useState(GAME_MODES[0].defaultSettings)
 	const [isDefaultSettings, setIsDefaultSettings] = useState(true)
-	const [question, setQuestion] = useState(() => getQuestion(mode, settings))
+	const [question, setQuestion] = useState(() => getQuestion(gameMode.path, settings))
 	const [percentile, setPercentile] = useState(0)
 	const [questionStartTime, setQuestionStartTime] = useState(0)
 	const [questionsAnswered, setQuestionsAnswered] = useState<IQuestionAnswered[]>([])
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	const getNewQuestion = () => {
-		setQuestion(getQuestion(mode, settings))
+		setQuestion(getQuestion(gameMode.path, settings))
 		setQuestionStartTime(performance.now())
 		setAnswer("")
 	}
@@ -50,7 +54,7 @@ const Game = () => {
 	const checkAnswer = (val: string, ans: number) => {
 		setAnswer(val)
 
-		if (isCorrect(mode, val, ans, settings)) {
+		if (isCorrect(gameMode.path, val, ans, settings)) {
 			const questionEndTime = performance.now()
 			const lastQuestion = {
 				...question,
@@ -85,7 +89,7 @@ const Game = () => {
 		setStartSeconds(settings.seconds)
 		setSeconds(settings.seconds)
 		setStart(true)
-		setIsDefaultSettings(_.isEqual(settings, GAME_MODES.find((m) => m.path === mode).defaultSettings))
+		setIsDefaultSettings(_.isEqual(settings, gameMode.defaultSettings))
 		inputRef.current?.focus()
 	}
 
@@ -156,7 +160,7 @@ const Game = () => {
 							isDefaultSettings={isDefaultSettings}
 						/>
 						<div className="my-8 divider"></div>
-						<CustomSettings mode={mode} settings={settings} setSettings={setSettings} />
+						<CustomSettings mode={gameMode.path} settings={settings} setSettings={setSettings} />
 						<button className="btn mt-8 btn-wide" onClick={startGame}>
 							Restart
 						</button>
@@ -164,7 +168,7 @@ const Game = () => {
 				)
 			) : (
 				<>
-					<CustomSettings mode={mode} settings={settings} setSettings={setSettings} />
+					<CustomSettings mode={gameMode.path} settings={settings} setSettings={setSettings} />
 					<button className="btn mt-8 btn-wide" onClick={startGame}>
 						Start
 					</button>

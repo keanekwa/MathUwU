@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import api from "@/lib/utils/api"
 import bcrypt from "bcryptjs-react"
 import getFormData from "@/lib/utils/getFormData"
-import { AlertContext } from "@/pages/_app"
+import AlertContext from "@/lib/contexts/alert.context"
 import { NextRouter, useRouter } from "next/router"
 
 const handleRegister = async (event: React.FormEvent<HTMLFormElement>, router: NextRouter, setAlert: Function) => {

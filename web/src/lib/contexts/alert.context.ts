@@ -1,3 +1,4 @@
 import { createContext } from "react"
 
-export const AlertContext = createContext<any>(undefined)
+const AlertContext = createContext<any>(undefined)
+export default AlertContext
