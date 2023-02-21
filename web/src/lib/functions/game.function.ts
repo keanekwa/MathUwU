@@ -19,7 +19,7 @@ const getInt = (range: [number, number]) => {
 	return random.int(Math.min(...range), Math.max(...range))
 }
 
-const getDecimal = (range: [number, number], decimalPlaces: number = 2) => {
+const getDecimal = (range: [number, number], decimalPlaces: number) => {
 	return (
 		Math.round(
 			random.int(Math.min(...range) * Math.pow(10, decimalPlaces), Math.max(...range) * Math.pow(10, decimalPlaces))
