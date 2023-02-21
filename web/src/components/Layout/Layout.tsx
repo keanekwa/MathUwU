@@ -1,7 +1,7 @@
 import Head from "next/head"
 import React, { ReactNode, useContext } from "react"
-import { AlertContext } from "../../pages/_app"
-import Alert from "../Alert/Alert"
+import AlertContext from "@/lib/contexts/alert.context"
+import Alert from "@/components/Alert/Alert"
 import Footer from "./Footer/Footer"
 import Navbar from "./Navbar/Navbar"
 

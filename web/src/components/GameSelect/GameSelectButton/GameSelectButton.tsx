@@ -1,7 +1,7 @@
 import Link from "next/link"
 import React from "react"
 
-import { IGameMode } from "../../../interfaces/Game"
+import { IGameMode } from "@/lib/interfaces/game.interfaces"
 
 export interface GameSelectButtonProps {
 	key: string
@@ -22,7 +22,7 @@ const GameSelectButton = ({ mode }: GameSelectButtonProps) => {
 	return (
 		<Link
 			href={"/game/" + mode.path}
-			onClick={mode.disabled ? (event) => event.preventDefault() : (event) => 0}
+			onClick={mode.disabled ? (event) => event.preventDefault() : () => 0}
 			className={classes}>
 			<h2>{mode.name}</h2>
 			<p>{mode.description}</p>

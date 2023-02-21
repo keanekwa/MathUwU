@@ -3,9 +3,11 @@ export interface IGameMode {
 	name: string
 	description: string
 	disabled: boolean
+	defaultSettings: ISettings
 }
 
 export interface ISettings {
+	[x: string]: any
 	isAdd: boolean
 	isSubtract: boolean
 	isDivide: boolean
@@ -15,6 +17,18 @@ export interface ISettings {
 	multiply1: [number, number]
 	multiply2: [number, number]
 	seconds: number
+}
+
+export interface IDecimalSettings extends ISettings {
+	decimalPlaces: number
+}
+
+export interface IFractionSettings extends ISettings {
+	decimalPlaces: number
+}
+
+export interface I80in8Settings extends ISettings {
+	decimalPlaces: number
 }
 
 export interface IQuestionAnswered {
