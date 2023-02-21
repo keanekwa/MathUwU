@@ -110,64 +110,62 @@ const Game = () => {
 	}
 
 	return (
-		<>
-			<div className="text-center flex flex-col justify-center items-center">
-				{start ? (
-					seconds > 0 ? (
-						<>
-							<Timer seconds={seconds} />
-							<Score score={score} />
-							<div className="flex justify-center items-center my-10">
-								<span className="text-xl mr-5">
-									{settings.decimalPlaces
-										? question?.numbers?.vars[0].toFixed(settings.decimalPlaces)
-										: question?.numbers?.vars[0]}{" "}
-									{question?.operator}{" "}
-									{settings.decimalPlaces
-										? question?.numbers?.vars[1].toFixed(settings.decimalPlaces)
-										: question?.numbers?.vars[1]}{" "}
-									=
-								</span>
-								<input
-									className="input"
-									type="number"
-									autoFocus
-									ref={inputRef}
-									onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
-									value={answer}
-								/>
-							</div>
-							<button className="btn mt-8" onClick={startGame}>
-								Restart
-							</button>
-						</>
-					) : (
-						<>
-							<h2 className="mb-5">Time's up!</h2>
-							<Stats
-								score={score}
-								seconds={startSeconds}
-								percentile={percentile}
-								questionsAnswered={questionsAnswered}
-								scoreHistory={scoreHistory}
-							/>
-							<div className="my-8 divider"></div>
-							<CustomSettings mode={mode} settings={settings} setSettings={setSettings} />
-							<button className="btn mt-8 btn-wide" onClick={startGame}>
-								Restart
-							</button>
-						</>
-					)
-				) : (
+		<div className="text-center flex flex-col justify-center items-center">
+			{start ? (
+				seconds > 0 ? (
 					<>
-						<CustomSettings mode={mode} settings={settings} setSettings={setSettings} />
-						<button className="btn mt-8 btn-wide" onClick={startGame}>
-							Start
+						<Timer seconds={seconds} />
+						<Score score={score} />
+						<div className="flex justify-center items-center my-10">
+							<span className="text-xl mr-5">
+								{settings.decimalPlaces
+									? question?.numbers?.vars[0].toFixed(settings.decimalPlaces)
+									: question?.numbers?.vars[0]}{" "}
+								{question?.operator}{" "}
+								{settings.decimalPlaces
+									? question?.numbers?.vars[1].toFixed(settings.decimalPlaces)
+									: question?.numbers?.vars[1]}{" "}
+								=
+							</span>
+							<input
+								className="input"
+								type="number"
+								autoFocus
+								ref={inputRef}
+								onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
+								value={answer}
+							/>
+						</div>
+						<button className="btn mt-8" onClick={startGame}>
+							Restart
 						</button>
 					</>
-				)}
-			</div>
-		</>
+				) : (
+					<>
+						<h2 className="mb-5">Time's up!</h2>
+						<Stats
+							score={score}
+							seconds={startSeconds}
+							percentile={percentile}
+							questionsAnswered={questionsAnswered}
+							scoreHistory={scoreHistory}
+						/>
+						<div className="my-8 divider"></div>
+						<CustomSettings mode={mode} settings={settings} setSettings={setSettings} />
+						<button className="btn mt-8 btn-wide" onClick={startGame}>
+							Restart
+						</button>
+					</>
+				)
+			) : (
+				<>
+					<CustomSettings mode={mode} settings={settings} setSettings={setSettings} />
+					<button className="btn mt-8 btn-wide" onClick={startGame}>
+						Start
+					</button>
+				</>
+			)}
+		</div>
 	)
 }
 
