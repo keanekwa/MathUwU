@@ -1,6 +1,7 @@
 import random from "random"
-import { OPERATORS } from "@/lib/constants/game.constants"
+import { GAME_MODES, OPERATORS } from "@/lib/constants/game.constants"
 import { ISettings } from "@/lib/interfaces/game.interfaces"
+import _ from "lodash"
 
 const getOperator = (settings: ISettings) => {
 	const { isAdd, isSubtract, isMultiply, isDivide } = settings

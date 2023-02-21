@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
-
+import _ from "lodash"
 import api from "@/lib/utils/api"
 import useInterval from "@/lib/utils/useInterval"
 import Timer from "./Timer/Timer"
@@ -34,6 +34,7 @@ const Game = () => {
 	const [isScoreSaved, setIsScoreSaved] = useState(false)
 	const [scoreHistory, setScoreHistory] = useState([])
 	const [settings, setSettings] = useState(GAME_MODES[0].defaultSettings)
+	const [isDefaultSettings, setIsDefaultSettings] = useState(true)
 	const [question, setQuestion] = useState(() => getQuestion(mode, settings))
 	const [percentile, setPercentile] = useState(0)
 	const [questionStartTime, setQuestionStartTime] = useState(0)
@@ -84,27 +85,30 @@ const Game = () => {
 		setStartSeconds(settings.seconds)
 		setSeconds(settings.seconds)
 		setStart(true)
+		setIsDefaultSettings(_.isEqual(settings, GAME_MODES.find((m) => m.path === mode).defaultSettings))
 		inputRef.current?.focus()
 	}
 
 	useInterval(() => setSeconds(seconds - 1), 1000)
 
 	if (seconds === 0 && !isScoreSaved) {
-		api
-			.post("/scores", {
-				score: score
-			})
-			.then(() => {
-				if (user) {
-					api.get("/scores").then((res) => {
-						setScoreHistory(res?.data?.response)
-					})
-				}
-
-				api.get(`/percentile/${score}`).then((res) => {
-					setPercentile(res?.data?.response?.percent_rank)
+		if (isDefaultSettings) {
+			api
+				.post("/scores", {
+					score: score
 				})
-			})
+				.then(() => {
+					if (user) {
+						api.get("/scores").then((res) => {
+							setScoreHistory(res?.data?.response)
+						})
+					}
+
+					api.get(`/percentile/${score}`).then((res) => {
+						setPercentile(res?.data?.response?.percent_rank)
+					})
+				})
+		}
 
 		setIsScoreSaved(true)
 	}
@@ -149,6 +153,7 @@ const Game = () => {
 							percentile={percentile}
 							questionsAnswered={questionsAnswered}
 							scoreHistory={scoreHistory}
+							isDefaultSettings={isDefaultSettings}
 						/>
 						<div className="my-8 divider"></div>
 						<CustomSettings mode={mode} settings={settings} setSettings={setSettings} />
