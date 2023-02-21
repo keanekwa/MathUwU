@@ -119,7 +119,14 @@ const Game = () => {
 							<Score score={score} />
 							<div className="flex justify-center items-center my-10">
 								<span className="text-xl mr-5">
-									{question?.numbers?.vars[0]} {question?.operator} {question?.numbers?.vars[1]} =
+									{settings.decimalPlaces
+										? question?.numbers?.vars[0].toFixed(settings.decimalPlaces)
+										: question?.numbers?.vars[0]}{" "}
+									{question?.operator}{" "}
+									{settings.decimalPlaces
+										? question?.numbers?.vars[1].toFixed(settings.decimalPlaces)
+										: question?.numbers?.vars[1]}{" "}
+									=
 								</span>
 								<input
 									className="input"

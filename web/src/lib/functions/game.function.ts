@@ -88,7 +88,7 @@ const isCorrectDefault = (val: string, ans: number, settings: ISettings) => {
 
 const isCorrectDecimals = (val: string, ans: number, settings: ISettings) => {
 	const { decimalPlaces } = settings
-	if (parseFloat(val) === +ans.toFixed(decimalPlaces)) return true
+	if (parseFloat(val) === parseFloat(ans.toFixed(decimalPlaces))) return true
 	else return false
 }
 
