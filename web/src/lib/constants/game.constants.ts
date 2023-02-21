@@ -20,17 +20,17 @@ export const DEFAULT_SETTINGS: ISettings = {
 
 export const DEFAULT_DECIMAL_SETTINGS: IDecimalSettings = {
 	...DEFAULT_SETTINGS,
-	decimalPlaces: 2
+	decimalPlaces: 1
 }
 
 export const DEFAULT_FRACTION_SETTINGS: IFractionSettings = {
 	...DEFAULT_SETTINGS,
-	decimalPlaces: 2
+	decimalPlaces: 1
 }
 
 export const DEFAULT_80IN8_SETTINGS: I80in8Settings = {
 	...DEFAULT_SETTINGS,
-	decimalPlaces: 2
+	decimalPlaces: 1
 }
 
 export const OPERATORS = {
