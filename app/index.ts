@@ -117,7 +117,13 @@ require("./passportConfig")(passport)
 // 			return
 // 		}
 
-// 		const scores = await db.query("SELECT * FROM scores WHERE username = $1 ORDER BY id DESC", [req.user.username])
+// 		const { mode } = req.query
+//		if (utils.checkEmpty([mode])) {
+// 			utils.sendBadRequest(res, "Game mode not specified in score retrieval.")
+// 			return
+// 		}
+
+// 		const scores = await db.query("SELECT * FROM scores WHERE username = $1 AND mode = $2 ORDER BY id DESC", [req.user.username, req.query.mode])
 
 // 		utils.sendSuccess(res, "Successfully retrieved scores.", scores.rows)
 // 	} catch (err: any) {
@@ -127,28 +133,39 @@ require("./passportConfig")(passport)
 
 app.post("/scores", async (req: any, res: any) => {
 	try {
-		let { score } = req.body
+		let { score, mode } = req.body
 
-		if (utils.checkEmpty([score])) {
-			utils.sendBadRequestError(res, "Unable to save score.")
+		if (utils.checkEmpty([score, mode])) {
+			utils.sendBadRequestError(res, "Invalid score or game mode when saving score.")
 			return
 		}
 
 		const newScore = req.user
-			? await db.query("INSERT INTO scores (username, score) VALUES ($1, $2) RETURNING *", [req.user.username, score])
-			: await db.query("INSERT INTO scores (score) VALUES ($1) RETURNING *", [score])
+			? await db.query("INSERT INTO scores (username, score, mode) VALUES ($1, $2, $3) RETURNING *", [
+					req.user.username,
+					score,
+					mode
+			  ])
+			: await db.query("INSERT INTO scores (score, mode) VALUES ($1, $2) RETURNING *", [score, mode])
 
-		utils.sendSuccess(res, "Successfully aved score.", newScore.rows[0])
+		utils.sendSuccess(res, "Successfully saved score.", newScore.rows[0])
 	} catch (err: any) {
 		console.error(err.message)
 	}
 })
 
-app.get("/percentile/:score", async (req: any, res: any) => {
+app.get("/percentile", async (req: any, res: any) => {
 	try {
+		const { score, mode } = req.query
+
+		if (utils.checkEmpty([score, mode])) {
+			utils.sendBadRequestError(res, "Invalid score or game mode when checking for score percentile.")
+			return
+		}
+
 		const percentile = await db.query(
-			"SELECT percentiles.percent_rank FROM (SELECT score, PERCENT_RANK() OVER (ORDER BY score) FROM scores GROUP BY score) AS percentiles WHERE percentiles.score = $1",
-			[req?.params?.score]
+			"SELECT percentiles.percent_rank FROM (SELECT score, PERCENT_RANK() OVER (ORDER BY score) FROM scores WHERE mode = $1 GROUP BY score) AS percentiles WHERE percentiles.score = $2",
+			[mode, score]
 		)
 
 		utils.sendSuccess(res, "Successfully retrieved percentile.", percentile.rows[0])
