@@ -20,21 +20,21 @@ const Stats = ({ score, seconds, percentile, questionsAnswered, scoreHistory, is
 	return (
 		<div className="w-full grid gap-y-5">
 			<StatsOverview score={score} seconds={seconds} percentile={percentile} isDefaultSettings={isDefaultSettings} />
-			<div className="px-12 mt-5 grid gap-y-5">
-				{questionsAnswered.length > 0 && (
-					<>
-						<StatsChart questionsAnswered={questionsAnswered} />
-						<StatsSlowQuestions questionsAnswered={questionsAnswered} />
-					</>
-				)}
-				{/* {user ? (
+			{questionsAnswered.length > 0 && (
+				<div className="px-12 mt-5 grid gap-y-5">
+					<StatsChart questionsAnswered={questionsAnswered} />
+					<StatsSlowQuestions questionsAnswered={questionsAnswered} />
+				</div>
+			)}
+			{/* <div className="mt-5">
+				{user ? (
 					<StatsScoreHistory scoreHistory={scoreHistory} />
 				) : (
-					<Link to="/login">
+					<Link href="/login">
 						<button className="link">Login to save scores.</button>
 					</Link>
-				)} */}
-			</div>
+				)}
+			</div> */}
 		</div>
 	)
 }
