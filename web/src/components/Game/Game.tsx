@@ -101,6 +101,10 @@ const Game = () => {
 			setAlert({ show: true, message: "Enter a numeric range for multiplication." })
 			return
 		}
+		if (seconds < 0) {
+			setAlert({ show: true, message: "Game duration cannot be negative." })
+			return
+		}
 		if (Number.isNaN(seconds)) {
 			setAlert({ show: true, message: "Enter a game duration." })
 			return
@@ -138,8 +142,9 @@ const Game = () => {
 								=
 							</span>
 							<input
-								className="input"
+								className="input w-28 sm:w-auto"
 								type="number"
+								inputMode="decimal"
 								autoFocus
 								ref={inputRef}
 								onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}

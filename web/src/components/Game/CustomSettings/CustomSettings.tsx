@@ -43,6 +43,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 						<input
 							className="input input-sm w-16 mx-2 text-center"
 							type="number"
+							inputMode="decimal"
 							defaultValue={defaultSettings.add1[0]}
 							onChange={(event) => setSettings({ ...settings, add1: [parseInt(event.target.value), settings.add1[1]] })}
 						/>{" "}
@@ -50,6 +51,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 						<input
 							className="input input-sm w-16 mx-2 text-center"
 							type="number"
+							inputMode="decimal"
 							defaultValue={defaultSettings.add1[1]}
 							onChange={(event) => setSettings({ ...settings, add1: [settings.add1[0], parseInt(event.target.value)] })}
 						/>
@@ -57,6 +59,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 						<input
 							className="input input-sm w-16 mx-2 text-center"
 							type="number"
+							inputMode="decimal"
 							defaultValue={defaultSettings.add2[0]}
 							onChange={(event) => setSettings({ ...settings, add2: [parseInt(event.target.value), settings.add2[1]] })}
 						/>{" "}
@@ -64,6 +67,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 						<input
 							className="input input-sm w-16 mx-2 text-center"
 							type="number"
+							inputMode="decimal"
 							defaultValue={defaultSettings.add2[1]}
 							onChange={(event) => setSettings({ ...settings, add2: [settings.add2[0], parseInt(event.target.value)] })}
 						/>
@@ -91,6 +95,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 						<input
 							className="input input-sm w-16 mx-2 text-center"
 							type="number"
+							inputMode="decimal"
 							defaultValue={defaultSettings.multiply1[0]}
 							onChange={(event) =>
 								setSettings({ ...settings, multiply1: [parseInt(event.target.value), settings.multiply1[1]] })
@@ -100,6 +105,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 						<input
 							className="input input-sm w-16 mx-2 text-center"
 							type="number"
+							inputMode="decimal"
 							defaultValue={defaultSettings.multiply1[1]}
 							onChange={(event) =>
 								setSettings({ ...settings, multiply1: [settings.multiply1[0], parseInt(event.target.value)] })
@@ -109,6 +115,7 @@ const CustomSettings = (props: CustomSettingsProps) => {
 						<input
 							className="input input-sm w-16 mx-2 text-center"
 							type="number"
+							inputMode="decimal"
 							defaultValue={defaultSettings.multiply2[0]}
 							onChange={(event) =>
 								setSettings({ ...settings, multiply2: [parseInt(event.target.value), settings.multiply2[1]] })
