@@ -149,6 +149,8 @@ const CustomSettings = (props: CustomSettingsProps) => {
 				Game Duration:{" "}
 				<input
 					className="input input-sm w-16 mx-2 text-center"
+					type="number"
+					inputMode="decimal"
 					defaultValue={defaultSettings.seconds}
 					onChange={(event) => setSettings({ ...settings, seconds: parseInt(event.target.value) })}
 				/>{" "}
