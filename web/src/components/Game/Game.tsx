@@ -140,6 +140,7 @@ const Game = () => {
 							<input
 								className="input"
 								type="number"
+								inputMode="decimal"
 								autoFocus
 								ref={inputRef}
 								onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
