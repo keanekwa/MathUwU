@@ -40,8 +40,7 @@ const StatsChart = ({ questionsAnswered }: ChartProps) => {
 	const gridColor = isDark ? "rgba(255, 255, 255, 0.15)" : "rgba(0, 0, 0, 0.15)"
 
 	const options: any = {
-		color: "red",
-		responsive: true,
+		maintainAspectRatio: false,
 		scales: {
 			y: {
 				ticks: {
@@ -101,7 +100,11 @@ const StatsChart = ({ questionsAnswered }: ChartProps) => {
 		]
 	}
 
-	return <Chart type="bar" data={data} options={options} />
+	return (
+		<div className="chart-container">
+			<Chart type="bar" data={data} options={options} />
+		</div>
+	)
 }
 
 export default StatsChart
