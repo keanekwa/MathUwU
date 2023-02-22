@@ -3,9 +3,9 @@ const dotenv = require("dotenv")
 const cors = require("cors")
 const db = require("./db")
 const utils = require("./utils")
-const passport = require("passport")
-const session = require("express-session")
-const cookieParser = require("cookie-parser")
+// const passport = require("passport")
+// const session = require("express-session")
+// const cookieParser = require("cookie-parser")
 
 dotenv.config()
 const app = express()
@@ -18,22 +18,22 @@ app.use(
 		credentials: true
 	})
 )
-app.set("trust proxy", 1)
-app.use(
-	session({
-		secret: "secretcode",
-		saveUninitialized: false,
-		resave: false,
-		cookie: {
-			maxAge: 30 * 24 * 60 * 60 * 1000,
-			sameSite: "none"
-		}
-	})
-)
-app.use(cookieParser("secretcode"))
-app.use(passport.initialize())
-app.use(passport.session())
-require("./passportConfig")(passport)
+// app.set("trust proxy", 1)
+// app.use(
+// 	session({
+// 		secret: "secretcode",
+// 		saveUninitialized: false,
+// 		resave: false,
+// 		cookie: {
+// 			maxAge: 30 * 24 * 60 * 60 * 1000,
+// 			sameSite: "none"
+// 		}
+// 	})
+// )
+// app.use(cookieParser("secretcode"))
+// app.use(passport.initialize())
+// app.use(passport.session())
+// require("./passportConfig")(passport)
 
 // Routes
 // interface RegisterReq {
