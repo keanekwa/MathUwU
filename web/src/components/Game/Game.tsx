@@ -16,17 +16,6 @@ import { getQuestion, isCorrect } from "@/lib/functions/game.function"
 const Game = () => {
 	const router = useRouter()
 	const { isReady, query } = router
-
-	useEffect(() => {
-		const mode = typeof query?.mode === "string" ? query?.mode : "default"
-		const findGameMode = GAME_MODES.find((m) => m.path === mode)
-		if (isReady && findGameMode === undefined) router.push("/404")
-		if (findGameMode !== undefined) {
-			setGameMode(findGameMode)
-			setSettings(findGameMode.defaultSettings)
-		}
-	}, [isReady, query])
-
 	const [user] = useContext(UserContext)
 	const [, setAlert] = useContext(AlertContext)
 	const [gameMode, setGameMode] = useState(GAME_MODES[0])
@@ -44,6 +33,41 @@ const Game = () => {
 	const [questionStartTime, setQuestionStartTime] = useState(0)
 	const [questionsAnswered, setQuestionsAnswered] = useState<IQuestionAnswered[]>([])
 	const inputRef = useRef<HTMLInputElement>(null)
+
+	useEffect(() => {
+		const mode = typeof query?.mode === "string" ? query?.mode : "default"
+		const findGameMode = GAME_MODES.find((m) => m.path === mode)
+		if (isReady && findGameMode === undefined) router.push("/404")
+		if (findGameMode !== undefined) {
+			setGameMode(findGameMode)
+			setSettings(findGameMode.defaultSettings)
+		}
+	}, [isReady, query])
+
+	useEffect(() => {
+		if (seconds === 0 && !isScoreSaved) {
+			setIsScoreSaved(true)
+
+			if (isDefaultSettings) {
+				api
+					.post("/scores", {
+						score: score,
+						mode: gameMode.path
+					})
+					.then(() => {
+						if (user) {
+							api.get("/scores", { params: { mode: gameMode.path } }).then((res) => {
+								setScoreHistory(res?.data?.response)
+							})
+						}
+
+						api.get(`/percentile`, { params: { score: score, mode: gameMode.path } }).then((res) => {
+							setPercentile(res?.data?.response?.percent_rank)
+						})
+					})
+			}
+		}
+	}, [seconds, isScoreSaved])
 
 	const getNewQuestion = () => {
 		setQuestion(getQuestion(gameMode.path, settings))
@@ -94,28 +118,6 @@ const Game = () => {
 	}
 
 	useInterval(() => setSeconds(seconds - 1), 1000)
-
-	if (seconds === 0 && !isScoreSaved) {
-		if (isDefaultSettings) {
-			api
-				.post("/scores", {
-					score: score
-				})
-				.then(() => {
-					if (user) {
-						api.get("/scores").then((res) => {
-							setScoreHistory(res?.data?.response)
-						})
-					}
-
-					api.get(`/percentile/${score}`).then((res) => {
-						setPercentile(res?.data?.response?.percent_rank)
-					})
-				})
-		}
-
-		setIsScoreSaved(true)
-	}
 
 	return (
 		<div className="text-center flex flex-col justify-center items-center">
