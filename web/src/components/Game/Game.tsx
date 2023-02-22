@@ -142,7 +142,7 @@ const Game = () => {
 								=
 							</span>
 							<input
-								className="input"
+								className="input w-28 sm:w-auto"
 								type="number"
 								inputMode="decimal"
 								autoFocus
