@@ -48,3 +48,8 @@ input:not(input[type="checkbox"]) {
 .menu {
 	@apply bg-base-300;
 }
+
+.chart-container {
+	@apply w-full flex justify-center h-48 sm:h-72 md:h-96;
+	max-width: calc(100vw - 8rem);
+}
