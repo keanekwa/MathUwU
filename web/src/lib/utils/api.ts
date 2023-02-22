@@ -5,7 +5,7 @@ const api = axios.create({
 		process.env.NEXT_PUBLIC_ENV === "PROD"
 			? process.env.NEXT_PUBLIC_API_HOST
 			: process.env.NEXT_PUBLIC_API_HOST! + ":" + process.env.NEXT_PUBLIC_API_PORT!.toString(),
-	timeout: 1000,
+	timeout: 5000,
 	withCredentials: true
 })
 
