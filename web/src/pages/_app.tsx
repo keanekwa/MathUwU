@@ -4,6 +4,7 @@ import { useState } from "react"
 import { IAlert } from "@/lib/interfaces/alert.interfaces"
 import UserContext from "@/lib/contexts/user.context"
 import AlertContext from "@/lib/contexts/alert.context"
+import { Analytics } from "@vercel/analytics/react"
 
 export default function App({ Component, pageProps }: AppProps) {
 	const [user, setUser] = useState<string | null>(null)
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
 		<UserContext.Provider value={[user, setUser]}>
 			<AlertContext.Provider value={[alert, setAlert]}>
 				<Component {...pageProps} />
+				<Analytics />
 			</AlertContext.Provider>
 		</UserContext.Provider>
 	)
