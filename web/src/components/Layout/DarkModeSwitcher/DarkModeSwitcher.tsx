@@ -5,12 +5,12 @@ import DarkModeSelect from "./DarkModeSelect/DarkModeSelect"
 const DarkModeSwitcher = () => {
 	const [showMoon, setShowMoon] = useState(true)
 	const [isSystemDark, setIsSystemDark] = useState(
-		typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
+		typeof window !== "undefined" && window.matchMedia("screen and (prefers-color-scheme: dark)").matches
 	)
 
 	typeof window !== "undefined" &&
-		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
-			setIsSystemDark(window.matchMedia("(prefers-color-scheme: dark)").matches)
+		window.matchMedia("screen and (prefers-color-scheme: dark)").addEventListener("change", (event) => {
+			setIsSystemDark(window.matchMedia("screen and (prefers-color-scheme: dark)").matches)
 		})
 
 	useEffect(() => {
@@ -52,9 +52,9 @@ const DarkModeSwitcher = () => {
 
 	return (
 		<div className="flex-none">
-			<div className="dropdown dropdown-end">
+			<div tabIndex={0} className="dropdown dropdown-end">
 				{showMoon ? (
-					<button className="btn btn-ghost btn-circle">
+					<button tabIndex={0} className="btn btn-ghost btn-circle">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -70,7 +70,7 @@ const DarkModeSwitcher = () => {
 						</svg>
 					</button>
 				) : (
-					<button className="btn btn-ghost btn-circle">
+					<button tabIndex={0} className="btn btn-ghost btn-circle">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
