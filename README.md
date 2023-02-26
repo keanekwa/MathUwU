@@ -1,5 +1,7 @@
 # MathUwU
 
+Link to project: [MathUwU.com](https://mathuwu.com)
+
 MathUwU aims on being both the Duolingo and Hackerrank of the quantitative finance world. Here's how:
 
 Just like how [Duolingo](https://www.duolingo.com/) has revolutionalized learning languages and [MonkeyType](https://monkeytype.com/) has revolutionalized typing test, MathUwU aims on creating a fun platform for aspiring quant traders and developers to practice for their quantitative interviews.
