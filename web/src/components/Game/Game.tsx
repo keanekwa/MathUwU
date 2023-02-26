@@ -37,8 +37,9 @@ const Game = () => {
 	useEffect(() => {
 		const mode = typeof query?.mode === "string" ? query?.mode : "default"
 		const findGameMode = GAME_MODES.find((m) => m.path === mode)
-		if (isReady && findGameMode === undefined) router.push("/404")
-		if (findGameMode !== undefined) {
+		if (isReady && (!findGameMode || findGameMode?.disabled === true)) {
+			router.push("/404")
+		} else if (findGameMode !== undefined) {
 			setGameMode(findGameMode)
 			setSettings(findGameMode.defaultSettings)
 		}
@@ -124,64 +125,68 @@ const Game = () => {
 	useInterval(() => setSeconds(seconds - 1), 1000)
 
 	return (
-		<div className="text-center flex flex-col justify-center items-center">
-			{start ? (
-				seconds > 0 ? (
-					<>
-						<Timer seconds={seconds} />
-						<Score score={score} />
-						<div className="flex justify-center items-center my-10">
-							<span className="text-xl mr-5">
-								{question?.numbers?.vars[0] % 1 !== 0
-									? question?.numbers?.vars[0].toFixed(settings.decimalPlaces)
-									: question?.numbers?.vars[0]}{" "}
-								{question?.operator}{" "}
-								{question?.numbers?.vars[1] % 1 !== 0
-									? question?.numbers?.vars[1].toFixed(settings.decimalPlaces)
-									: question?.numbers?.vars[1]}{" "}
-								=
-							</span>
-							<input
-								className="input w-28 sm:w-auto"
-								type="number"
-								inputMode="decimal"
-								autoFocus
-								ref={inputRef}
-								onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
-								value={answer}
-							/>
-						</div>
-						<button className="btn mt-8" onClick={startGame}>
-							Restart
-						</button>
-					</>
-				) : (
-					<>
-						<h2 className="mb-5">Time's up!</h2>
-						<Stats
-							score={score}
-							seconds={startSeconds}
-							percentile={percentile}
-							questionsAnswered={questionsAnswered}
-							scoreHistory={scoreHistory}
-							isDefaultSettings={isDefaultSettings}
-						/>
-						<div className="my-8 divider"></div>
-						<CustomSettings mode={gameMode.path} settings={settings} setSettings={setSettings} />
-						<button className="btn mt-8 btn-wide" onClick={startGame}>
-							Restart
-						</button>
-					</>
-				)
-			) : (
-				<>
-					<CustomSettings mode={gameMode.path} settings={settings} setSettings={setSettings} />
-					<button className="btn mt-8 btn-wide" onClick={startGame}>
-						Start
-					</button>
-				</>
+		<>
+			{isReady && (
+				<div className="text-center flex flex-col justify-center items-center">
+					{start ? (
+						seconds > 0 ? (
+							<>
+								<Timer seconds={seconds} />
+								<Score score={score} />
+								<div className="flex justify-center items-center my-10">
+									<span className="text-xl mr-5">
+										{question?.numbers?.vars[0] % 1 !== 0
+											? question?.numbers?.vars[0].toFixed(settings.decimalPlaces)
+											: question?.numbers?.vars[0]}{" "}
+										{question?.operator}{" "}
+										{question?.numbers?.vars[1] % 1 !== 0
+											? question?.numbers?.vars[1].toFixed(settings.decimalPlaces)
+											: question?.numbers?.vars[1]}{" "}
+										=
+									</span>
+									<input
+										className="input w-28 sm:w-auto"
+										type="number"
+										inputMode="decimal"
+										autoFocus
+										ref={inputRef}
+										onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
+										value={answer}
+									/>
+								</div>
+								<button className="btn mt-8" onClick={startGame}>
+									Restart
+								</button>
+							</>
+						) : (
+							<>
+								<h2 className="mb-5">Time's up!</h2>
+								<Stats
+									score={score}
+									seconds={startSeconds}
+									percentile={percentile}
+									questionsAnswered={questionsAnswered}
+									scoreHistory={scoreHistory}
+									isDefaultSettings={isDefaultSettings}
+								/>
+								<div className="my-8 divider"></div>
+								<CustomSettings mode={gameMode.path} settings={settings} setSettings={setSettings} />
+								<button className="btn mt-8 btn-wide" onClick={startGame}>
+									Restart
+								</button>
+							</>
+						)
+					) : (
+						<>
+							<CustomSettings mode={gameMode.path} settings={settings} setSettings={setSettings} />
+							<button className="btn mt-8 btn-wide" onClick={startGame}>
+								Start
+							</button>
+						</>
+					)}
+				</div>
 			)}
-		</div>
+		</>
 	)
 }
 
