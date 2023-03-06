@@ -6,7 +6,7 @@ const Index = () => {
 	return (
 		<>
 			<Head>
-				<meta property="og:title" content="MathUwU | Arithmetic Zetamac & Quant Interviews Made Fun" key="title" />
+				<title>MathUwU | Arithmetic Zetamac & Quant Interviews Made Fun</title>
 				<meta
 					name="description"
 					content="MathUwU is a gamified quantitative finance interview preparation platform, with mental math games like Arithmetic Zetamac and other brainteasers."
