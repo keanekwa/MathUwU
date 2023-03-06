@@ -20,7 +20,6 @@ const Layout = (props: LayoutProps) => {
 	return (
 		<>
 			<Head>
-				<title>MathUwU</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
 			<div className="flex flex-col min-h-screen justify-between">
