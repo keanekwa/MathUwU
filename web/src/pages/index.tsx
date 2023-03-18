@@ -13,6 +13,10 @@ const Index = () => {
 				/>
 			</Head>
 			<Layout>
+				<div itemScope itemType="https://schema.org/WebSite">
+					<meta itemProp="url" content="https://mathuwu.com/" />
+					<meta itemProp="name" content="MathUwU" />
+				</div>
 				<GameSelect />
 			</Layout>
 		</>
