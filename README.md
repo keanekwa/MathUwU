@@ -14,6 +14,24 @@ One of the most popular practice tools in the market is the [Arithmetic Zetamac]
 
 MathUwU introduces a fun, new way to practice for these mental arithmetic tests, which is an integral part of the quantitative finance world.
 
+## How MathUwU Works
+
+1. Choose a game mode
+
+<img src="https://user-images.githubusercontent.com/8297863/235381623-f8a9e844-e9f9-40bf-b9ce-324fa4440438.png" width="800">
+
+2. Customize game settings
+
+<img src="https://user-images.githubusercontent.com/8297863/235381627-6c3a2556-684f-4a4b-8e89-412c0d13e50a.png" width="800">
+
+3. Play the game
+
+<img src="https://user-images.githubusercontent.com/8297863/235381634-d8863b76-0c0c-4806-afe8-2d0226663b13.png" width="800">
+
+4. Review statistics and improve!
+
+<img src="https://user-images.githubusercontent.com/8297863/235381616-97306cc2-a925-4722-8697-7ad96b76d9a4.png" width="800">
+
 ## Future Product Roadmap
 
 [HackerRank](https://www.hackerrank.com/) and [CodeSignal](https://codesignal.com/) have become de-facto platforms when companies hire for programming focused roles. The first round of the interview process usually consists of sending an invitation to an applicant to complete an online test on one of these platforms.
