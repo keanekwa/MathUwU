@@ -5,7 +5,8 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				majorMonoDisplay: ["Major Mono Display"]
+				majorMonoDisplay: ["Major Mono Display"],
+				notoSansMath: ["Noto Sans Math"]
 			},
 			colors: {
 				slate: colors.slate,
