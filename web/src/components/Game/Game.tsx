@@ -134,7 +134,7 @@ const Game = () => {
 								<Timer seconds={seconds} />
 								<Score score={score} />
 								<div className="flex justify-center items-center my-10">
-									<span className="text-xl mr-5">
+									<span className="math text-xl lg:text-2xl mr-5">
 										{question?.numbers?.vars[0] % 1 !== 0
 											? question?.numbers?.vars[0].toFixed(settings.decimalPlaces)
 											: question?.numbers?.vars[0]}{" "}
@@ -152,6 +152,7 @@ const Game = () => {
 										ref={inputRef}
 										onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
 										value={answer}
+										onBlur={() => inputRef.current?.focus()}
 									/>
 								</div>
 								<button className="btn mt-8" onClick={startGame}>

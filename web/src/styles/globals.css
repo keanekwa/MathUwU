@@ -53,3 +53,7 @@ input:not(input[type="checkbox"]) {
 	@apply w-full flex justify-center h-48 sm:h-72 md:h-96;
 	max-width: calc(100vw - 8rem);
 }
+
+.math {
+	@apply font-notoSansMath;
+}
