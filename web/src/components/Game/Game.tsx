@@ -152,6 +152,7 @@ const Game = () => {
 										ref={inputRef}
 										onChange={(e) => checkAnswer(e.target.value, question?.numbers?.ans as number)}
 										value={answer}
+										onBlur={() => inputRef.current?.focus()}
 									/>
 								</div>
 								<button className="btn mt-8" onClick={startGame}>
