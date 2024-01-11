@@ -53,7 +53,7 @@ const StatsOverview = ({ score, seconds, percentile, isDefaultSettings }: StatsO
 				</div>
 				<div className="stat-desc">Total score / {seconds} seconds</div>
 			</div>
-			{isDefaultSettings && (
+			{/* {isDefaultSettings && (
 				<div className="stat">
 					<div className="stat-figure">
 						<svg
@@ -74,7 +74,7 @@ const StatsOverview = ({ score, seconds, percentile, isDefaultSettings }: StatsO
 					<div className="stat-value">{(percentile * 100).toFixed(1)}%</div>
 					<div className="stat-desc">of users</div>
 				</div>
-			)}
+			)} */}
 		</div>
 	)
 }

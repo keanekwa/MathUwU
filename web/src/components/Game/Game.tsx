@@ -49,24 +49,24 @@ const Game = () => {
 		if (seconds === 0 && !isScoreSaved) {
 			setIsScoreSaved(true)
 
-			if (isDefaultSettings) {
-				api
-					.post("/scores", {
-						score: score,
-						mode: gameMode.path
-					})
-					.then(() => {
-						if (user) {
-							api.get("/scores", { params: { mode: gameMode.path } }).then((res) => {
-								setScoreHistory(res?.data?.response)
-							})
-						}
+			// if (isDefaultSettings) {
+			// 	api
+			// 		.post("/scores", {
+			// 			score: score,
+			// 			mode: gameMode.path
+			// 		})
+			// 		.then(() => {
+			// 			if (user) {
+			// 				api.get("/scores", { params: { mode: gameMode.path } }).then((res) => {
+			// 					setScoreHistory(res?.data?.response)
+			// 				})
+			// 			}
 
-						api.get(`/percentile`, { params: { score: score, mode: gameMode.path } }).then((res) => {
-							setPercentile(res?.data?.response?.percent_rank)
-						})
-					})
-			}
+			// 			api.get(`/percentile`, { params: { score: score, mode: gameMode.path } }).then((res) => {
+			// 				setPercentile(res?.data?.response?.percent_rank)
+			// 			})
+			// 		})
+			// }
 		}
 	}, [seconds, isScoreSaved])
 
