@@ -63,7 +63,7 @@ const getQuestionDecimals = (operator: string, settings: ISettings) => {
 	if (operator === OPERATORS.ADD || operator === OPERATORS.SUBTRACT) {
 		const a = getDecimal(add1, decimalPlaces)
 		const b = getDecimal(add2, decimalPlaces)
-		const ans = a + b
+		const ans = Math.round((a + b) * 100) / 100
 		console.log(a, b, ans)
 
 		if (operator === OPERATORS.ADD) return { operator: operator, numbers: returnNormal(a, b, ans) }
@@ -73,7 +73,7 @@ const getQuestionDecimals = (operator: string, settings: ISettings) => {
 	if (operator === OPERATORS.MULTIPLY || operator === OPERATORS.DIVIDE) {
 		const a = getInt(multiply1)
 		const b = getDecimal(multiply2, decimalPlaces)
-		const ans = a * b
+		const ans = Math.round(a * b * 100) / 100
 		console.log(a, b, ans)
 
 		if (operator === OPERATORS.MULTIPLY) return { operator: operator, numbers: returnNormal(a, b, ans) }
