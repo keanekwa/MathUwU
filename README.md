@@ -1,6 +1,6 @@
 # MathUwU
 
-Link to project: [MathUwU.com](https://mathuwu.com)
+Link to project: [Archived MathUwU](https://mathuwu.vercel.app) (formerly [MathUwU.com](https://mathuwu.com))
 
 MathUwU aims on being both the Duolingo and Hackerrank of the quantitative finance world. Here's how:
 
